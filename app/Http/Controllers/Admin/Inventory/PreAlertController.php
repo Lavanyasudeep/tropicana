@@ -94,7 +94,7 @@ class PreAlertController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.inventory.pre-alert.form');
     }
 
     /**
@@ -110,10 +110,7 @@ class PreAlertController extends Controller
      */
     public function show(string $id)
     {
-        $packingList = PackingList::with('packingListDetails.packageType')->findOrFail($id);
-        $packingListDetail = PackingListDetail::where('packing_list_id', $id)->get();
-        
-        return view('admin.inventory.pre-alert.view', compact('packingList', 'packingListDetail'));
+        return view('admin.inventory.pre-alert.view');
     }
 
     /**
@@ -121,16 +118,7 @@ class PreAlertController extends Controller
      */
     public function edit(string $id)
     {
-        $suppliers = Supplier::all();
-        $clients = Client::all();
-        $packageTypes = Unit::all();
-        $categories = ProductCategory::all();
-        $brands = Brand::all();
-        $ports = Port::all();
-        $packingList = PackingList::with('packingListDetails.packageType')->findOrFail($id);
-        $packingListDetail = PackingListDetail::where('packing_list_id', $id)->get();
-        
-        return view('admin.inventory.pre-alert.edit', compact('packingList', 'packingListDetail', 'suppliers', 'clients', 'packageTypes', 'categories', 'brands', 'ports'));
+        return view('admin.inventory.pre-alert.form');
     }
 
     /**
@@ -210,10 +198,7 @@ class PreAlertController extends Controller
 
     public function print($id)
     {
-        $packingList = PackingList::with(['packingListDetails.packageType'])->findOrFail($id);
-        $packingListDetails = $packingList->packingListDetails;
-
-        return view('admin.inventory.pre-alert.print', compact('packingList', 'packingListDetails'));
+        return view('admin.inventory.pre-alert.print');
     }
 
     public function getPackingListDetails(Request $request)

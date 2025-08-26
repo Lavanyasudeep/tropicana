@@ -29,20 +29,23 @@
     <table class="print-detail-table">
         <tr>
             <td>
-                <strong>Date:</strong> 16/10/2023<br><br>
-                <strong>Time:</strong> 20:00<br><br>
+                <strong>Doc No:</strong> TC-25-0001<br><br>
+                <strong>Doc Date:</strong> 16/10/2023<br><br>
+                <strong>Doc Time:</strong> 20:00<br><br>
                 <strong>Gate Pass No.:</strong> 7508<br><br>
                 <strong>Customer:</strong> TRDP<br><br>
             </td>
             <td>
                 <strong>Vehicle No.:</strong> HR 55 R 0057<br><br>
-                <strong>Product:</strong> Tropicana<br><br>
-                <strong>SKU:</strong> 1L PET<br><br>
+                <strong>Product:</strong> Frozen Prawns<br><br>
+                <strong>SKU:</strong> 150<br><br>
                 <strong>Vehicle Set Temp (°C):</strong> 2<br><br>
             </td>
             <td>
+                <strong>Status:</strong> Created<br><br>
                 <strong>Remarks:</strong> OK<br><br>
                 <strong>Received By:</strong> Tropicana<br><br>
+                <strong>Checked By:</strong> John Smith<br><br>
             </td>
         </tr>
     </table>
@@ -52,33 +55,29 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th class="txt-left">Product #</th>
                 <th class="txt-center">Time</th>
                 <th class="txt-center">Product Temp (°C)</th>
-                <th class="txt-left">Name</th>
-                <th class="txt-left">Driver</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>1</td>
+                <td class="txt-left">Frozen Prawns</td>
                 <td class="txt-center">20:00</td>
                 <td class="txt-center">-1.6</td>
-                <td class="txt-left">Jatin</td>
-                <td class="txt-left">Driver A</td>
             </tr>
             <tr>
                 <td>2</td>
+                <td class="txt-left">Frozen Squid Rings</td>
                 <td class="txt-center">20:05</td>
                 <td class="txt-center">-1.6</td>
-                <td class="txt-left">Operational Supervisor</td>
-                <td class="txt-left">Driver A</td>
             </tr>
             <tr>
                 <td>3</td>
+                <td class="txt-left">Frozen Crab Meat</td>
                 <td class="txt-center">20:10</td>
                 <td class="txt-center">-1.5</td>
-                <td class="txt-left">Technical Supervisor</td>
-                <td class="txt-left">Driver A</td>
             </tr>
         </tbody>
     </table>

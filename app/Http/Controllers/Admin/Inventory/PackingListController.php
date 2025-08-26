@@ -94,7 +94,14 @@ class PackingListController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = Supplier::all();
+        $clients = Client::all();
+        $packageTypes = Unit::all();
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $ports = Port::all();
+        
+        return view('admin.inventory.packing-list.form', compact('suppliers', 'clients', 'packageTypes', 'categories', 'brands', 'ports'));
     }
 
     /**
@@ -102,7 +109,73 @@ class PackingListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            // Create the main packing list record
+            $packingList = new PackingList();
+            $packingList->fill([
+                'client_id'         => $request->client_id,
+                'doc_date'          => $request->doc_date,
+                'invoice_no'        => $request->invoice_no,
+                'invoice_date'      => $request->invoice_date,
+                'supplier_id'       => $request->supplier_id,
+                'contact_person'    => $request->contact_name,
+                'contact_address'   => $request->contact_address,
+                'no_of_containers'  => $request->no_of_containers,
+                'package_type_id'   => $request->package_type_id,
+                'loading_date'      => $request->loading_date,
+                'loading_port_id'   => $request->loading_port_id,
+                'discharge_port_id' => $request->discharge_port_id,
+                'vessel_name'       => $request->vessel_name,
+                'voyage_no'         => $request->voyage_no,
+                'created_by'        => auth()->id(),
+            ]);
+            $packingList->save();
+
+            // Save detail rows if provided
+            if ($request->has('product_ids') && is_array($request->product_ids)) {
+                foreach ($request->product_ids as $i => $productId) {
+                    // Skip empty rows
+                    if (empty($productId)) {
+                        continue;
+                    }
+
+                    $packingListDtl = new PackingListDetail();
+                    $packingListDtl->fill([
+                        'packing_list_id'         => $packingList->id,
+                        'product_id'              => $productId,
+                        'cargo_description'       => $request->cargo_description[$i] ?? null,
+                        'lot_no'                  => $request->lot_no[$i] ?? null,
+                        'variety_id'              => $request->variety_id[$i] ?? null,
+                        'brand_id'                => $request->brand_id[$i] ?? null,
+                        'class'                   => $request->class[$i] ?? null,
+                        'package_type_id'         => $request->package_type_ids[$i] ?? null,
+                        'package_qty'             => $request->package_qty[$i] ?? null,
+                        'item_size_per_package'   => $request->item_size_per_package[$i] ?? null,
+                        'package_qty_per_pallet'  => $request->package_qty_per_pallet[$i] ?? null,
+                        'pallet_qty'              => $request->pallet_qty[$i] ?? null,
+                        'gw_per_package'          => $request->gw_per_package[$i] ?? null,
+                        'nw_per_package'          => $request->nw_per_package[$i] ?? null,
+                    ]);
+                    $packingListDtl->save();
+                }
+            }
+
+            DB::commit();
+
+            return redirect()
+                ->route('admin.inventory.packing-list.index')
+                ->with('success', 'Packing List created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return back()->withErrors([
+                'error'   => 'Failed to create Packing List',
+                'details' => $e->getMessage(),
+            ])->withInput();
+        }
+
     }
 
     /**
@@ -110,10 +183,7 @@ class PackingListController extends Controller
      */
     public function show(string $id)
     {
-        $packingList = PackingList::with('packingListDetails.packageType')->findOrFail($id);
-        $packingListDetail = PackingListDetail::where('packing_list_id', $id)->get();
-        
-        return view('admin.inventory.packing-list.view', compact('packingList', 'packingListDetail'));
+        return view('admin.inventory.packing-list.view');
     }
 
     /**
@@ -127,10 +197,8 @@ class PackingListController extends Controller
         $categories = ProductCategory::all();
         $brands = Brand::all();
         $ports = Port::all();
-        $packingList = PackingList::with('packingListDetails.packageType')->findOrFail($id);
-        $packingListDetail = PackingListDetail::where('packing_list_id', $id)->get();
         
-        return view('admin.inventory.packing-list.edit', compact('packingList', 'packingListDetail', 'suppliers', 'clients', 'packageTypes', 'categories', 'brands', 'ports'));
+        return view('admin.inventory.packing-list.form', compact('suppliers', 'clients', 'packageTypes', 'categories', 'brands', 'ports'));
     }
 
     /**
@@ -210,10 +278,7 @@ class PackingListController extends Controller
 
     public function print($id)
     {
-        $packingList = PackingList::with(['packingListDetails.packageType'])->findOrFail($id);
-        $packingListDetails = $packingList->packingListDetails;
-
-        return view('admin.inventory.packing-list.print', compact('packingList', 'packingListDetails'));
+        return view('admin.inventory.packing-list.print');
     }
 
     public function getPackingListDetails(Request $request)

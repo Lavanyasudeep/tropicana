@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^4.2",
+        "endroid/qr-code": "^6.0",
         "jeroennoten/laravel-adminlte": "^3.15",
         "laravel/fortify": "^1.25",
         "laravel/framework": "^11.0",

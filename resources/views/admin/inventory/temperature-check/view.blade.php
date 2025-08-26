@@ -45,27 +45,30 @@
                 <div class="row">
                     <!-- Panel 1 -->
                     <div class="col-md-4">
-                        <div class="pform-panel" style="min-height:128px;" >
-                            <div class="pform-row"><div class="pform-label">Date</div><div class="pform-value">16/10/2023</div></div>
-                            <div class="pform-row"><div class="pform-label">Time</div><div class="pform-value">20:00</div></div>
+                        <div class="pform-panel" style="min-height:135px;" >
+                            <div class="pform-row"><div class="pform-label">Doc No</div><div class="pform-value">TC-25-0001</div></div>
+                            <div class="pform-row"><div class="pform-label">Doc Date</div><div class="pform-value">16/10/2023</div></div>
+                            <div class="pform-row"><div class="pform-label">Doc Time</div><div class="pform-value">20:00</div></div>
                             <div class="pform-row"><div class="pform-label">Gate Pass No.</div><div class="pform-value">7508</div></div>
                             <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">TRDP</div></div>
                         </div>
                     </div>
                     <!-- Panel 2 -->
                     <div class="col-md-4">
-                        <div class="pform-panel" style="min-height:128px;" >
+                        <div class="pform-panel" style="min-height:135px;" >
                             <div class="pform-row"><div class="pform-label">Vehicle No.</div><div class="pform-value">HR 55 R 0057</div></div>
-                            <div class="pform-row"><div class="pform-label">Product</div><div class="pform-value">Tropicana</div></div>
-                            <div class="pform-row"><div class="pform-label">SKU</div><div class="pform-value">1L PET</div></div>
+                            <div class="pform-row"><div class="pform-label">Product</div><div class="pform-value">Frozen Prawns</div></div>
+                            <div class="pform-row"><div class="pform-label">Total Qty</div><div class="pform-value">150</div></div>
                             <div class="pform-row"><div class="pform-label">Vehicle Set Temp (°C)</div><div class="pform-value">2</div></div>
                         </div>
                     </div>
                     <!-- Panel 3 -->
                     <div class="col-md-4">
-                        <div class="pform-panel" style="min-height:128px;" >
+                        <div class="pform-panel" style="min-height:135px;" >
+                            <div class="pform-row"><div class="pform-label">Status</div><div class="pform-value">Created</div></div>
                             <div class="pform-row"><div class="pform-label">Remarks</div><div class="pform-value">OK</div></div>
                             <div class="pform-row"><div class="pform-label">Received By</div><div class="pform-value">Tropicana</div></div>
+                            <div class="pform-row"><div class="pform-label">Checked By</div><div class="pform-value">John Smith</div></div>
                         </div>
                     </div>
                 </div>
@@ -75,33 +78,29 @@
                     <thead>
                         <tr>
                             <th>Check #</th>
+                            <th>Product #</th>
                             <th>Time</th>
                             <th>Product Temp (°C)</th>
-                            <th>Name</th>
-                            <th>Driver</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
+                            <td>Frozen Prawns</td>
                             <td>20:00</td>
                             <td>-1.6</td>
-                            <td>Jatin</td>
-                            <td>Driver A</td>
                         </tr>
                         <tr>
                             <td>2</td>
+                            <td>Frozen Squid Rings</td>
                             <td>20:05</td>
                             <td>-1.6</td>
-                            <td>Supervisor</td>
-                            <td>Driver A</td>
                         </tr>
                         <tr>
                             <td>3</td>
+                            <td>Frozen Crab Meat</td>
                             <td>20:10</td>
-                            <td>-1.5</td>
-                            <td>Tech Supervisor</td>
-                            <td>Driver A</td>
+                            <td>Frozen Crab Meat</td>
                         </tr>
                     </tbody>
                 </table>

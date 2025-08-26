@@ -26,5 +26,7 @@ class Block extends Model
         return $this->belongsTo(StorageRoom::class, 'room_id', 'room_id');
     }
 
-    
+    public function warehouseUnit() {
+        return $this->belongsTo(WarehouseUnit::class, 'warehouse_unit_id', 'wu_id');
+    }
 }

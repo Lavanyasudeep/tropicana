@@ -56,6 +56,9 @@
                                 <button class="btn btn-sm btn-warning btn-edit" onclick="editMenu('mainmenu', {{ $parent->menu_id }})" title="Edit" >
                                     <i class="fas fa-pen"></i>
                                 </button>
+                                <button class="btn btn-sm btn-danger btn-delete" onclick="deleteMenu({{ $parent->menu_id }})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </li>
                         @endforeach
                     </ul>
@@ -133,7 +136,7 @@
 <style>
     .menuPanel { display:flex; }
     .menuPanel .ca-col { width:33.33%; float:left; border:1px solid #CCC; margin-left:-1px; }
-    .menuPanel .ca-col-header { margin:0; padding:15px; min-height:62px; background-color:#1b5f76; color:#fff; font-size:16px; }
+    .menuPanel .ca-col-header { margin:0; padding:15px; min-height:62px; background-color:#215723; color:#fff; font-size:16px; }
     .menuPanel .ca-col-header h5 { margin:0; padding:0; font-size:16px; }
     .menuPanel .ca-col-header button { float:right; }
     .menuPanel ul { list-style-type:none; margin:0; padding:0; }
@@ -141,7 +144,8 @@
     .menuPanel ul li a { color:#000; font-size:16px; padding:5px 10px; width: 100%; display: block; }
     .menuPanel ul li a i { margin-right:5px; color:#333; }
     .menuPanel ul li a span { font-size:12px; display:block; }
-    .menuPanel ul li .btn-edit { font-size:12px; float:right; position:absolute; top:4px; right:4px; }
+    .menuPanel ul li .btn-edit { font-size:12px; float:right; position:absolute; top:4px; right:39px; }
+    .menuPanel ul li .btn-delete { font-size:12px; float:right; position:absolute; top:4px; right:4px; }
     .menuPanel ul li.active { background-color:#dbdfe0; color:#000; }
     .menuPanel ul li:hover { background-color:#dbdfe0; color:#000; } 
 </style>
@@ -159,6 +163,9 @@ function loadSubMenu(menu_id) {
 
     $.get("{{ route('admin.master.general.menu.get-sub-menu') }}", { menu_id }, function(html) {
         $('#sub-menu-column').html(html);
+
+        // ✅ Now that the HTML exists, initialize sortable
+        initSortable('#sortableSubMenu-' + menu_id);
     });
 }
 
@@ -168,6 +175,9 @@ function loadMenu(menu_id) {
 
     $.get("{{ route('admin.master.general.menu.get-menu') }}", { menu_id }, function(html) {
         $('#menu-column').html(html);
+
+        // ✅ Now that the HTML exists, initialize sortable
+        initSortable('#sortableMenu-' + menu_id);
     });
 }
 
@@ -264,19 +274,18 @@ function highlightMenu(menu_id) {
     }
 }
 
-$(function () {
-    $('#sortableMainMenu').sortable({
+function initSortable(listSelector) {
+    $(listSelector).sortable({
         placeholder: "ui-state-highlight",
-        update: function (event, ui) {
+        update: function () {
             let order = [];
-            $('#sortableMainMenu li').each(function (index) {
+            $(listSelector + ' li').each(function (index) {
                 order.push({
                     id: $(this).data('menu-id'),
                     sort_order: index + 1
                 });
             });
 
-            // Auto-save order via AJAX
             $.ajax({
                 url: '{{ route("admin.master.general.menu.sort.update") }}',
                 method: 'POST',
@@ -284,8 +293,8 @@ $(function () {
                     _token: '{{ csrf_token() }}',
                     order: order
                 },
-                success: function (res) {
-                    console.log('Sort order updated');
+                success: function () {
+                    console.log('Sort order updated for', listSelector);
                 },
                 error: function () {
                     alert('Failed to update sort order');
@@ -293,6 +302,41 @@ $(function () {
             });
         }
     });
+}
+
+function deleteMenu(id) {
+    if (!confirm('Are you sure you want to delete this menu?')) return;
+
+    $.ajax({
+        url: '{{ url("admin/master/general/menu/destroy") }}/' + id,
+        type: 'POST',
+        data: {
+            _method: 'DELETE',
+            _token: '{{ csrf_token() }}'
+        },
+        success: function (res) {
+            if (res.success) {
+                $('li[data-menu-id="' + id + '"]').remove();
+            } else {
+                alert('Failed to delete menu');
+            }
+        },
+        error: function () {
+            alert('Error deleting menu');
+        }
+    });
+}
+
+$(function () {
+    // Main menu
+    initSortable('#sortableMainMenu');
+
+    // Example: child menu for parent_id = 5
+    initSortable('#sortableMenu-5');
+
+    // Example: child menu for parent_id = 5
+    initSortable('#sortableSubMenu-5');
 });
+
 </script>
 @endpush

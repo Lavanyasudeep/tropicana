@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Master\Inventory\StorageRoom;
 use App\Models\Master\Inventory\Block;
+use App\Models\Master\Inventory\WarehouseUnit;
 
 use Illuminate\Http\Request;
 
@@ -19,9 +20,10 @@ class BlockController extends Controller
     public function index(Request $request)
     {
         $rooms= StorageRoom::active()->get();
+        $warehouseUnits = WarehouseUnit::all();
 
-        $data = Block::with(['room'])
-                    ->select(['block_id', 'name', 'block_no', 'room_id', 'description', 'total_capacity', 'temperature_range', 'is_active as Status']);
+        $data = Block::with(['room', 'warehouseUnit'])
+                    ->select('cs_blocks.*');
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->filter(function ($instance) use ($request) {
@@ -37,6 +39,9 @@ class BlockController extends Controller
                         });
                     }
                 })
+                ->addColumn('warehouse_unit', function ($row) {
+                    return $row->warehouseUnit->wu_name ?? '-';
+                })
                 ->addColumn('room_name', function ($row) {
                     return $row->room ? $row->room->name : 'No Room';
                 })
@@ -51,6 +56,7 @@ class BlockController extends Controller
                         data-id='{$block->block_id}'
                         data-name='{$block->name}'
                         data-block-no='{$block->block_no}'
+                        data-unit-id='{$block->warehouse_unit_id}'
                         data-room-id='{$block->room_id}'
                         data-description='{$block->description}'
                         data-capacity='{$block->total_capacity}'
@@ -70,7 +76,7 @@ class BlockController extends Controller
                 ->make(true);
         }
 
-        return view('admin.master.inventory.block.index', compact('rooms'));
+        return view('admin.master.inventory.block.index', compact('rooms', 'warehouseUnits'));
     }
 
     /**
@@ -95,6 +101,7 @@ class BlockController extends Controller
 
         Block::create([
             'name' => $request->name,
+            'warehouse_unit_id' => $request->warehouse_unit_id,
             'room_id' => $request->room_id,
             'block_no' => $request->block_no,
             'description' => $request->description,
@@ -137,6 +144,7 @@ class BlockController extends Controller
         $block->fill($request->only([
             'block_no',
             'name',
+            'warehouse_unit_id',
             'room_id',
             'description',
             'total_capacity',

@@ -24,6 +24,15 @@
                     <label for="block_no">Block No</label>
                     <input type="text" class="form-control" name="block_no" id="block_no" required>
                 </div>
+                <div class="col-md-4">
+                    <label>Warehouse Unit</label>
+                    <select name="warehouse_unit_id" class="form-control" required>
+                        <option value="">-- Select Warehouse Unit --</option>
+                        @foreach($warehouseUnits as $unit)
+                            <option value="{{ $unit->wu_id }}">{{ $unit->wu_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group col-md-4">
                     <label for="room_id">Storage Room</label>
                     <select class="form-control" name="room_id" id="room_id" required>
@@ -80,6 +89,7 @@
                     <th style="width:5%;" >#</th>
                     <th style="width:20%;" >Name</th>
                     <th style="width:20%;" >Block No</th>
+                    <th style="width:20%;" >Warehouse Unit</th>
                     <th style="width:30%;" >Room</th>
                     <th style="width:10%;" >Capacity</th>
                     <th style="width:10%;" >Temperature</th>
@@ -121,10 +131,11 @@
             columns: [
                 { data: 'block_id', name: 'block_id', width: '5%' },
                 { data: 'name', name: 'name', width: '15%' },
-                { data: 'block_no', name: 'block_no', width: '15%' },
-                { data: 'room_name', name: 'room_name', width: '15%' },
-                { data: 'total_capacity', name: 'total_capacity', width: '15%' },
-                { data: 'temperature_range', name: 'temperature_range', width: '15%' },
+                { data: 'block_no', name: 'block_no', width: '10%' },
+                { data: 'warehouse_unit', name: 'warehouse_unit', width: '10%' },
+                { data: 'room_name', name: 'room_name', width: '10%' },
+                { data: 'total_capacity', name: 'total_capacity', width: '10%' },
+                { data: 'temperature_range', name: 'temperature_range', width: '10%' },
                 { data: 'actions', name: 'actions', width: '20%', orderable: false, searchable: false }
             ],
             columnDefs: [

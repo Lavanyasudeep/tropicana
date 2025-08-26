@@ -12,6 +12,7 @@
         <div class="action-btns" >
             <a class="btn btn-adv-filter" href="#" title="Filter" id="hdrAdvFilterBtn" ><i class="fas fa-filter" ></i> Advance Filter</a> 
             <a class="btn btn-import" href="#" title="import" id="hdrImportBtn" ><i class="fas fa-file-import" ></i> Import</a>
+            <a href="{{ route('admin.inventory.packing-list.create') }}" class="btn btn-create"><i class="fas fa-plus"></i> Create</a>
         </div>
     </div>
 
@@ -154,30 +155,48 @@ $(document).ready(function() {
         lengthMenu: [10, 20, 50, 100],
         pageLength: 20,
         searching: false,
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: "{{ route('admin.inventory.packing-list.index') }}",
-            data: function (d) {
-                let range = $('#fltrDateRangePicker').val();
-                if (range) {
-                    let dates = range.split(' - ');
-
-                    // Function to convert dd/mm/yyyy to yyyy-mm-dd
-                    function formatDate(dateStr) {
-                        let parts = dateStr.split('/');
-                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // yyyy-mm-dd
-                    }
-
-                    d.from_date = formatDate(dates[0]);
-                    d.to_date = formatDate(dates[1]);
-                }
-
-                d.status = $('#fltrStatus').val();
-                d.client_flt = $('#clientFlt').val();
-                d.quick_search = $('#fltrSearchBox').val();
+        processing: false,
+        serverSide: false,
+        data: [
+            {
+                doc_no: 'PL‑25‑00012',
+                doc_date: '26/08/2025',
+                invoice_no: 'INV‑25‑0010',
+                invoice_date: '25/08/2025',
+                client: { client_name: 'Ocean Fresh Exports Pvt Ltd' },
+                status: 'Assigned',
+                actions: `
+                    <a href="{{ route('admin.inventory.packing-list.edit', 1) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.packing-list.print', 1) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.packing-list.view', 1) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+                doc_no: 'PL‑25‑00011',
+                doc_date: '20/08/2025',
+                invoice_no: 'INV‑25‑0009',
+                invoice_date: '19/08/2025',
+                client: { client_name: 'Blue Ocean Seafood Traders' },
+                status: 'Not Assigned',
+                actions: `
+                    <a href="{{ route('admin.inventory.gatepass-in.edit', 2) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.gatepass-in.print', 2) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.gatepass-in.view', 2) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
             }
-        },
+        ],
         columns: [
             { data: 'doc_no', name: 'doc_no' },
             { data: 'doc_date', name: 'doc_date' },
@@ -185,19 +204,13 @@ $(document).ready(function() {
             { data: 'invoice_date', name: 'invoice_date' },
             { data: 'client.client_name', name: 'client.client_name' },
             { data: 'status', name: 'status' },
-            { data: 'actions', name: 'actions', orderable: false, searchable: false },
+            { data: 'actions', name: 'actions', orderable: false, searchable: false }
         ],
         columnDefs: [
-            {
-                targets: 5,
-                className: 'text-center'
-            },
-            {
-                targets: 6,
-                className: 'text-center'
-            }
+            { targets: 5, className: 'text-center' },
+            { targets: 6, className: 'text-center' }
         ],
-        order: [[1, 'desc']],
+        order: [[1, 'desc']]
     });
 
     $(document).on("click", "#cancelFltrBtn", function () {

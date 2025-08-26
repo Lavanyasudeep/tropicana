@@ -72,7 +72,18 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+
+        // Delete all children first
+        Menu::where('parent_id', $id)->delete();
+
+        // Delete the parent menu
+        $menu->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Menu and its sub‑menus deleted successfully'
+        ]);
     }
 
     public function search(Request $request)

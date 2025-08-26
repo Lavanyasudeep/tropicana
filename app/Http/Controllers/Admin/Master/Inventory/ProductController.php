@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Master\Inventory;
 
 use App\Models\Master\Purchase\Supplier;
+use App\Models\Master\Sales\Customer;
 use App\Models\Master\Inventory\Product;
 use App\Models\Master\Inventory\ProductCategory;
+use App\Models\Master\Inventory\ProductMaster;
 use App\Models\Master\General\Unit;
 use App\Models\Master\General\Brand;
 use App\Models\Master\General\Tax;
@@ -25,6 +27,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = ProductCategory::select('product_category_id', 'product_category_name')->orderBy('product_category_name')->limit(100)->get();
+        $brands = Brand::select('brand_id', 'brand_name')->get();
+        $customers = Customer::select('customer_id', 'customer_name')->get();
+
         if ($request->ajax()) {
             $query = ProductMaster::query();
             return DataTables::of($query)
@@ -43,7 +49,7 @@ class ProductController extends Controller
                 ->make(true);
         }
 
-        return view('admin.master.inventory.product.index');
+        return view('admin.master.inventory.product.index', compact('categories', 'brands', 'customers'));
     }
 
     /**
@@ -55,9 +61,10 @@ class ProductController extends Controller
         $brands = Brand::select('brand_id', 'brand_name')->get();
         $units = Unit::select('unit_id', 'conversion_unit')->get();
         $suppliers = Supplier::select('supplier_id', 'supplier_name')->get();
+        $customers = Customer::select('customer_id', 'customer_name')->get();
         $taxes = Tax::select('tax_id', 'tax_per')->get();
 
-        return view('admin.master.inventory.product.form', compact('categories','brands','units','suppliers','taxes'));
+        return view('admin.master.inventory.product.form', compact('categories','brands','units','suppliers','taxes', 'customers'));
     }
 
     /**

@@ -27,34 +27,26 @@
 <table class="print-detail-table">
     <tr>
         <td>
-            <strong>Doc. #:</strong> {{ $packingList->doc_no }}<br><br>
-            <strong>Doc. Date:</strong> {{ $packingList->doc_date }}<br><br>
-            <strong>Invoice #:</strong> {{ $packingList->invoice_no }}<br><br>
-            <strong>Invoice Date:</strong> {{ $packingList->invoice_date }}<br>
+            <strong>Doc. #:</strong> PL‑25‑00012<br><br>
+            <strong>Doc. Date:</strong> 26/08/2025<br><br>
+            <strong>Gate Pass No.:</strong> GP-25-0045<br><br>
+            <strong>Invoice No.:</strong> INV-25-0010<br>
         </td>
 
         <!-- Column 2 -->
         <td>
-            <strong>Status:</strong> {{ $packingList->status }}<br><br>
-            <strong>Supplier:</strong> {{ $packingList->supplier->supplier_name }}<br><br>
-            <strong>Client:</strong> {{ $packingList->client->client_name ?? '' }}<br><br>
-            <strong>Notify:</strong> {{ $packingList->contact_person }}<br>
+            <strong>Status:</strong> Created<br><br>
+            <strong>Customer Name:</strong> Ocean Fresh Exports Pvt Ltd<br><br>
+            <strong>Contact Number:</strong> +91 98470 12345<br><br>
+            <strong>Address:</strong> Plot No. 45, Seafood Industrial Estate, Aroor, Kerala, India<br>
         </td>
 
         <!-- Column 3 -->
         <td>
-            <strong>Container #:</strong> {{ $packingList->container_nos }}<br><br>
-            <strong>Package Type:</strong> {{ $packingList->package_types }}<br><br>
-            <strong>Loading Date:</strong> {{ $packingList->loading_date }}<br><br>
-            <strong>Goods:</strong> {{ $packingList->goods }}<br>
-        </td>
-
-        <!-- Column 4 -->
-        <td>
-            <strong>Size:</strong> {{ $packingList->size }}<br><br>
-            <strong>Port of Loading:</strong> {{ $packingList->loading_port_id }}<br><br>
-            <strong>Port of Discharge:</strong> {{ $packingList->discharge_port_id }}<br><br>
-            <strong>Vessel:</strong> {{ $packingList->vessel_name }} / {{ $packingList->voyage_no }}<br>
+            <strong>Vehicle No.:</strong> KL-07-CD-4521<br><br>
+            <strong>Container No.:</strong> CONT-SEA-00987<br><br>
+            <strong>Port of Loading:</strong> Cochin Port<br><br>
+            <strong>Port of Discharge:</strong> Port of Rotterdam<br><br>
         </td>
     </tr>
 </table>
@@ -62,65 +54,61 @@
 <table class="print-list-table">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Size</th>
-            <th>No. of Pallets</th>
-            <th>No. of Packages</th>
-            <th>Package Type</th>
-            <th>Cargo Desc.</th>
-            <th>Variety</th>
-            <th>G.W/Pkg</th>
-            <th>N.W/Pkg</th>
-            <th>G.W. Total</th>
-            <th>N.W. Total</th>
-            <th>Class</th>
-            <th>Brand</th>
-            <th>Lot</th>
+            <th>Item Name</th>
+            <th>UOM</th>
+            <th>Quantity</th>
+            <th>Net Weight (KG)</th>
+            <th>Gross Weight (KG)</th>
+            <th>Remarks</th>
         </tr>
     </thead>
     <tbody>
-        @php
-            $tot_pallet_qty = $tot_package_qty = $tot_gw_per_package = $tot_nw_per_package = $tot_gw_with_pallet = $tot_nw_kg = 0;
-        @endphp
-        @foreach($packingListDetails as $k => $v)
         <tr>
-            <td>{{ $k + 1 }}</td>
-            <td>{{ $v->item_size_per_package }}</td>
-            <td>{{ $v->pallet_qty }}</td>
-            <td>{{ $v->package_qty }}</td>
-            <td>{{ $v->packageType?->description }}</td>
-            <td>{{ $v->cargo_description }}</td>
-            <td>{{ $v->variety->ProductCategoryName }}</td>
-            <td>{{ $v->gw_per_package }}</td>
-            <td>{{ $v->nw_per_package }}</td>
-            <td>{{ $v->gw_with_pallet }}</td>
-            <td>{{ $v->nw_kg }}</td>
-            <td>{{ $v->class ?? '' }}</td>
-            <td>{{ $v->brand->brand_name ?? '' }}</td>
-            <td>{{ $v->lot_no }}</td>
+            <td>Frozen Prawns</td>
+            <td>KG</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500.00</td>
+            <td class="text-right">520.00</td>
+            <td>Packed in 20kg cartons</td>
         </tr>
-        @php
-            $tot_pallet_qty += $v->pallet_qty;
-            $tot_package_qty += $v->package_qty;
-            $tot_gw_per_package += $v->gw_per_package;
-            $tot_nw_per_package += $v->nw_per_package;
-            $tot_gw_with_pallet += $v->gw_with_pallet;
-            $tot_nw_kg += $v->nw_kg;
-        @endphp
-        @endforeach
+        <tr>
+            <td>Frozen Squid Rings</td>
+            <td>KG</td>
+            <td class="text-right">300</td>
+            <td class="text-right">300.00</td>
+            <td class="text-right">315.00</td>
+            <td>Packed in 15kg cartons</td>
+        </tr>
+        <tr>
+            <td>Frozen Crab Meat</td>
+            <td>KG</td>
+            <td class="text-right">200</td>
+            <td class="text-right">200.00</td>
+            <td class="text-right">210.00</td>
+            <td>Packed in 10kg cartons</td>
+        </tr>
         <tr style="font-weight: bold;">
+            <td colspan="2" class="text-right">Total</td>
+            <td class="text-right">1000</td>
+            <td class="text-right">{{ number_format(1000, 2) }}</td>
+            <td class="text-right">{{ number_format(1045, 2) }}</td>
             <td></td>
-            <td>Total</td>
-            <td>{{ $tot_pallet_qty }}</td>
-            <td>{{ $tot_package_qty }}</td>
-            <td colspan="3"></td>
-            <td>{{ $tot_gw_per_package }}</td>
-            <td>{{ $tot_nw_per_package }}</td>
-            <td>{{ $tot_gw_with_pallet }}</td>
-            <td>{{ $tot_nw_kg }}</td>
-            <td colspan="3"></td>
         </tr>
     </tbody>
+</table>
+
+<table class="print-sign-table">
+    <tr>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Assigned By:</strong> ___________________________
+        </td>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Verified By:</strong> ___________________________
+        </td>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Approved By:</strong> ___________________________
+        </td>
+    </tr>
 </table>
 
 </body>

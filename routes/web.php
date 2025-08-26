@@ -14,7 +14,10 @@ use App\Http\Controllers\Admin\Inventory\OutwardController;
 use App\Http\Controllers\Admin\Inventory\StockAdjustmentController;
 use App\Http\Controllers\Admin\Inventory\StorageRoomController;
 use App\Http\Controllers\Admin\Inventory\GatePassController;
+use App\Http\Controllers\Admin\Inventory\GatePassInController;
 use App\Http\Controllers\Admin\Inventory\TemperatureCheckController;
+use App\Http\Controllers\Admin\Inventory\PalletizationController;
+use App\Http\Controllers\Admin\Inventory\PutAwayController;
 
 // Purchase
 use App\Http\Controllers\Admin\Purchase\GRNController;
@@ -28,6 +31,8 @@ use App\Http\Controllers\Admin\Accounting\PaymentController;
 use App\Http\Controllers\Admin\Accounting\JournalController;
 
 // Masters
+use App\Http\Controllers\Admin\Master\Inventory\WarehouseUnitController;
+use App\Http\Controllers\Admin\Master\Inventory\DockController;
 use App\Http\Controllers\Admin\Master\Inventory\RoomController;
 use App\Http\Controllers\Admin\Master\Inventory\BlockController;
 use App\Http\Controllers\Admin\Master\Inventory\RackController;
@@ -104,6 +109,22 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
         /********** Master : Inventory ***********/
         Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function() {
+            Route::group(['prefix' => 'warehouse-unit', 'as' => 'warehouse-unit.'], function() {
+                Route::get('/', [WarehouseUnitController::class, 'index'])->name('index');
+                Route::post('/store', [WarehouseUnitController::class, 'store'])->name('store');
+                Route::post('/update/{id}', [WarehouseUnitController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [WarehouseUnitController::class, 'destroy'])->name('destroy');
+                Route::post('/toggle-status', [WarehouseUnitController::class, 'toggleStatus'])->name('toggle-status');
+            });
+
+            Route::group(['prefix' => 'docks', 'as' => 'docks.'], function() {
+                Route::get('/', [DockController::class, 'index'])->name('index');
+                Route::post('/store', [DockController::class, 'store'])->name('store');
+                Route::post('/update/{id}', [DockController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [DockController::class, 'destroy'])->name('destroy');
+                Route::post('/toggle-status', [DockController::class, 'toggleStatus'])->name('toggle-status');
+            });
+
             Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
                 Route::get('/', [RoomController::class, 'index'])->name('index');
                 Route::post('/store', [RoomController::class, 'store'])->name('store');
@@ -375,16 +396,30 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
         //Pre Alert
         Route::group(['prefix' => 'pre-alert', 'as' => 'pre-alert.'], function() {
             Route::get('/', [PreAlertController::class, 'index'])->name('index');
+            Route::get('/create', [PreAlertController::class, 'create'])->name('create');
             Route::get('/{id}/edit', [PreAlertController::class, 'edit'])->name('edit');
             Route::post('/{id}/update', [PreAlertController::class, 'update'])->name('update');
             Route::get('/view/{id}', [PreAlertController::class, 'show'])->name('view');
             Route::get('/{id}/print', [PreAlertController::class, 'print'])->name('print');
-            Route::post('/get-packing-list-details', [PreAlertController::class, 'getPackingListDetails'])->name('get_packinglist_details');
+        });
+
+        //gatepass
+        Route::group(['prefix' => 'gatepass-in', 'as' => 'gatepass-in.'], function() {
+            Route::get('/', [GatePassInController::class, 'index'])->name('index');
+            Route::get('/create', [GatePassInController::class, 'create'])->name('create');
+            Route::post('/store/{id?}', [GatePassInController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [GatePassInController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [GatePassInController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [GatePassInController::class, 'show'])->name('view');
+            Route::get('/{id}/print', [GatePassInController::class, 'print'])->name('print');
+            Route::post('/change-status', [GatePassInController::class, 'changeStatus'])->name('change-status');
         });
 
         //packing list
         Route::group(['prefix' => 'packing-list', 'as' => 'packing-list.'], function() {
             Route::get('/', [PackingListController::class, 'index'])->name('index');
+            Route::get('/create', [PackingListController::class, 'create'])->name('create');
+            Route::get('/store', [PackingListController::class, 'store'])->name('store');
             Route::get('/{id}/edit', [PackingListController::class, 'edit'])->name('edit');
             Route::post('/{id}/update', [PackingListController::class, 'update'])->name('update');
             Route::get('/view/{id}', [PackingListController::class, 'show'])->name('view');
@@ -400,6 +435,22 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
             Route::post('/{id}/update', [TemperatureCheckController::class, 'update'])->name('update');
             Route::get('/view/{id}', [TemperatureCheckController::class, 'show'])->name('view');
             Route::get('/{id}/print', [TemperatureCheckController::class, 'print'])->name('print');
+        });
+
+         //palletization
+        Route::group(['prefix' => 'palletization', 'as' => 'palletization.'], function() {
+            Route::get('/', [PalletizationController::class, 'index'])->name('index');
+            Route::get('/create', [PalletizationController::class, 'create'])->name('create');
+            Route::get('/store', [PalletizationController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [PalletizationController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [PalletizationController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [PalletizationController::class, 'show'])->name('view');
+            Route::get('/{id}/print', [PalletizationController::class, 'print'])->name('print');
+        });
+
+         //put away
+        Route::group(['prefix' => 'put-away', 'as' => 'put-away.'], function() {
+            Route::get('/', [PutAwayController::class, 'index'])->name('index');
         });
 
         //Inward

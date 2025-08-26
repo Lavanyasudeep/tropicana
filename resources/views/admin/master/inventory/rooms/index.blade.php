@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="row" id="roomCreateForm" >
+<div class="row" id="roomCreateForm">
     <!-- Room Form -->
     <div class="col-12">
         <div class="card">
@@ -20,27 +20,71 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-4">
+                            <label>Warehouse Unit</label>
+                            <select name="warehouse_unit_id" class="form-control" required>
+                                <option value="">-- Select Warehouse Unit --</option>
+                                @foreach($warehouseUnits as $unit)
+                                    <option value="{{ $unit->wu_id }}">{{ $unit->wu_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Room No</label>
+                            <input type="text" class="form-control" name="room_no" placeholder="R001" required>
+                        </div>
+                        <div class="col-md-4">
                             <label>Room Name</label>
                             <input type="text" class="form-control" name="name" required>
                         </div>
+                    </div>
+
+                    <div class="row mt-2">
                         <div class="col-md-4">
                             <label>Description</label>
                             <input type="text" class="form-control" name="description">
                         </div>
                         <div class="col-md-4">
                             <label>Total Capacity (tons)</label>
-                            <input type="number" class="form-control" name="total_capacity" required1 >
+                            <input type="number" step="0.01" class="form-control" name="total_capacity" required>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <label>Temperature Range (°C)</label>
-                            <input type="text" class="form-control" name="temperature_range" required1 >
+                            <input type="text" class="form-control" name="temperature_range" placeholder="-18°C to -22°C" required>
                         </div>
-                        <div class="col-md-4" style="margin-top: 30px;" >
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <label>Storage Product Type</label>
+                            <select name="storage_product_type_id" class="form-control" required>
+                                <option value="">-- Select Product Type --</option>
+                                @foreach($productTypes as $type)
+                                    <option value="{{ $type->product_type_id }}">{{ $type->type_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Status</label>
+                            <select name="status" class="form-control">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Is Active</label>
+                            <select name="is_active" class="form-control">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
                             <button type="submit" class="btn btn-success">Save</button>
                             <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
-                            <button type="button" class="btn btn-default" id="closeEditBtn">Close</button>                            
+                            <button type="button" class="btn btn-default" id="closeEditBtn">Close</button>
                         </div>
                     </div>
                 </form>
@@ -73,6 +117,7 @@
                 <tr>
                     <th style="width:5%;" >#</th>
                     <th style="width:20%;" >Name</th>
+                    <th style="width:20%;" >Warehouse Unit</th>
                     <th style="width:30%;" >Description</th>
                     <th style="width:10%;" >Capacity</th>
                     <th style="width:10%;" >Temperature</th>
@@ -115,6 +160,7 @@
             columns: [
                 { data: 'room_id', name: 'room_id', width: '5%' },
                 { data: 'name', name: 'name', width: '25%' },
+                { data: 'warehouse_unit', name: 'warehouse_unit', width: '15%' },
                 { data: 'description', name: 'description', width: '25%' },
                 { data: 'total_capacity', name: 'total_capacity', width: '12.5%' },
                 { data: 'temperature_range', name: 'temperature_range', width: '12.5%' },
