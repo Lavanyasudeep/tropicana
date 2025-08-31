@@ -122,24 +122,24 @@
                                         <thead>
                                             <tr>
                                                 <th>Item Name</th>
+                                                <th>Batch No.</th>
                                                 <th>Qty</th>
                                                 <th>UOM</th>
-                                                <th>Batch No.</th>
                                                 <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td><input class="form-control" value=""></td>
-                                                <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
                                                 <td><input class="form-control" value=""></td>
-                                                <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>

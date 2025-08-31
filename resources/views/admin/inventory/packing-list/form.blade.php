@@ -10,6 +10,7 @@
 <div class="page-sub-header">
     <h3>Create Form</h3>
     <div class="action-btns">
+        <a href="#" class="btn btn-import" title="import" id="hdrImportBtn" ><i class="fas fa-file-import" ></i> Import</a>
         <a href="{{ route('admin.inventory.packing-list.index') }}" class="btn btn-success"><i class="fas fa-arrow-left"></i> Back</a>
     </div>
 </div>
@@ -123,27 +124,18 @@
                                     <table class="page-input-table" id="packingListItemsTable">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Item Name</th>
+                                                <th>Batch No.</th>
                                                 <th>Quantity</th>
                                                 <th>UOM</th>
-                                                <th>Batch No.</th>
-                                                <th>Gross Weight (KG)</th>
-                                                <th>Net Weight (KG)</th>
+                                                <th>Net Weight</th>
                                                 <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>   
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><input class="form-control" value=""></td>
-                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-control" value=""></td>
+                                                <td>1</td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
@@ -152,7 +144,16 @@
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
+                                                <td>2</td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>

@@ -163,7 +163,7 @@
     margin: 26px 0 0 10px;
     font-size: 14px; }
   .remaingAddMoreBtn { float: left;
-    margin: 15px 0 0 0;
+    margin: 17px 0 0 0;
     font-size: 14px; }
 </style>
 @stop 
