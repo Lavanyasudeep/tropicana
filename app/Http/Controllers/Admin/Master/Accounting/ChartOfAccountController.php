@@ -19,11 +19,18 @@ class ChartOfAccountController extends Controller
         // $level1s = Level1::orderBy('code')->get();
 
         // return view('admin.master.accounting.chart-of-account.index', compact('level1s'));
+        // $level1s = Level1::with(['level2s' => function($q) {
+        //                 $q->with(['accounts' => function($q2) {
+        //                             $q2->orderBy('account_name');
+        //                         }]);
+        //                     }])->get();
         $level1s = Level1::with(['level2s' => function($q) {
                         $q->with(['accounts' => function($q2) {
-                                    $q2->orderBy('account_name');
+                                    $q2->orderBy('sort_order');
                                 }]);
-                            }])->get();
+                            }])
+                        ->orderBy('sort_order')
+                        ->get();
 
         return view('admin.master.accounting.chart-of-account.tree', compact('level1s'));
     }
@@ -51,7 +58,7 @@ class ChartOfAccountController extends Controller
         switch ($type) {
             case 'level1':
                 Level1::updateOrCreate(
-                    ['level_1_id' => $level1Id],
+                    ['level_1_id' => $accountId],
                     [
                         'company_id'      => 1,
                         'code'      => $code,
@@ -62,7 +69,7 @@ class ChartOfAccountController extends Controller
 
             case 'level2':
                 Level2::updateOrCreate(
-                    ['level_2_id' => $level2Id],
+                    ['level_2_id' => $accountId],
                     [
                         'company_id'      => 1,
                         'code'      => $code,
@@ -198,5 +205,26 @@ class ChartOfAccountController extends Controller
         return view('admin.master.accounting.chart-of-account.partials.accounts', compact('level2', 'accounts'));
     }
 
+    public function sortLevel1(Request $request)
+    {
+        foreach ($request->ids as $index => $id) {
+            Level1::where('level_1_id', $id)->update(['sort_order' => $index]);
+        }
+        return response()->json(['status' => 'ok']);
+    }
+
+    public function sortLevel2(Request $request) {
+        foreach ($request->ids as $index => $id) {
+            Level2::where('level_2_id', $id)->update(['sort_order' => $index]);
+        }
+        return response()->json(['status' => 'ok']);
+    }
+
+    public function sortAccount(Request $request) {
+        foreach ($request->ids as $index => $id) {
+            ChartOfAccount::where('account_id', $id)->update(['sort_order' => $index]);
+        }
+        return response()->json(['status' => 'ok']);
+    }
 
 }

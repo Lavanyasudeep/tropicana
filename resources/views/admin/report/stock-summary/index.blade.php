@@ -123,27 +123,66 @@
         const table = $('#stockSummaryTable').DataTable({
             lengthMenu: [10, 20, 50, 100],
             pageLength: 20,
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('admin.report.stock-summary.index') }}",
-                data: function (d) {
-                    let range = $('#fltrDateRangePicker').val();
-                    if (range) {
-                        // let dates = range.split(' - ');
-
-                        // // Function to convert dd/mm/yyyy to yyyy-mm-dd
-                        // function formatDate(dateStr) {
-                        //     let parts = dateStr.split('/');
-                        //     return `${parts[2]}-${parts[1]}-${parts[0]}`; // yyyy-mm-dd
-                        // }
-
-                        // d.from_date = formatDate(dates[0]);
-                        // d.to_date = formatDate(dates[1]);
-                    }
-                    d.search_term = $('#fltrSearchBox').val();
+            processing: false,
+            serverSide: false,
+            data: [
+                {
+                    "product_name": "Frozen Peas",
+                    "category_name": "Vegetables",
+                    "batch_no": "LOT-20250801",
+                    "RateType": "Monthly",
+                    "UOM": "Box",
+                    "SubUOM": "Gram",
+                    "slot_positions": "WU0001-R002-B2-R5-L1-D2, WU0001-R002-B2-R5-L1-D3",
+                    "pallets": "PAL-001, PAL-002",
+                    "pallet_count": 2,
+                    "in_quantity": 1200,
+                    "out_quantity": 300,
+                    "total_quantity": 900
+                },
+                {
+                    "product_name": "Chicken Breast",
+                    "category_name": "Meat",
+                    "batch_no": "LOT-20250802",
+                    "RateType": "Weekly",
+                    "UOM": "Bag",
+                    "SubUOM": "Gram",
+                    "slot_positions": "WU0002-R003-B1-R2-L2-D1, WU0002-R003-B1-R2-L2-D2, WU0002-R003-B1-R2-L2-D3",
+                    "pallets": "PAL-003, PAL-004, PAL-005",
+                    "pallet_count": 3,
+                    "in_quantity": 1800,
+                    "out_quantity": 600,
+                    "total_quantity": 1200
+                },
+                {
+                    "product_name": "Ice Cream Tub",
+                    "category_name": "Dairy",
+                    "batch_no": "LOT-20250803",
+                    "RateType": "Monthly",
+                    "UOM": "Box",
+                    "SubUOM": "Box",
+                    "slot_positions": "WU0003-R001-B3-R1-L3-D4",
+                    "pallets": "PAL-006",
+                    "pallet_count": 1,
+                    "in_quantity": 500,
+                    "out_quantity": 100,
+                    "total_quantity": 400
+                },
+                {
+                    "product_name": "Frozen Mango",
+                    "category_name": "Fruits",
+                    "batch_no": "LOT-20250804",
+                    "RateType": "Monthly",
+                    "UOM": "Crate",
+                    "SubUOM": "Gram",
+                    "slot_positions": "WU0004-R004-B2-R3-L1-D1, WU0004-R004-B2-R3-L1-D2",
+                    "pallets": "PAL-007, PAL-008",
+                    "pallet_count": 2,
+                    "in_quantity": 1500,
+                    "out_quantity": 500,
+                    "total_quantity": 1000
                 }
-            },
+                ],
             columns: [
                 { data: 'product_name', name: 'product_name' },
                 { data: 'category_name', name: 'category_name', defaultContent: ' '},

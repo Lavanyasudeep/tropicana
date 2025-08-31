@@ -16,23 +16,23 @@
     <div class="card-body" >
 
         <div id="chart-tree">
-            <ul>
+            <ul id="level1-list" data-parent="root">
                 @foreach($level1s as $level1)
-                <li>
+                <li data-id="{{ $level1->level_1_id }}">
                     <strong>{{ $level1->description }}</strong>
                     <button class="btn btn-xs btn-default ca-btn-add" onclick="openForm('level2', {{ $level1->level_1_id }}, 0)"><i class="fa fa-plus" ></i> Add Child</button>
                     <button class="btn btn-xs btn-default ca-btn-edit" onclick="editAccount('level1', {{ $level1->level_1_id }})"><i class="fa fa-pen" ></i> Edit</button>
                     <button class="btn btn-xs btn-default ca-btn-view-sub" ><i class="fa fa-angle-down" ></i></button>
-                    <ul>
+                    <ul class="level2-list" data-parent="{{ $level1->level_1_id }}">
                         @foreach($level1->level2s as $level2)
-                        <li>
+                        <li data-id="{{ $level2->level_2_id }}">
                             <strong>{{ $level2->description }}</strong>
                             <button class="btn btn-xs btn-default ca-btn-add" onclick="openForm('account', {{ $level2->level_1_id }}, {{ $level2->level_2_id }})"><i class="fa fa-plus" ></i> Add Child</button>
                             <button class="btn btn-xs btn-default ca-btn-edit" onclick="editAccount('level2', {{ $level2->level_2_id }})"><i class="fa fa-pen" ></i> Edit</button>
                             <button class="btn btn-xs btn-default ca-btn-view-sub" ><i class="fa fa-angle-down" ></i></button>
-                            <ul>
+                            <ul class="account-list" data-parent="{{ $level2->level_2_id }}">
                                 @foreach($level2->accounts as $acc)
-                                <li>
+                                <li data-id="{{ $acc->account_id }}">
                                     {{ $acc->account_name }}
                                     <button class="btn btn-xs btn-default ca-btn-edit" onclick="editAccount('account', {{ $acc->account_id }})"><i class="fa fa-pen" ></i> Edit</button>
                                 </li>
@@ -52,13 +52,13 @@
 <div class="modal fade" id="accountModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <form id="accountForm" >
+        @csrf
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Account</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body">
-                @csrf
                 <input type="hidden" name="ca_form_type" id="ca_form_type">
                 <input type="hidden" name="account_id" id="account_id">
                 <input type="hidden" name="level_1_id" id="level_1_id">
@@ -108,6 +108,8 @@
 @endpush
 
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
 <script>
 function openForm(type, level_1_id, level_2_id) {
     $('#accountModal').find('.modal-title').text('Create');
@@ -130,11 +132,12 @@ function editAccount(type, id) {
     $('#accountModal').find('.modal-title').text('Edit');
     $('#ca_form_type').val(type);
     $.get("{{ url('admin/master/accounting/chart-of-account') }}/edit/" + type + "/" + id, function(data) {
-        $('#account_id').val(data.account_id);
-        $('#account_name').val(data.account_name);
-        $('#account_code').val(data.account_code);
+        $('#account_id').val(data.id);
+        $('#account_name').val(data.name);
+        $('#account_code').val(data.code);
         $('#level_1_id').val(data.level_1_id);
         $('#level_2_id').val(data.level_2_id);
+        
         $('#accountModal').modal('show');
     });
 }
@@ -163,5 +166,26 @@ $('#accountForm').on('submit', function(e) {
         }
     });
 });
+
+function initSortable(containerClass, route) {
+    document.querySelectorAll(containerClass).forEach(container => {
+        new Sortable(container, {
+            animation: 150,
+            onEnd: function (evt) {
+                const sortedIds = [...evt.to.children].map(li => li.dataset.id);
+                $.post(route, {
+                    ids: sortedIds,
+                    parent_id: evt.to.dataset.parent,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                });
+            }
+        });
+    });
+}
+
+initSortable('.level1-list', '/admin/master/chart-of-account/sort-level1');
+initSortable('.level2-list', '/admin/master/chart-of-account/sort-level2');
+initSortable('.account-list', '/admin/master/chart-of-account/sort-account');
+
 </script>
 @endpush

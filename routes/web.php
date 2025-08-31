@@ -333,6 +333,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
                 Route::post('/store', [ChartOfAccountController::class, 'store'])->name('store');
                 Route::get('/edit/{type}/{id}', [ChartOfAccountController::class, 'edit'])->name('edit');
                 Route::post('/update/{id}', [ChartOfAccountController::class, 'update'])->name('update');
+                Route::post('/sort-level1', [ChartOfAccountController::class, 'sortLevel1'])->name('sortLevel1');
+                Route::post('/sort-level2', [ChartOfAccountController::class, 'sortLevel2'])->name('sortLevel2');
+                Route::post('/sort-account', [ChartOfAccountController::class, 'sortAccount'])->name('sortAccount');
             }); 
 
             Route::group(['prefix' => 'analytical', 'as' => 'analytical.'], function() {
