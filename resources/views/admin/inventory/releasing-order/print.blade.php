@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pre‑Alert - Print</title>
+    <title>Releasing Order - Print</title>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body onload="printAndClose()">
@@ -21,7 +21,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="print-page-title"><strong>PRE‑ALERT</strong></td>
+            <td colspan="2" class="print-page-title"><strong>CUSTOMER RELEASING ORDER</strong></td>
         </tr>
     </tbody>
 </table>
@@ -30,10 +30,10 @@
 <table class="print-detail-table">
     <tr>
         <td>
-            <strong>Doc. #:</strong> PA‑25‑00001<br><br>
+            <strong>Doc. #:</strong> RO‑25‑00001<br><br>
             <strong>Doc. Date:</strong> 25/08/2025<br><br>
-            <strong>Arriving. Date:</strong> 25/10/2025<br><br>
-            <strong>Ref No. #:</strong> SQ‑25‑00045<br><br>
+            <strong>Releasing. Date:</strong> 25/10/2025<br><br>
+            <strong>Ref No. #:</strong> PQ‑25‑00045<br><br>
             <strong>Customer:</strong> ABC Cold Storage Ltd.<br>
         </td>
         <td>
@@ -45,6 +45,7 @@
         <td>
             <strong>Vehicle No.:</strong> KL‑07‑AB‑1234<br><br>
             <strong>Driver Name:</strong> Ramesh Kumar<br><br>
+            <strong>Transport Mode:</strong> Refrigerated Truck<br><br>
         </td>
     </tr>
 </table>

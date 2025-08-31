@@ -1,16 +1,42 @@
 @extends('adminlte::page')
 
-@section('title', 'Pre‑Alert List')
+@section('title', 'Releasing Order List')
 
 @section('content_header')
-    <h1>Pre‑Alert Documents</h1>
+    <h1>Releasing Order</h1>
 @endsection
 
 @section('content')
+@php 
+$orders =[
+    [
+        'document_no' => 'PA‑25‑00003',
+        'customer_name' => 'Frozen Foods Inc.',
+        'created_at' => '2025-08-25',
+        'releasing_date' => '2025-08-27',
+        'vehicle_no' => 'KL‑09‑EF‑9012',
+        'status' => 'Released',
+        'items_count' => 5
+    ],
+    [
+        'document_no' => 'PA‑25‑00004',
+        'customer_name' => 'Oceanic Ice Ltd.',
+        'created_at' => '2025-08-26',
+        'releasing_date' => '2025-08-28',
+        'vehicle_no' => '',
+        'status' => 'Cancelled',
+        'items_count' => 0
+    ]
+];
+
+$orders = collect($orders)->map(function ($order) {
+    return (object) $order;
+});
+@endphp
 <div class="page-sub-header">
     <h3>List</h3>
     <div class="action-btns">
-        <a href="{{ route('admin.inventory.pre-alert.create') }}" class="btn btn-create"><i class="fas fa-plus"></i> Create</a>
+        <a href="{{ route('admin.inventory.releasing-order.create') }}" class="btn btn-create"><i class="fas fa-plus"></i> Create</a>
     </div>
 </div>
 
@@ -71,36 +97,39 @@
                     <th>Doc. #</th>
                     <th>Date</th>
                     <th>Customer</th>
+                    <th>Releasing Date</th>
+                    <th>No. of Items</th>
                     <th>Vehicle No.</th>
                     <th>Status</th>
                     <th style="width:120px;">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($orders as $order)
                 <tr>
-                    <td>PA‑25‑00001</td>
-                    <td>25/08/2025</td>
-                    <td>ABC Cold Storage Ltd.</td>
-                    <td>KL‑07‑AB‑1234</td>
-                    <td>Created</td>
+                    <td>{{ $order->document_no }}</td>
+                    <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $order->created_at)->format('d/m/Y') }}</td>
+                    <td>{{ $order->customer_name }}</td>
+                    <td>{{ \Carbon\Carbon::parse($order->releasing_date)->format('d/m/Y') }}</td>
+                    <td>{{ $order->items_count }}</td>
+                    <td>{{ $order->vehicle_no }}</td>
                     <td>
-                        <a href="{{ route('admin.inventory.pre-alert.edit', 1) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                        <a href="{{ route('admin.inventory.pre-alert.print', 1) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i></a>
-                        <a href="{{ route('admin.inventory.pre-alert.view', 1) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                        <span class="badge 
+                            @if($order->status == 'Created') badge-warning 
+                            @elseif($order->status == 'Approved') badge-success 
+                            @elseif($order->status == 'Released') badge-primary 
+                            @elseif($order->status == 'Cancelled') badge-danger 
+                            @endif">
+                            {{ $order->status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.inventory.releasing-order.edit', 1) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('admin.inventory.releasing-order.print', 1) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i></a>
+                        <a href="{{ route('admin.inventory.releasing-order.view', 1) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>PA‑25‑00002</td>
-                    <td>26/08/2025</td>
-                    <td>XYZ Foods Pvt. Ltd.</td>
-                    <td>KL‑08‑CD‑5678</td>
-                    <td>Approved</td>
-                    <td>
-                        <a href="{{ route('admin.inventory.pre-alert.edit', 2) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                        <a href="{{ route('admin.inventory.pre-alert.print', 2) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i></a>
-                        <a href="{{ route('admin.inventory.pre-alert.view', 2) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

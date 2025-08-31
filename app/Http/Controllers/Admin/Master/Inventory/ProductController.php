@@ -7,6 +7,7 @@ use App\Models\Master\Sales\Customer;
 use App\Models\Master\Inventory\Product;
 use App\Models\Master\Inventory\ProductCategory;
 use App\Models\Master\Inventory\ProductMaster;
+use App\Models\Master\Inventory\ProductAttribute;
 use App\Models\Master\General\Unit;
 use App\Models\Master\General\Brand;
 use App\Models\Master\General\Tax;
@@ -62,9 +63,10 @@ class ProductController extends Controller
         $units = Unit::select('unit_id', 'conversion_unit')->get();
         $suppliers = Supplier::select('supplier_id', 'supplier_name')->get();
         $customers = Customer::select('customer_id', 'customer_name')->get();
+        $attributes = ProductAttribute::get();
         $taxes = Tax::select('tax_id', 'tax_per')->get();
 
-        return view('admin.master.inventory.product.form', compact('categories','brands','units','suppliers','taxes', 'customers'));
+        return view('admin.master.inventory.product.form', compact('categories','brands','units','suppliers','taxes', 'customers','attributes'));
     }
 
     /**

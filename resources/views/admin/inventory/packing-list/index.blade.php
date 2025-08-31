@@ -97,6 +97,7 @@
                         <th>Inv. #</th>
                         <th>Inv. Date</th>
                         <th>Client</th>
+                        <th>Palletization Status</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -164,6 +165,7 @@ $(document).ready(function() {
                 invoice_no: 'INV‑25‑0010',
                 invoice_date: '25/08/2025',
                 client: { client_name: 'Ocean Fresh Exports Pvt Ltd' },
+                palletization: 33,
                 status: 'Assigned',
                 actions: `
                     <a href="{{ route('admin.inventory.packing-list.edit', 1) }}" class="btn btn-warning btn-sm">
@@ -183,6 +185,7 @@ $(document).ready(function() {
                 invoice_no: 'INV‑25‑0009',
                 invoice_date: '19/08/2025',
                 client: { client_name: 'Blue Ocean Seafood Traders' },
+                palletization: 0,
                 status: 'Not Assigned',
                 actions: `
                     <a href="{{ route('admin.inventory.gatepass-in.edit', 2) }}" class="btn btn-warning btn-sm">
@@ -195,6 +198,26 @@ $(document).ready(function() {
                         <i class="fas fa-eye"></i>
                     </a>
                 `
+            },
+            {
+                doc_no: 'PL‑25‑00010',
+                doc_date: '18/08/2025',
+                invoice_no: 'INV‑25‑0008',
+                invoice_date: '17/08/2025',
+                client: { client_name: 'Southern Catch Logistics' },
+                palletization: 100,
+                status: 'Completed',
+                actions: `
+                    <a href="{{ route('admin.inventory.packing-list.edit', 3) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.packing-list.print', 3) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.inventory.packing-list.view', 3) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
             }
         ],
         columns: [
@@ -203,14 +226,49 @@ $(document).ready(function() {
             { data: 'invoice_no', name: 'invoice_no' },
             { data: 'invoice_date', name: 'invoice_date' },
             { data: 'client.client_name', name: 'client.client_name' },
+            {
+                data: 'palletization',
+                name: 'palletization',
+                render: function(data, type, row) {
+                    const percent = parseInt(data);
+                    let color = '#ccc';
+                    if (percent >= 75) color = '#4caf50';
+                    else if (percent >= 50) color = '#ffeb3b';
+                    else if (percent > 0) color = '#ff9800';
+                    return `
+                        <div style="width: 60px; height: 14px; border: 1px solid #999; border-radius: 3px; background: #f1f1f1; position: relative;">
+                            <div style="width: ${percent}%; height: 100%; background: ${color}; border-radius: 2px;"></div>
+                        </div>
+                        <small style="display:block; text-align:center; font-size:10px;">${percent}%</small>
+                    `;
+                }
+            },
             { data: 'status', name: 'status' },
-            { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable: false,
+                searchable: false,
+                render: function(data, type, row) {
+                    let html = data;
+
+                    if (parseInt(row.palletization) === 100) {
+                        html += `
+                            <a href="/admin/purchase/grn/create?ref=${row.doc_no}" class="btn btn-success btn-sm mt-1">
+                                <i class="fas fa-file-invoice"></i> Create GRN
+                            </a>
+                        `;
+                    }
+
+                    return html;
+                }
+            }
         ],
         columnDefs: [
             { targets: 5, className: 'text-center' },
             { targets: 6, className: 'text-center' }
         ],
-        order: [[1, 'desc']]
+        order: [[0, 'desc']]
     });
 
     $(document).on("click", "#cancelFltrBtn", function () {

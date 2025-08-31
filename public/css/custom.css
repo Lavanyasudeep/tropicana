@@ -1,6 +1,7 @@
 .main-header { padding:0; }
 .main-header ul li a { font-size:13px; }
 
+.card-header { background-color: white; !important}
 .w100p { width:100% !important; }
 
 .main-sidebar .brand-link { padding:0 !important; background-color: #FFF; height: 78px !important; }
@@ -55,6 +56,7 @@
 .page-sub-header .action-status label { font-size:14px; }
 .page-sub-header .action-status select { padding: 4px 5px; font-size: 14px; margin-left: 5px; border: 1px solid #719bab; border-radius: 3px; }
 
+.page-list-table-heading { font-size:16px; }
 .page-list-table { width: 100% !important; background-color: #FFF; }
 .page-list-table thead th { position: sticky !important; top: 0; z-index: 2; padding:8px; font-size:13px; background-color: #245e26; color:#FFF; font-weight:normal; border: 0 !important; border-left: 1px solid #ffffff70 !important; border-bottom:3px solid #000 !important; }
 .page-list-table tbody th:first-child { border-left: 1px solid #245e26 !important; }
@@ -72,6 +74,8 @@
 .page-list-table tbody td input,
 .page-list-table tbody td select { padding:2px 6px; font-size: 14px; width:100%; height:auto !important; border:1px solid #CCC; border-radius:2px; }
 
+
+.page-input-table-heading { font-size:16px; }
 .page-input-table { width: 100% !important; background-color: #FFF; }
 .page-input-table thead th { position: sticky !important; top: 0; z-index: 2; padding:8px; font-size:13px; background-color: #245e26; color:#FFF; font-weight:normal; border: 0 !important; border-left: 1px solid #ffffff70 !important; border-bottom:3px solid #000 !important; }
 .page-input-table tbody th:first-child { border-left: 1px solid #245e26 !important; }
@@ -162,7 +166,7 @@
     background-color: #e5f5e6;
     border-left: 4px solid #215723;
     padding: 6px 10px;
-    margin: 15px 0 8px;
+    margin:0 0 8px;
     border-radius: 3px;
     letter-spacing: 0.5px;
 }
@@ -170,6 +174,7 @@
 .page-form-add .pform-value input[type="text"],
 .page-form-add .pform-value input[type="number"],
 .page-form-add .pform-value input[type="date"],
+.page-form-add .pform-value input[type="time"],
 .page-form-add .pform-value input[type="email"],
 .page-form-add .pform-value input[type="password"],
 .page-form-add .pform-value textarea,
@@ -237,7 +242,7 @@ color:#000 !important;
 .active-inactive-btn { padding: 4px 6px; font-size: 10px; }
 .pallet-input { padding: 0px 5px; height: 24px; font-size: 12px; }
 
-.modal-header { background-color: #204657; color:#FFF; }
+.modal-header { background-color: #132f13; color:#FFF; }
 
 .dashboard-main-panel { margin-top:15px; border:0px; }
 .dashboard-main-panel .card { box-shadow:none; min-height:400px; }
@@ -262,7 +267,7 @@ color:#000 !important;
     /* background-repeat: repeat; */
     /* background-image: url(../images/background4.png); */
     /* background-blend-mode: difference; */
-    background-color: #128a51;
+    background-color: #c1ffe1;
     background-image: url(../images/background4.png);
     background-repeat: no-repeat;
     /* background-size: cover; */
@@ -389,3 +394,7 @@ input[type="number"] { text-align:right !important; }
 #settlementModal .text-end { text-align: right !important; }
 #settlementModal input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.remarks-panel {  }
+.remarks-panel label { font-size:14px; }
+.remarks-panel textarea { border: 1px solid #CCC; border-radius: 4px; min-height: 150px; font-size: 13px; padding: 8px; }

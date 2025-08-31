@@ -16,17 +16,14 @@ use Illuminate\Http\Request;
 use DataTables;
 use Carbon\Carbon;
 
-class PalletizationController extends Controller
+class VehPreCoolingInspCheckController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $clients = Client::all();
-        $statuses = Status::select('status_name')->where('doc_type', 'inward')->get();
-
-        return view('admin.inventory.palletization.index', compact('clients', 'statuses'));
+        return view('admin.inventory.vpci-check.index');
     }
 
     /**
@@ -34,7 +31,7 @@ class PalletizationController extends Controller
      */
     public function create()
     {
-        return view('admin.inventory.palletization.form');
+        return view('admin.inventory.vpci-check.form');
     }
 
     /**
@@ -49,7 +46,7 @@ class PalletizationController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.inventory.palletization.view');
+        return view('admin.inventory.vpci-check.view');
     }
 
     /**
@@ -57,7 +54,7 @@ class PalletizationController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.inventory.palletization.form');
+        return view('admin.inventory.vpci-check.form');
     }
 
     /**
@@ -78,7 +75,7 @@ class PalletizationController extends Controller
 
     public function print(string $id)
     {
-        return view('admin.inventory.palletization.print');
+        return view('admin.inventory.vpci-check.print');
     }
 
 }

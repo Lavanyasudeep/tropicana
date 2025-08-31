@@ -1,14 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Inward List')
+@section('title', 'GRN')
 
 @section('content_header')
-    <h1>Inward</h1>
+    <h1>GRN</h1>
 @stop
 
 @section('content')
-
-    @include('admin.purchase.grn.modal')
 
     <div class="page-sub-header" >
         <h3>List</h3>
@@ -16,6 +14,9 @@
             <a class="btn btn-adv-filter" href="#" title="Filter" id="hdrAdvFilterBtn" ><i class="fas fa-filter" ></i> Advance Filter</a> 
             <a class="btn btn-sync" href="#" title="Sync GRN From PJJ ERP" id="hdrGRNSyncBtn" ><i class="fas fa-sync" ></i> Sync</a>
             <a class="btn btn-import" href="#" title="import" id="hdrImportBtn" ><i class="fas fa-file-import" ></i> Import</a>
+            <a href="{{ route('admin.purchase.grn.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create
+            </a>
         </div>
     </div>
 
@@ -83,12 +84,14 @@
             <table id="grnTable" class="page-list-table">
                 <thead>
                     <tr>
-                        <th>Ref. No</th>
-                        <th>Date</th>
-                        <th>Supplier</th>
+                        <th>Doc No</th>
+                        <th>Doc Date</th>
+                        <th>Customer</th>
                         <th>Invoice #</th>
-                        <th>Amount</th>
-                        <th></th>
+                        <th>Vehicle No</th>
+                        <th>Gatepass No</th>
+                        <th>Total Pallets</th>
+                        <th>Put Away Status</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -98,6 +101,8 @@
                         <th><input type="text" class="form-control column-search" placeholder="Search"></th>
                         <th><input type="text" class="form-control column-search" placeholder="Search"></th>
                         <th><input type="text" class="form-control column-search" placeholder="Search"></th>
+                        <th><input type="text" class="form-control column-search" placeholder="Search"></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -245,63 +250,112 @@
         /***** End : Sync *****/
 
         /***** Start : Data Table *****/
-        let table = $('#grnTable').DataTable({
+       let table = $('#grnTable').DataTable({
             lengthMenu: [10, 20, 50, 100],
             pageLength: 20,
-            searching: true, 
+            searching: true,
             processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('admin.purchase.grn.index') }}",
-                data: function (d) {
-                    let range = $('#fltrDateRangePicker').val();
-                    if (range) {
-                        let dates = range.split(' - ');
-
-                        // Function to convert dd/mm/yyyy to yyyy-mm-dd
-                        function formatDate(dateStr) {
-                            let parts = dateStr.split('/');
-                            return `${parts[2]}-${parts[1]}-${parts[0]}`; // yyyy-mm-dd
-                        }
-
-                        d.from_date = formatDate(dates[0]);
-                        d.to_date = formatDate(dates[1]);
-                    }
-
-                    d.status = $('#fltrStatus').val();
-                    d.quick_search = $('#fltrSearchBox').val();
+            serverSide: false, // client-side for dummy data
+            data: [
+                {
+                    doc_no: "GRN-25-00001",
+                    doc_date: "2025-08-26",
+                    customer: "Ocean Fresh Exports Pvt Ltd",
+                    invoice_no: "INV-2501",
+                    vehicle_no: "KL-07-AB-1234",
+                    gatepass_no: "GP-1001",
+                    total_pallets: 12,
+                    putaway_status: 100,
+                    status: '<span class="badge badge-success">Completed</span>',
+                    action: `
+                    <a href="{{ route('admin.purchase.grn.edit', 1) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.print', 1) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.view', 1) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+                },
+                {
+                    doc_no: "GRN-25-00002",
+                    doc_date: "2025-08-25",
+                    customer: "Fresh Harvest Distributors",
+                    invoice_no: "INV-2502",
+                    vehicle_no: "KL-07-CD-4521",
+                    gatepass_no: "GP-1002",
+                    total_pallets: 8,
+                    putaway_status: 50,
+                    status: '<span class="badge badge-warning">Pending</span>',
+                    action: `
+                    <a href="{{ route('admin.purchase.grn.edit', 1) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.print', 1) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.view', 1) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+                },
+                {
+                    doc_no: "GRN-25-00003",
+                    doc_date: "2025-08-24",
+                    customer: "Bluewave Seafood Traders",
+                    invoice_no: "INV-2503",
+                    vehicle_no: "KL-55-EF-9988",
+                    gatepass_no: "GP-1003",
+                    total_pallets: 15,
+                    putaway_status: 0,
+                    status: '<span class="badge badge-danger">Rejected</span>',
+                    action: `
+                    <a href="{{ route('admin.purchase.grn.edit', 1) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.print', 1) }}" target="_blank" class="btn btn-sm btn-print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="{{ route('admin.purchase.grn.view', 1) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
                 }
-            },
+            ],
             columns: [
-                { data: 'GRNNo', name: 'GRNNo', width: '10%' },
-                { data: 'GRNDate', name: 'GRNDate', width: '10%' },
-                { data: 'supplier.supplier_name', name: 'supplier.supplier_name', width: '25%' },
-                { data: 'InvoiceNumber', name: 'InvoiceNumber', width: '20%' },
-                { data: 'Amount', name: 'Amount', width: '10%' },
-                { data: 'assigned_progress', name: 'assigned_progress', width: '10%' },
-                { data: 'status', name: 'status', width: '10%' },
-                { data: 'actions', name: 'actions', width: '5%', orderable: false, searchable: false },
+                { data: 'doc_no' },
+                { data: 'doc_date' },
+                { data: 'customer' },
+                { data: 'invoice_no' },
+                { data: 'vehicle_no' },
+                { data: 'gatepass_no' },
+                { data: 'total_pallets' },
+                {
+                    data: 'putaway_status',
+                    name: 'putaway_status',
+                    render: function(data, type, row) {
+                        const percent = parseInt(data);
+                        let color = '#ccc';
+                        if (percent >= 75) color = '#4caf50';
+                        else if (percent >= 50) color = '#ffeb3b';
+                        else if (percent > 0) color = '#ff9800';
+
+                        return `
+                            <div style="width: 60px; height: 14px; border: 1px solid #999; border-radius: 3px; background: #f1f1f1; position: relative;">
+                                <div style="width: ${percent}%; height: 100%; background: ${color}; border-radius: 2px;"></div>
+                            </div>
+                            <small style="display:block; text-align:center; font-size:10px;">${percent}%</small>
+                        `;
+                    }
+                },
+                { data: 'status' },
+                { data: 'action' }
             ],
-            columnDefs: [
-                {
-                    targets: 4,
-                    className: 'text-right'
-                },
-                {
-                    targets: 5,
-                    className: 'text-center'
-                },
-                {
-                    targets: 6,
-                    className: 'text-center'
-                },
-                {
-                    targets: 7,
-                    className: 'text-center'
-                }
-            ],
-            order: [[1, 'desc']],
+            order: [[1, 'desc']]
         });
+
         /***** End : Data Table *****/
 
          $('#grnTable thead').on('keyup change', '.column-search', function () {

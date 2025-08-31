@@ -1,196 +1,185 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Palletization - Print</title>
+    <title>Pallet - Print</title>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body onload="printAndClose()">
+@php
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
+$pallet = [
+    [
+        'pallet_no'         => 'PLT-00001',
+        'warehouse_unit_no' => 'WU-0005',
+        'room_no'           => 'R-102',
+        'dock_no'           => 'D-07',
+        'product_code'      => 'FRZ-001',
+        'product'           => 'Frozen Prawns 500g',
+        'lot'               => 'BCH-25-001',
+        'size'              => '500g',
+        'package_type'      => 'Carton',
+        'no_of_packages'    => 60,
+        'total_gw'          => 750,
+        'total_nw'          => 720,
+        'expiry_date'       => '2026-02-15',
+        'uom'               => 'Boxes',
+        'palletized_by'     => 'Ramesh Kumar',
+        'palletized_time'   => '09:15 – 09:42 (00:27)',
+        'supervisor'        => 'Vijay Nair',
+        'remarks'           => 'No damage, all boxes sealed',
+    ],
+    [
+        'pallet_no'         => 'PLT-00001',
+        'warehouse_unit_no' => 'WU-0005',
+        'room_no'           => 'R-102',
+        'dock_no'           => 'D-07',
+        'product_code'      => 'FRZ-002',
+        'product'           => 'Frozen Squid Rings 1kg',
+        'lot'               => 'BCH-25-002',
+        'size'              => '1kg',
+        'package_type'      => 'Carton',
+        'no_of_packages'    => 40,
+        'total_gw'          => 500,
+        'total_nw'          => 480,
+        'expiry_date'       => '2026-03-20',
+        'uom'               => 'Boxes',
+        'palletized_by'     => 'Ramesh Kumar',
+        'palletized_time'   => '09:15 – 09:42 (00:27)',
+        'supervisor'        => 'Vijay Nair',
+        'remarks'           => 'No damage, all boxes sealed',
+    ]
+];
 
-    {{-- Header --}}
-    <table class="print-detail-table">
-        <tbody>
-            <tr>
-                <td style="text-align: left;">
-                    <img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Company Logo">
-                </td>
-                <td style="text-align: left;">
-                    <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                    <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                    <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                    <p>Website: www.johnsonchill.com</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="print-page-title"><strong>PALLETIZATION SUMMARY</strong></td>
-            </tr>
-        </tbody>
-    </table>
+// Build QR payload with all items for this pallet
+$qrPayload = [
+    'pallet_no' => $pallet[0]['pallet_no'],
+    'items'     => $pallet
+];
 
-    {{-- Shipment Details --}}
-    @php
-    // Dummy pallet-wise data
-    $pallets = [
-        'P-1-1' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-2' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-3' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-4' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-5' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-6' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-7' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-8' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-9' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-1-10' => [
-            ['product' => 'RED JOANPRINCE SMALL', 'lot' => 'LOT001', 'size' => '1L', 'weight_per_unit' => '1.05', 'package_type' => 'Carton', 'no_of_packages' => 100, 'gw_per_package' => '10.5', 'nw_per_package' => '10', 'total_gw' => '525', 'total_nw' => '500'],
-        ],
-        'P-2-1' => [
-            ['product' => 'GREEN EMERALD LARGE', 'lot' => 'LOT010', 'size' => '500ml', 'weight_per_unit' => '0.55', 'package_type' => 'Crate', 'no_of_packages' => 200, 'gw_per_package' => '6.6', 'nw_per_package' => '6', 'total_gw' => '264', 'total_nw' => '240'],
-        ],
-        'P-2-2' => [
-            ['product' => 'GREEN EMERALD LARGE', 'lot' => 'LOT010', 'size' => '500ml', 'weight_per_unit' => '0.55', 'package_type' => 'Crate', 'no_of_packages' => 200, 'gw_per_package' => '6.6', 'nw_per_package' => '6', 'total_gw' => '264', 'total_nw' => '240'],
-        ],
-        'P-2-3' => [
-            ['product' => 'GREEN EMERALD LARGE', 'lot' => 'LOT010', 'size' => '500ml', 'weight_per_unit' => '0.55', 'package_type' => 'Crate', 'no_of_packages' => 200, 'gw_per_package' => '6.6', 'nw_per_package' => '6', 'total_gw' => '264', 'total_nw' => '240'],
-        ],
-        'P-2-4' => [
-            ['product' => 'GREEN EMERALD LARGE', 'lot' => 'LOT010', 'size' => '500ml', 'weight_per_unit' => '0.55', 'package_type' => 'Crate', 'no_of_packages' => 200, 'gw_per_package' => '6.6', 'nw_per_package' => '6', 'total_gw' => '264', 'total_nw' => '240'],
-        ],
-    ];
-    @endphp
+$builder = new Builder(
+    writer: new PngWriter(),
+    data: json_encode($qrPayload),
+    size: 150,
+    margin: 5
+);
 
-    <table class="header-table">
+$result = $builder->build();
+$qrCodeBase64 = 'data:image/png;base64,' . base64_encode($result->getString());
+
+$first = $pallet[0] ?? [];
+@endphp
+
+<!-- Header -->
+<table class="print-detail-table">
+    <tr>
+        <td style="text-align:left;">
+            <img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Company Logo">
+        </td>
+        <td style="text-align:left;">
+            <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
+            <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
+            <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
+            <p>Website: www.johnsonchill.com</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="print-page-title"><strong>PALLETIZATION</strong></td>
+    </tr>
+</table>
+
+<!-- Metadata -->
+<table class="print-detail-table">
+    <tr>
+        <td>
+            <strong>Doc No:</strong> PAL-25-00001<br>
+            <strong>Doc Date:</strong> 26/08/2025<br>
+            <strong>Doc Time:</strong> 09:42<br>
+            <strong>Gatepass No.:</strong> GP-1001<br>
+            <strong>Packing List No.:</strong> PL-25-00001<br>
+            <strong>Vehicle No.:</strong> KL-07-CD-4521<br>
+            <strong>Customer:</strong> Ocean Fresh Exports Pvt Ltd
+        </td>
+        <td>
+            <strong>Warehouse Unit:</strong> {{ $first['warehouse_unit_no'] ?? '' }}<br>
+            <strong>Dock No:</strong> {{ $first['dock_no'] ?? '' }}<br>
+            <strong>Room No:</strong> {{ $first['room_no'] ?? '' }}<br>
+            <strong>Pallet No:</strong> {{ $first['pallet_no'] ?? '' }}<br>
+            <strong>Qty Per Pallet:</strong> {{ collect($pallet)->sum('no_of_packages') }}<br>
+            <strong>Total Weight (KG):</strong> {{ $first['total_gw'] ?? '' }}
+        </td>
+        <td>
+            <strong>Palletized By:</strong> {{ $first['palletized_by'] ?? '' }}<br>
+            <strong>Palletized Time:</strong> {{ $first['palletized_time'] ?? '' }}<br>
+            <strong>Supervisor:</strong> {{ $first['supervisor'] ?? '' }}<br>
+            <strong>Remarks:</strong> {{ $first['remarks'] ?? '' }}
+        </td>
+        <td>
+            <strong>Status:</strong> Completed<br>
+            <strong>QR Code:</strong><br>
+            <img src="{{ $qrCodeBase64 }}" style="width:80px;height:80px;">
+        </td>
+    </tr>
+</table>
+
+<!-- Items Table -->
+<table class="print-list-table">
+    <thead>
         <tr>
-            <td><strong>DO No.:</strong> PAL-25-00001</td>
-            <td><strong>Date:</strong> 2023-04-25</td>
-            <td><strong>Packing List No.:</strong> PL-25-00001</td>
+            <th>S/N</th>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Batch No</th>
+            <th>Expiry Date</th>
+            <th class="txt-right">Quantity</th>
+            <th>UOM</th>
         </tr>
+    </thead>
+    <tbody>
+        @foreach($pallet as $i => $item)
         <tr>
-            <td><strong>Sales Order No.:</strong> SO-25-00001</td>
-            <td><strong>GRN No.:</strong> GR-1001</td>
-            <td><strong>Vehicle No.:</strong> KL-07-AB-1345</td>
+            <td>{{ $i + 1 }}</td>
+            <td>{{ $item['product_code'] ?? '' }}</td>
+            <td>{{ $item['product'] ?? '' }}</td>
+            <td>{{ $item['lot'] ?? '' }}</td>
+            <td>{{ $item['expiry_date'] ?? '' }}</td>
+            <td class="txt-right">{{ $item['no_of_packages'] ?? '' }}</td>
+            <td>{{ $item['uom'] ?? '' }}</td>
         </tr>
-        <tr>
-            <td><strong>Client:</strong> ABC Foods Ltd</td>
-            <td><strong>Supplier:</strong> LMN Group</td>
-            <td><strong>Warehouse Unit:</strong> 3</td>
+        @endforeach
+    </tbody>
+    <tfoot>
+        <tr style="font-weight:bold;">
+            <td colspan="5" class="txt-right">Total</td>
+            <td class="txt-right">{{ collect($pallet)->sum('no_of_packages') }}</td>
+            <td>Boxes</td>
         </tr>
-        <tr>
-            <td><strong>Empty Pallet Weight:</strong> 28</td>
-            <td><strong>Total Pallets:</strong> {{ count($pallets ?? []) }}</td>
-            <td><strong>Total Packages:</strong> {{ collect($pallets)->flatten(1)->sum('no_of_packages') }}</td>
-        </tr>
-    </table>
+    </tfoot>
+</table>
 
-    {{-- Pallet Table --}}
-    <table class="print-list-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Pallet No.</th>
-                <th>QR Code</th>
-                <th>Product</th>
-                <th>Lot</th>
-                <th>Size</th>
-                <th>Weight/Unit</th>
-                <th>Package Type</th>
-                <th>No. of Packages</th>
-                <th>G.W./Pkg</th>
-                <th>N.W./Pkg</th>
-                <th>Total G.W.</th>
-                <th>Total N.W.</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                use Endroid\QrCode\Builder\Builder;
-                use Endroid\QrCode\Writer\PngWriter;
-                $tot_packages = $tot_gw = $tot_nw = 0;
+<table class="print-sign-table">
+    <tr>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Assigned By:</strong> ___________________________
+        </td>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Palletized By:</strong> ___________________________
+        </td>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Verified By:</strong> ___________________________
+        </td>
+        <td style="height: 60px; vertical-align: bottom;">
+            <strong>Approved By:</strong> ___________________________
+        </td>
+    </tr>
+</table>
 
-            @endphp
-            @foreach ($pallets as $index => $items)
-                @php
-                    $first = $items[0];
-                    $qrData = "Pallet: {$index}\nProduct: {$first['product']}\nLot: {$first['lot']}\nSize: {$first['size']}\nPackage Type: {$first['package_type']}\nNo. of Packages: {$first['no_of_packages']}\nTotal G.W.: {$first['total_gw']}\nTotal N.W.: {$first['total_nw']}";
-                    $builder = new Builder(
-                        writer: new PngWriter(),
-                        data: $qrData,
-                        size: 100,
-                        margin: 2
-                    );
-                    $result = $builder->build();
-                    $qrBase64 = 'data:image/png;base64,' . base64_encode($result->getString());
-
-                    $tot_packages += $first['no_of_packages'];
-                    $tot_gw += $first['total_gw'];
-                    $tot_nw += $first['total_nw'];
-                @endphp
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $index }}</td>
-                    <td><img src="{{ $qrBase64 }}" style="width:80px;height:80px;"></td>
-                    <td>{{ $first['product'] }}</td>
-                    <td>{{ $first['lot'] }}</td>
-                    <td>{{ $first['size'] }}</td>
-                    <td>{{ $first['weight_per_unit'] }}</td>
-                    <td>{{ $first['package_type'] }}</td>
-                    <td>{{ $first['no_of_packages'] }}</td>
-                    <td>{{ $first['gw_per_package'] }}</td>
-                    <td>{{ $first['nw_per_package'] }}</td>
-                    <td>{{ $first['total_gw'] }}</td>
-                    <td>{{ $first['total_nw'] }}</td>
-                </tr>
-            @endforeach
-            <tr style="font-weight: bold;">
-                <td colspan="8">Total</td>
-                <td>{{ $tot_packages }}</td>
-                <td colspan="2"></td>
-                <td>{{ $tot_gw }}</td>
-                <td>{{ $tot_nw }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-     {{-- Summary table (same as Inward) --}}
-    <table class="print-summary-table">
-        <tr><td><strong>Weight of 1 empty pallet:</strong></td><td class="txt-right">28</td></tr>
-        <tr><td><strong>Total No of Pallets:</strong></td><td class="txt-right">{{ count($pallets ?? []) }}</td></tr>
-        <tr><td><strong>Total No of Packages:</strong></td><td class="txt-right">{{ $tot_packages }}</td></tr>
-        <tr><td><strong>Total G.W.:</strong></td><td class="txt-right">{{ $tot_gw }}</td></tr>
-        <tr><td><strong>Total N.W.:</strong></td><td class="txt-right">{{ $tot_nw }}</td></tr>
-    </table>
-
-    {{-- Signature table (same as Inward) --}}
-    <table class="print-sign-table">
-        <tr>
-            <td style="height: 60px; vertical-align: bottom;"><strong>Prepared By:</strong> ___________________________</td>
-            <td style="height: 60px; vertical-align: bottom;"><strong>Checked By:</strong> ___________________________</td>
-            <td style="height: 60px; vertical-align: bottom;"><strong>Approved By:</strong> ___________________________</td>
-        </tr>
-    </table>
+<script>
+function printAndClose() {
+    window.print();
+    setTimeout(() => window.close(), 1000);
+}
+</script>
 
 </body>
 </html>
-
-<script>
-    function printAndClose() {
-        window.print();
-        setTimeout(() => window.close(), 1000);
-    }
-</script>

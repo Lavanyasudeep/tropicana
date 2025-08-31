@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="page-sub-header">
-    <h3>Form</h3>
+    <h3>Create Form</h3>
     <div class="action-btns">
         <a href="{{ route('admin.inventory.palletization.index') }}" class="btn btn-success">
             <i class="fas fa-arrow-left"></i> Back
@@ -25,44 +25,56 @@
             <!-- Header Fields -->
             <div class="row">
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:175px;">
+                    <div class="pform-panel" style="min-height:182px;">
                         <div class="pform-row">
                             <div class="pform-label">Doc No</div>
                             <div class="pform-value">
-                                <input type="text" name="doc_no" id="doc_no" class="form-control">
+                                <input type="text" name="doc_no" id="doc_no" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="pform-row">
-                            <div class="pform-label">Packing List</div>
+                            <div class="pform-label">Doc Date</div>
+                            <div class="pform-value"><input type="date" name="doc_date" value="2025-08-26"></div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">Doc Time</div>
+                            <div class="pform-value"><input type="time" name="doc_time" value="09:42"></div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">Gatepass No.</div>
                             <div class="pform-value">
-                                <select id="packingListSelect" class="form-control">
-                                <option value="">-- Select --</option>
-                                <option value="PL001">Packing List #PL001</option>
-                                <option value="PL002">Packing List #PL002</option>
-                            </select>
+                                <select name="gatepass_no" id="gatepass_no" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option value="GP001">GP-001</option>
+                                    <option value="GP002">GP-002</option>
+                                </select>
                             </div>
                         </div>
                         <div class="pform-row">
-                            <div class="pform-label">Gatepass No</div>
+                            <div class="pform-label">Order/Packing List</div>
                             <div class="pform-value">
-                                <input type="text" name="gatepass_no" id="gatepass_no" class="form-control">
-                            </div>
-                        </div>
-                        <div class="pform-row">
-                            <div class="pform-label">Customer</div>
-                            <div class="pform-value">
-                                <input type="text" name="customer" id="customer" class="form-control" readonly>
+                                <select id="packingListSelect" class="form-control" readonly >
+                                    <option value="">- Select -</option>
+                                    <option value="PL001">PL-001</option>
+                                    <option value="PL002">PL-002</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:175px;">
+                    <div class="pform-panel" style="min-height:182px;">
+                        <div class="pform-row">
+                            <div class="pform-label">Customer</div>
+                            <div class="pform-value">
+                                <input type="text" name="customer" id="customer" class="form-control" readonly>
+                            </div>
+                        </div>
                         <div class="pform-row">
                             <div class="pform-label">Vehicle No</div>
                             <div class="pform-value">
-                                <input type="text" name="vehicle_no" id="vehicle_no" class="form-control">
+                                <input type="text" name="vehicle_no" id="vehicle_no" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="pform-row">
@@ -81,11 +93,25 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:175px;">
+                    <div class="pform-panel" style="min-height:182px;">
                         <div class="pform-row">
-                            <div class="pform-label">Weight of 1 Empty Pallet</div>
+                            <div class="pform-label">Start Time</div>
+                            <div class="pform-value"><input type="time" name="start_time" value="09:42"></div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">End Time</div>
+                            <div class="pform-value"><input type="time" name="start_time" value="09:42"></div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">Team</div>
                             <div class="pform-value">
-                                <input type="number" name="empty_pallet_weight" id="empty_pallet_weight" class="form-control">
+                                <input type="text" name="team" id="team" class="form-control">
+                            </div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">Volume of Pallet (m3)</div>
+                            <div class="pform-value">
+                                <input type="number" name="pallet_capacity" id="pallet_capacity" class="form-control">
                             </div>
                         </div>
                         <div class="pform-row">
@@ -99,28 +125,29 @@
             </div>
 
             <!-- Items Table -->
-            <div class="row mt-4">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="page-list-panel">
-                        <table class="page-list-table" id="itemsTable">
+                        <table class="page-input-table" id="itemsTable">
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Lot</th>
-                                    <th>UOM</th>
-                                    <th>Total Qty</th>
-                                    <th>Assigned Qty</th>
-                                    <th>Total G.W.</th>
-                                    <th>Total N.W.</th>
-                                    <th>Quantity</th>
+                                    <th>Lot No.</th>
+                                    <th style="text-align:center;" >UOM</th>
+                                    <th style="text-align:center;" >Total Qty</th>
+                                    <th style="text-align:center;" >Loaded Qty</th>
+                                    <th style="text-align:center;" >Qty Per Pallet</th>
+                                    <th style="text-align:center;" >Palletized Qty</th>
+                                    <th style="text-align:center;" >Volume(m3)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Items will be injected here -->
                             </tbody>
                         </table>
+                        <div id="addProductContainer"></div>
                         <div class="mt-3">
-                            <button type="button" id="generatePallets" class="btn btn-primary btn-sm float-right">Generate Pallets</button>
+                            <button type="submit" class="btn btn-save btn-sm float-right">Save</button>
                         </div>
                     </div>
                 </div>
@@ -134,212 +161,156 @@
 
 @section('js')
 <script>
-$(document).on('input', '.qty-per-pallet', function() {
-    let boxes = parseInt($(this).data('boxes'));
-    let qtyPerPallet = parseInt($(this).val()) || 0;
-    let pallets = qtyPerPallet > 0 ? Math.ceil(boxes / qtyPerPallet) : '';
-    $(this).closest('tr').find('.no-of-pallets').text(pallets);
+const gatePassData = {
+  "GP001": {
+    customer: "Ocean Fresh Exports Pvt Ltd",
+    vehicle_no: "KL-07-CD-4521",
+    packing_list_no: "PL001",
+    warehouse_unit: "WU-0001",
+    dock_no: "DOCK-001",
+    pallet_capacity: 2.5,
+    default_qty_per_pallet: 100,
+    products: [
+      { name: "Frozen Prawns", lot: "LOT-PR-001", uom: "KG", total_qty: 500, assigned_qty: 200, length: 0.5, breadth: 0.4, height: 0.3 },
+      { name: "Frozen Squid Rings", lot: "LOT-SQ-002", uom: "KG", total_qty: 300, assigned_qty: 150, length: 0.4, breadth: 0.3, height: 0.2 }
+    ]
+  },
+  "GP002": {
+    customer: "Blue Ocean Seafood Traders",
+    vehicle_no: "KL-07-XY-7890",
+    packing_list_no: "PL002",
+    warehouse_unit: "WU-0002",
+    dock_no: "DOCK-002",
+    pallet_capacity: 3.0,
+    default_qty_per_pallet: 120,
+    products: [
+      { name: "Frozen Lobster Tails", lot: "LOT-LB-004", uom: "KG", total_qty: 100, assigned_qty: 20, length: 0.6, breadth: 0.5, height: 0.4 },
+      { name: "Frozen Tuna Steaks", lot: "LOT-TN-005", uom: "KG", total_qty: 150, assigned_qty: 75, length: 0.5, breadth: 0.4, height: 0.3 }
+    ]
+  }
+};
 
-    let total = 0;
-    $('.no-of-pallets').each(function(){
-        let val = parseInt($(this).text()) || 0;
-        total += val;
-    });
-    $('#total_pallets').val(total);
+const gpSelect = document.getElementById('gatepass_no');
+const tbody = document.querySelector('#itemsTable tbody');
+
+gpSelect.addEventListener('change', function () {
+  const gp = gatePassData[this.value];
+  if (!gp) return;
+
+  // Autofill header
+  document.getElementById('customer').value = gp.customer;
+  document.getElementById('vehicle_no').value = gp.vehicle_no;
+  document.getElementById('packingListSelect').value = gp.packing_list_no;
+  document.getElementById('warehouse_unit').value = gp.warehouse_unit;
+  document.getElementById('dock_no').value = gp.dock_no;
+  document.getElementById('pallet_capacity').value = gp.pallet_capacity;
+  document.getElementById('qty_per_pallet').value = gp.default_qty_per_pallet;
+
+  tbody.innerHTML = '';
+  document.getElementById('addProductContainer').innerHTML = '';
+  addProductRow(gp);
 });
 
-$(document).on('change', '#packingListSelect', function() {
-    let packingListId = $(this).val();
-    let rows = '';
+function calculateQtyPerPallet(product, palletCapacity) {
+  const unitVolume = product.length * product.breadth * product.height;
+  return unitVolume ? Math.floor(palletCapacity / unitVolume) : 0;
+}
 
-    // Clear table if nothing selected
-    if (!packingListId) {
-        $('#itemsTable tbody').empty();
-        return;
+function bindQtyChange(row, product) {
+  const qtyInput = row.querySelector('.qty');
+  qtyInput.addEventListener('input', function () {
+    const qty = parseInt(this.value, 10) || 0;
+    const capacity = qty * product.length * product.breadth * product.height;
+    row.querySelector('.capacity-cell').textContent = capacity.toFixed(2);
+    checkTotalCapacity();
+  });
+}
+
+function checkTotalCapacity() {
+  const palletCapacity = parseFloat(document.getElementById('pallet_capacity').value) || 0;
+  let totalUsed = 0;
+
+  tbody.querySelectorAll('tr').forEach(row => {
+    totalUsed += parseFloat(row.querySelector('.capacity').textContent) || 0;
+  });
+
+  const container = document.getElementById('addProductContainer');
+  let btn = document.getElementById('addProductBtn');
+
+  if (totalUsed < palletCapacity) {
+    const remaining = (palletCapacity - totalUsed).toFixed(2);
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'addProductBtn';
+      btn.className = 'btn btn-warning btn-sm mt-2';
+      btn.textContent = `Add another product (Remaining: ${remaining} m³)`;
+      btn.addEventListener('click', () => addProductRow(gatePassData[gpSelect.value]));
+      container.appendChild(btn);
+    } else {
+      btn.textContent = `Add another product (Remaining: ${remaining} m³)`;
     }
+  } else if (btn) {
+    btn.remove();
+  }
+}
 
-    // Dummy data sets
-    let dummyData = {
-        'PL001': [
-            {
-                product: 'RED JOANPRINCE SMALL',
-                lot: '(70)-75UACJH4578126/08/2015_SD174',
-                size: '13',
-                weight_per_unit: '4',
-                package_type: 'Carton',
-                no_of_packages: 1098,
-                gw_per_package: 4.5,
-                nw_per_package: 4,
-                total_gw: 4932,
-                total_nw: 4392,
-                pallet_type: '328'
-            },
-            {
-                product: 'GREEN EMERALD LARGE',
-                lot: '(80)-88XYZ1234567/09/2015_SD200',
-                size: '15',
-                weight_per_unit: '5',
-                package_type: 'Crate',
-                no_of_packages: 800,
-                gw_per_package: 5.2,
-                nw_per_package: 4.8,
-                total_gw: 4160,
-                total_nw: 3840,
-                pallet_type: '330'
-            }
-        ],
-        'PL002': [
-            {
-                product: 'YELLOW SUNBURST MEDIUM',
-                lot: '(60)-65ABC9876543/07/2015_SD150',
-                size: '14',
-                weight_per_unit: '4.2',
-                package_type: 'Box',
-                no_of_packages: 950,
-                gw_per_package: 4.7,
-                nw_per_package: 4.3,
-                total_gw: 4465,
-                total_nw: 4085,
-                pallet_type: '329'
-            }
-        ]
-    };
+function addProductRow(gp) {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>
+      <select class="form-control product-select">
+        <option value="">- Select Product -</option>
+        ${gp.products.map(p => `<option value="${p.name}">${p.name}</option>`).join('')}
+      </select>
+    </td>
+    <td class="lot"></td>
+    <td class="uom"></td>
+    <td class="total_qty text-center"></td>
+    <td class="assigned_qty text-center"></td>
+    <td class="qty_per_pallet text-center"></td>
+    <td><input type="number" class="form-control quantity" min="0"></td>
+    <td class="capacity text-center">0.00</td>
+  `;
+  tbody.appendChild(row);
 
-    // Build rows from dummy data
-    dummyData[packingListId].forEach(item => {
-        rows += `
-            <tr>
-                <td class="product-cell">${item.product}</td>
-                <td class="lot-cell">${item.lot}</td>
-                <td class="size-cell">${item.size}</td>
-                <td>${item.weight_per_unit}</td>
-                <td>${item.package_type}</td>
-                <td class="boxes-cell">${item.no_of_packages}</td>
-                <td>${item.gw_per_package}</td>
-                <td>${item.nw_per_package}</td>
-                <td>${item.total_gw}</td>
-                <td>${item.total_nw}</td>
-                <td>${item.pallet_type}</td>
-                <td>
-                    <input type="number" class="form-control qty-per-pallet" 
-                           data-boxes="${item.no_of_packages}" min="0">
-                </td>
-                <td class="no-of-pallets"></td>
-            </tr>
-        `;
+  const productSelect = row.querySelector('.product-select');
+  const quantityInput = row.querySelector('.quantity');
+
+  productSelect.addEventListener('change', function () {
+    const product = gp.products.find(p => p.name === this.value);
+    if (!product) return;
+
+    // Fill static fields
+    row.querySelector('.lot').textContent = product.lot;
+    row.querySelector('.uom').textContent = product.uom;
+    row.querySelector('.total_qty').textContent = product.total_qty;
+    row.querySelector('.assigned_qty').textContent = product.assigned_qty;
+
+    // Calculate default qty per pallet
+    const palletCapacity = parseFloat(document.getElementById('pallet_capacity').value) || 0;
+    const unitVolume = product.length * product.breadth * product.height;
+    const defaultQty = unitVolume ? Math.floor(palletCapacity / unitVolume) : 0;
+
+    row.querySelector('.qty_per_pallet').textContent = defaultQty;
+    quantityInput.value = defaultQty;
+
+    // Calculate initial capacity
+    const initialCapacity = defaultQty * unitVolume;
+    row.querySelector('.capacity').textContent = initialCapacity.toFixed(2);
+
+    // Bind quantity change
+    quantityInput.addEventListener('input', function () {
+      const qty = parseInt(this.value, 10) || 0;
+      const newCapacity = qty * unitVolume;
+      row.querySelector('.capacity').textContent = newCapacity.toFixed(2);
+      checkTotalCapacity();
     });
 
-    $('#itemsTable tbody').html(rows);
-});
-
-$('#generatePallets').on('click', function() {
-    let palletData = [];
-
-    $('#itemsTable tbody tr').each(function(index, row) {
-        let product = $(row).find('td').eq(0).text();
-        let lot = $(row).find('td').eq(1).text();
-        let size = $(row).find('td').eq(2).text();
-        let boxes = parseInt($(row).find('td').eq(5).text());
-        let qtyPerPallet = parseInt($(row).find('.qty-per-pallet').val()) || 0;
-        let pallets = qtyPerPallet > 0 ? Math.ceil(boxes / qtyPerPallet) : 0;
-
-        for (let i = 1; i <= pallets; i++) {
-            let assignedBoxes = (i < pallets) ? qtyPerPallet : (boxes - qtyPerPallet * (pallets - 1));
-            palletData.push({
-                palletNo: `P-${index+1}-${i}`,
-                product,
-                lot,
-                size,
-                boxes: assignedBoxes
-            });
-        }
-    });
-
-    // Store pallet data in sessionStorage so next page can read it
-    sessionStorage.setItem('palletData', JSON.stringify(palletData));
-
-    let palletWindow = window.open('', 'Pallets', 'width=800,height=600');
-    let html = `
-        <html>
-        <head>
-            <title>Pallets</title>
-            <style>
-                body { font-family: Arial, sans-serif; }
-                h3 { margin-bottom: 15px; }
-                .pallet {
-                    display:inline-block;
-                    width:120px;
-                    height:80px;
-                    border:1px solid #333;
-                    margin:5px;
-                    text-align:center;
-                    vertical-align:top;
-                    position:relative;
-                    padding-top:10px;
-                    box-sizing:border-box;
-                }
-                .pallet strong { display:block; font-size:14px; }
-                .tooltip {
-                    display:none;
-                    position:absolute;
-                    top:100%;
-                    left:0;
-                    background:#fff;
-                    border:1px solid #ccc;
-                    padding:5px;
-                    font-size:12px;
-                    width:200px;
-                    z-index:10;
-                    box-shadow:0 2px 5px rgba(0,0,0,0.2);
-                }
-                .pallet:hover .tooltip { display:block; }
-                .confirm-btn {
-                    display:block;
-                    margin-top:20px;
-                    padding:10px 20px;
-                    background:#007bff;
-                    color:#fff;
-                    border:none;
-                    cursor:pointer;
-                    font-size:14px;
-                }
-            </style>
-        </head>
-        <body>
-            <h3>Generated Pallets</h3>
-    `;
-
-    palletData.forEach(p => {
-        html += `
-            <div class="pallet">
-                <strong>${p.palletNo}</strong>
-                ${p.boxes} boxes
-                <div class="tooltip">
-                    <div><strong>Product:</strong> ${p.product}</div>
-                    <div><strong>Lot:</strong> ${p.lot}</div>
-                    <div><strong>Size:</strong> ${p.size}</div>
-                </div>
-            </div>
-        `;
-    });
-
-    // Confirm button
-    html += `
-        <button class="confirm-btn" onclick="confirmPallets()">Confirm</button>
-        <script>
-            function confirmPallets() {
-                // Redirect to palletization index page
-                window.opener.location.href = '/admin/inventory/palletization';
-                window.close();
-            }
-        <\/script>
-        </body>
-        </html>
-    `;
-
-    palletWindow.document.write(html);
-    palletWindow.document.close();
-});
-
+    checkTotalCapacity();
+  });
+}
+  
 </script>
+
 @endsection

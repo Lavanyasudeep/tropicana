@@ -12,32 +12,97 @@
     <h3>Put Away</h3>
 </div>
 
-<div class="row">
-  <!-- Pallet List -->
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <strong>Pallets</strong>
-        <input id="palletSearch" class="form-control form-control-sm mt-2" placeholder="Search pallet...">
-      </div>
-      <div class="card-body pallet-list" id="palletList"></div>
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div>
+      <label class="mb-0 mr-2">Warehouse :</label>
+      <ul class="nav nav-tabs d-inline-flex" role="tablist" id="warehouseTabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#ca" role="tab">WU-0001</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cb" role="tab">WU-0002</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cc" role="tab">WU-0003</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cd" role="tab">WU-0004</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#ce" role="tab">WU-0005</a></li>
+      </ul>
     </div>
   </div>
 
-  <!-- Room Visualization -->
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-header"><strong>Room Visualization</strong></div>
-      <div class="card-body racks-grid" id="racksGrid"></div>
+  <div class="card-body tab-content" id="warehouseContent">
+    <div class="tab-pane fade show active" id="ca">
+
+        <div class="row">
+            <!-- Pallet list -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Pallets In Ante Room</strong>
+                        <input id="palletSearch" class="form-control form-control-sm mt-2" placeholder="Search pallet...">
+                    </div>
+                    <div class="card-body pallet-list" id="palletList"></div>
+                </div>
+            </div>
+
+            <!-- Chamber view -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <label>Rooms :</label>
+                        <ul class="nav nav-tabs d-inline-flex" role="tablist" id="chamberTabs">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#ca" role="tab">CR-101</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cb" role="tab">CR-102</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cc" role="tab">CR-103</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cd" role="tab">CR-104</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#ce" role="tab">CR-105</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body racks-grid" id="racksGrid"></div>
+                </div>
+            </div>
+        
+        </div>
     </div>
+    <!-- Repeat .tab-pane for C-B, C-C, etc. -->
   </div>
 </div>
 
 <input type="hidden" id="assignments" name="assignments" value="[]">
 
 <style>
-  .pallet-list {
-  max-height: 75vh;
+.card-header {
+    background-color: #b4c8b5;
+    padding-bottom: 0;
+}
+
+.card-header-tabs .nav-link {
+  padding: 6px 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.card-header-tabs .nav-link.active {
+  background-color: #f8f9fa;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+#warehouseTabs, #chamberTabs {
+  border-bottom: none;
+}
+
+#chamberTabs .nav-link, #warehouseTabs .nav-link { color:#000; }
+
+#warehouseTabs .nav-tabs .nav-link a,
+#chamberTabs .nav-tabs .nav-link a { color:#CCC !important; }
+
+/* Chamber label tweak */
+#warehouseTabs > label, #chamberTabs > label {
+  padding: 7px 15px 0 0;
+  font-size: 14px;
+}
+
+/* Pallet list */
+.pallet-list {
+  min-height: 50vh;
   overflow-y: auto;
 }
 .pallet-item {
@@ -45,12 +110,24 @@
   border: 1px solid #ccc;
   margin-bottom: 6px;
   border-radius: 4px;
-  background: #f8f9fa;
+  background: #e8f8ea;
   cursor: grab;
+  font-size: 11px;
+  transition: background-color 0.15s ease;
+}
+.pallet-item:hover {
+  background-color: #506c52;
+  color: white;
 }
 .pallet-item.assigned {
-  opacity: 0.6;
+  opacity: 0.4;
+  font-style: italic;
 }
+#palletList .pallet-item small {
+  font-size: 11px !important;
+}
+
+/* Racks grid */
 .racks-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -59,58 +136,84 @@
 .rack {
   border: 1px solid #ddd;
   border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 .rack-header {
-  background: #f5f5f5;
+  background: #506c52;
   padding: 4px;
   font-weight: bold;
   text-align: center;
+  color: white;
 }
-.rack-slots {
+.rack-body {
+  flex: 1;
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  gap: 6px;
-  padding: 6px;
+  grid-template-rows: repeat(4, 1fr) auto;
 }
-.rack-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.slot {
-  border: 1px dashed #aaa;
-  height: 50px;
-  display: flex;
+
+.level-label {
+  display: block;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  background: #fff;
+  font-size: 10px;
+  background: #9cbaa1;
+  color: white;
+  min-height: 36px; 
+  width: 12%;
+  text-align:center;
+  float:left;
+  padding-top:10px;
+}
+.slot {
+  border: 1px solid #CCC;
+  border-right: 1px solid #ffffff;
+  border-left:-1px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;         /* slightly smaller font */
+  min-height: 36px;       /* reduced height */
+  width: 22%;        /* reduced width */
+  padding: 2px;
+  float:left;
 }
 .slot.occupied {
-  border: 1px solid #4caf50;
-  background: #e8f5e9;
+  border-color: #af4c4c;
+  background: #f1dbdb;
 }
 .slot.hover {
   border-color: #0d6efd;
   background: #eef5ff;
 }
 
-</style>
-<script>
-  // Dummy pallets (use your existing array in PHP if you prefer)
-  const pallets = [
-    { pallet_no: 'P-1-1', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L', packages: 100 },
-    { pallet_no: 'P-1-2', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L', packages: 100 },
-    { pallet_no: 'P-1-3', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L', packages: 100 },
-    { pallet_no: 'P-1-4', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L', packages: 100 },
-    { pallet_no: 'P-1-5', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L', packages: 100 },
-    { pallet_no: 'P-2-1', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml', packages: 200 },
-    { pallet_no: 'P-2-2', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml', packages: 200 },
-    { pallet_no: 'P-2-3', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml', packages: 200 },
-    { pallet_no: 'P-2-4', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml', packages: 200 }
-  ];
+.depth-label {
+  font-size: 9px;
+  text-align: center;
+  padding:4px 0;
+  width: 22%; 
+  float:right;
+}
 
-  const racks = Array.from({length: 8}, (_, i) => `R${i+1}`);
+.depth-row {
+   background-color: #9cbaa1;
+  color: white;
+}
+
+</style>
+
+<script>
+const pallets = [
+    { pallet_no: 'PAL-0001', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L' },
+    { pallet_no: 'PAL-0002', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L' },
+    { pallet_no: 'PAL-0003', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L' },
+    { pallet_no: 'PAL-0004', product: 'RED JOANPRINCE SMALL', lot: 'LOT001', size: '1L' },
+    { pallet_no: 'PAL-0005', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml' },
+    { pallet_no: 'PAL-0006', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml' },
+    { pallet_no: 'PAL-0007', product: 'GREEN EMERALD LARGE', lot: 'LOT010', size: '500ml' }
+];
+const racks = Array.from({length: 8}, (_, i) => `R${i+1}`);
 const levels = ['L4','L3','L2','L1'];
 const depths = ['D1','D2','D3','D4'];
 
@@ -118,91 +221,117 @@ const palletToSlot = new Map();
 const slotToPallet = new Map();
 
 function renderPalletList() {
-  const list = document.getElementById('palletList');
-  const q = (document.getElementById('palletSearch').value || '').toLowerCase();
-  list.innerHTML = '';
-  pallets.forEach(p => {
-    if(q && !(`${p.pallet_no} ${p.product} ${p.lot}`.toLowerCase().includes(q))) return;
-    const assigned = palletToSlot.has(p.pallet_no);
-    const div = document.createElement('div');
-    div.className = `pallet-item ${assigned ? 'assigned' : ''}`;
-    div.draggable = true;
-    div.dataset.palletNo = p.pallet_no;
-    div.innerHTML = `<strong>${p.pallet_no}</strong><br><small>${p.product} • ${p.lot} • ${p.size} • ${p.qty}</small>`;
-    div.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text/plain', p.pallet_no);
+    const list = document.getElementById('palletList');
+    const q = (document.getElementById('palletSearch').value || '').toLowerCase();
+    list.innerHTML = '';
+    pallets.forEach(p => {
+        if(q && !(`${p.pallet_no} ${p.product} ${p.lot}`.toLowerCase().includes(q))) return;
+        const assigned = palletToSlot.has(p.pallet_no);
+        const div = document.createElement('div');
+        div.className = `pallet-item ${assigned ? 'assigned' : ''}`;
+        div.draggable = true;
+        div.dataset.palletNo = p.pallet_no;
+        div.innerHTML = `<strong>${p.pallet_no}</strong><br><small>${p.product} • ${p.lot} • ${p.size}</small>`;
+        div.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', p.pallet_no);
+        });
+        list.appendChild(div);
     });
-    list.appendChild(div);
-  });
 }
 
 function renderRacks() {
-  const grid = document.getElementById('racksGrid');
-  grid.innerHTML = '';
-  racks.forEach(rackId => {
-    const rackEl = document.createElement('div');
-    rackEl.className = 'rack';
-    rackEl.innerHTML = `<div class="rack-header">${rackId}</div>`;
-    const slotsWrap = document.createElement('div');
-    slotsWrap.className = 'rack-slots';
-    levels.forEach(level => {
-      const row = document.createElement('div');
-      row.className = 'rack-row';
-      depths.forEach(depth => {
-        const slotId = `${rackId}-${level}-${depth}`;
-        const slotEl = document.createElement('div');
-        slotEl.className = 'slot';
-        slotEl.id = slotId;
-        slotEl.textContent = `${level}-${depth}`;
-        slotEl.addEventListener('dragover', e => { e.preventDefault(); slotEl.classList.add('hover'); });
-        slotEl.addEventListener('dragleave', () => slotEl.classList.remove('hover'));
-        slotEl.addEventListener('drop', e => {
-          e.preventDefault();
-          slotEl.classList.remove('hover');
-          const palletNo = e.dataTransfer.getData('text/plain');
-          if(slotToPallet.has(slotId)) return alert('Slot occupied');
-          assignPalletToSlot(palletNo, slotId);
+    const grid = document.getElementById('racksGrid');
+    grid.innerHTML = '';
+    racks.forEach(rackId => {
+        const rackEl = document.createElement('div');
+        rackEl.className = 'rack';
+        rackEl.innerHTML = `<div class="rack-header">Chamber: ${rackId}</div>`;
+        const body = document.createElement('div');
+        body.className = 'rack-body';
+
+        // Levels with slots
+        levels.forEach(level => {
+            const row = document.createElement('div');
+            row.className = 'rack-row';
+            const lvlLabel = document.createElement('div');
+            lvlLabel.className = 'level-label';
+            lvlLabel.textContent = level;
+            row.appendChild(lvlLabel);
+            depths.forEach(depth => {
+                const slotId = `${rackId}-${level}-${depth}`;
+                const slot = document.createElement('div');
+                slot.className = 'slot';
+                slot.id = slotId;
+                slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('hover'); });
+                slot.addEventListener('dragleave', () => slot.classList.remove('hover'));
+                slot.addEventListener('drop', e => {
+                    e.preventDefault();
+                    slot.classList.remove('hover');
+                    const palletNo = e.dataTransfer.getData('text/plain');
+                    if(slotToPallet.has(slotId)) return alert('Slot occupied');
+                    assignPalletToSlot(palletNo, slotId);
+                });
+                row.appendChild(slot);
+            });
+            body.appendChild(row);
         });
-        row.appendChild(slotEl);
-      });
-      slotsWrap.appendChild(row);
+
+        // Depth labels row at bottom
+        const depthRow = document.createElement('div');
+        depthRow.className = 'depth-row';
+        depthRow.appendChild(document.createElement('div')); // empty corner
+        depths.forEach(d => {
+            const dLabel = document.createElement('div');
+            dLabel.className = 'depth-label';
+            dLabel.textContent = d;
+            depthRow.appendChild(dLabel);
+        });
+        body.appendChild(depthRow);
+
+        rackEl.appendChild(body);
+        grid.appendChild(rackEl);
     });
-    rackEl.appendChild(slotsWrap);
-    grid.appendChild(rackEl);
-  });
 }
 
 function assignPalletToSlot(palletNo, slotId) {
-  if(palletToSlot.has(palletNo)) {
-    const prevSlot = palletToSlot.get(palletNo);
-    freeSlot(prevSlot);
-  }
-  palletToSlot.set(palletNo, slotId);
-  slotToPallet.set(slotId, palletNo);
-  const slotEl = document.getElementById(slotId);
-  slotEl.classList.add('occupied');
-  slotEl.textContent = palletNo;
-  updateAssignments();
-  renderPalletList();
+    // Free previous slot if pallet is already assigned
+    if (palletToSlot.has(palletNo)) {
+        const prevSlot = palletToSlot.get(palletNo);
+        freeSlot(prevSlot);
+    }
+
+    // Save the assignment in both maps
+    palletToSlot.set(palletNo, slotId);
+    slotToPallet.set(slotId, palletNo);
+
+    // Mark slot visually
+    const slotEl = document.getElementById(slotId);
+    slotEl.classList.add('occupied');
+    slotEl.textContent = palletNo;
+
+    // Update hidden field + refresh list
+    updateAssignments();
+    renderPalletList();
 }
 
 function freeSlot(slotId) {
-  const palletNo = slotToPallet.get(slotId);
-  if(!palletNo) return;
-  palletToSlot.delete(palletNo);
-  slotToPallet.delete(slotId);
-  const slotEl = document.getElementById(slotId);
-  slotEl.classList.remove('occupied');
-  slotEl.textContent = slotId.split('-').slice(1).join('-');
+    const palletNo = slotToPallet.get(slotId);
+    if (!palletNo) return;
+    palletToSlot.delete(palletNo);
+    slotToPallet.delete(slotId);
+    const slotEl = document.getElementById(slotId);
+    slotEl.classList.remove('occupied');
+    // Reset text back to level-depth label
+    slotEl.textContent = slotId.split('-').slice(1).join('-');
 }
 
 function updateAssignments() {
-  const arr = [];
-  palletToSlot.forEach((slotId, palletNo) => {
-    const [rack, level, depth] = slotId.split('-');
-    arr.push({ pallet_no: palletNo, rack, level, depth });
-  });
-  document.getElementById('assignments').value = JSON.stringify(arr);
+    const arr = [];
+    palletToSlot.forEach((slotId, palletNo) => {
+        const [rack, level, depth] = slotId.split('-');
+        arr.push({ pallet_no: palletNo, rack, level, depth });
+    });
+    document.getElementById('assignments').value = JSON.stringify(arr);
 }
 
 document.getElementById('palletSearch').addEventListener('input', renderPalletList);

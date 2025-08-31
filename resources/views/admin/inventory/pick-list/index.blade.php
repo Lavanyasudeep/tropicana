@@ -96,7 +96,7 @@
                 <tr>
                     <th>Doc. No.</th>
                     <th>Doc. Date</th>
-                    <th>Client</th>
+                    <th>Customer</th>
                     <th>Nos. of Items</th>
                     <th>Picked Qty</th>
                     <th>Status</th>

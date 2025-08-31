@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Gatepass')
+@section('title', 'Create Gatepass-Out')
 
 @section('content_header')
-    <h1>Gate Pass</h1>
+    <h1>Gate Pass-out</h1>
 @endsection
 
 @section('content')

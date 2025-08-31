@@ -35,7 +35,7 @@
     }
 @endphp
 <div class="page-sub-header">
-    <h3>{{ $page_title }}</h3>
+    <h3>{{ $page_title }} Form</h3>
     <div class="action-btns">
         <a href="{{ route('admin.master.inventory.product.index') }}" class="btn btn-success">
             <i class="fas fa-arrow-left"></i> Back
@@ -47,7 +47,7 @@
     <ul class="nav nav-tabs" id="productTab" role="tablist">
         <li class="nav-item"><a class="nav-link active" id="tab-basic" data-toggle="tab" href="#basic" role="tab"><i class="fas fa-info-circle"></i> Basic Info</a></li>
         <li class="nav-item"><a class="nav-link" id="tab-specs" data-toggle="tab" href="#specs" role="tab"><i class="fas fa-cogs"></i> Specifications</a></li>
-        <li class="nav-item"><a class="nav-link" id="tab-variants" data-toggle="tab" href="#variants" role="tab"><i class="fas fa-receipt"></i> Variants</a></li>
+        <!-- <li class="nav-item"><a class="nav-link" id="tab-variants" data-toggle="tab" href="#variants" role="tab"><i class="fas fa-receipt"></i> Variants</a></li> -->
         <li class="nav-item"><a class="nav-link" id="tab-inventory" data-toggle="tab" href="#inventory" role="tab"><i class="fas fa-warehouse"></i> Inventory</a></li>
         <li class="nav-item"><a class="nav-link" id="tab-tax" data-toggle="tab" href="#tax" role="tab"><i class="fas fa-receipt"></i> Tax & Pricing</a></li>
         <li class="nav-item"><a class="nav-link" id="tab-others" data-toggle="tab" href="#others" role="tab"><i class="fas fa-ellipsis-h"></i> Others</a></li>
@@ -64,7 +64,7 @@
                     <div class="tab-pane fade show active" id="basic" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
 
                                     <!-- Identification -->
                                     <div class="pform-section-title">Identification</div>
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
                                     <!-- Classification -->
                                     <div class="pform-section-title">Classification</div>
                                     <div class="pform-row">
@@ -128,10 +128,10 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="pform-panel" style="min-height:200px;">
+                                    <div class="pform-panel" style="min-height:158px;">
                                         <!-- Description -->
                                         <div class="pform-section-title">Description</div>
                                         <div class="pform-row">
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="pform-panel" style="min-height:200px;">
+                                    <div class="pform-panel" style="min-height:158px;">
                                         <!-- Codes & Compliance -->
                                         <div class="pform-section-title">Codes & Compliance</div>
                                         <div class="pform-row">
@@ -177,7 +177,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="pform-panel" style="min-height:200px;">
+                                    <div class="pform-panel" style="min-height:158px;">
                                         <!-- Image -->
                                         <div class="pform-section-title">Media</div>
                                         <div class="pform-row">
@@ -191,13 +191,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
                     <!-- SPECIFICATIONS -->
                     <div class="tab-pane fade" id="specs" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:300px;">
+                                <div class="pform-panel" style="min-height:260px;">
                                     
                                     <!-- Weight & Capacity -->
                                     <div class="pform-section-title">Weight & Capacity</div>
@@ -226,10 +225,31 @@
                                         <div class="pform-value"><input type="number" name="no_of_items_in_box" placeholder="e.g. 12"></div>
                                     </div>
                                 </div>
+                                
+                                <div class="pform-panel" style="min-height:158px;">
+                                    <!-- Material & Packaging -->
+                                    <div class="pform-section-title">Material & Packaging</div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Material / Composition</div>
+                                        <div class="pform-value"><input type="text" name="material" placeholder="e.g. Polypropylene"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Packaging Type</div>
+                                        <div class="pform-value">
+                                            <select name="packaging_type">
+                                                <option value="">-- Select --</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Carton">Carton</option>
+                                                <option value="Bag">Bag</option>
+                                                <option value="Drum">Drum</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:300px;">
+                                <div class="pform-panel" style="min-height:150px;">
                                     <!-- Dimensions -->
                                     <div class="pform-section-title">Dimensions</div>
                                     <div class="pform-row">
@@ -245,34 +265,8 @@
                                         <div class="pform-value"><input type="number" step="0.01" name="height_cm" placeholder="e.g. 15.0"></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
-                                    <!-- Material & Packaging -->
-                                    <div class="pform-section-title">Material & Packaging</div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Material / Composition</div>
-                                        <div class="pform-value"><input type="text" name="material" placeholder="e.g. Polypropylene"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Packaging Type</div>
-                                        <div class="pform-value">
-                                            <select name="packaging_type">
-                                                <option value="">-- Select --</option>
-                                                <option value="Carton">Carton</option>
-                                                <option value="Bag">Bag</option>
-                                                <option value="Drum">Drum</option>
-                                                <option value="Pallet">Pallet</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
                                     <!-- Storage & Compliance -->
                                     <div class="pform-section-title">Storage & Compliance</div>
                                     <div class="pform-row">
@@ -292,7 +286,26 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="pform-panel" style="min-height:100px;">
+                                    <!-- Specifications -->
+                                    <div class="pform-section-title">Specifications</div>
+                                    <table class="table page-input-table" id="specificationTable1" >
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 45%" >Attribute</th>
+                                                <th style="width: 45%" >Value</th>
+                                                <th style="width: 10%" ></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn btn-sm btn-success" onclick="addSpecRow(1)" >
+                                        <i class="fas fa-plus"></i> Add More
+                                    </button>
+                                    <br /><br />
                                 </div>
                             </div>
                         </div>
@@ -387,7 +400,7 @@
                     <div class="tab-pane fade" id="inventory" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:190px;">
 
                                     <!-- Stock Levels -->
                                     <div class="pform-section-title">Stock Levels</div>
@@ -410,7 +423,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:190px;">
                                     <!-- Units -->
                                     <div class="pform-section-title">Units</div>
                                     <div class="pform-row">
@@ -502,7 +515,7 @@
                     <div class="tab-pane fade" id="tax" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:300px;">
+                                <div class="pform-panel" style="min-height:222px;">
 
                                     <!-- Tax Details -->
                                     <div class="pform-section-title">Tax Details</div>
@@ -524,7 +537,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:300px;">
+                                <div class="pform-panel" style="min-height:222px;">
                                     <!-- Pricing -->
                                     <div class="pform-section-title">Pricing</div>
                                     <div class="pform-row">
@@ -559,7 +572,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
                                     <!-- Barcodes & Supplier Codes -->
                                     <div class="pform-section-title">Barcodes & Supplier Codes</div>
                                     <div class="pform-row">
@@ -584,7 +597,7 @@
                     <div class="tab-pane fade" id="others" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
 
                                     <!-- Procurement -->
                                     <div class="pform-section-title">Procurement</div>
@@ -619,15 +632,16 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
                                     <!-- Product Settings -->
-                                    <div class="pform-section-title">Product Settings</div>
+                                    <div class="pform-section-title">Settings</div>
                                     <div class="pform-row">
+                                        <div class="pform-label">Active</div>
                                         <div class="pform-value">
-                                            <label><input type="checkbox" name="active" checked> Active</label><br>
-                                            <label><input type="checkbox" name="allow_negative"> Allow Negative Stock</label><br>
-                                            <label><input type="checkbox" name="single_batch"> Single Batch</label><br>
-                                            <label><input type="checkbox" name="new_product"> Mark as New Product</label>
+                                            <label><input type="checkbox" name="active" checked> Yes</label><br>
+                                            <!-- <label><input type="checkbox" name="allow_negative"> Allow Negative Stock</label><br>
+                                            <label><input type="checkbox" name="single_batch"> Single Batch</label><br> -->
+                                            <!-- <label><input type="checkbox" name="new_product"> Mark as New Product</label> -->
                                         </div>
                                     </div>
                                 </div>
@@ -635,7 +649,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:200px;">
+                                <div class="pform-panel" style="min-height:158px;">
                                     <!-- Notes -->
                                     <div class="pform-section-title">Notes</div>
                                     <div class="pform-row">
@@ -670,7 +684,93 @@
     </div>
 </div>
 
+<!-- Product Attribute Modal -->
+<div class="modal fade" id="createAttributeModal" tabindex="-1" aria-labelledby="attributeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="createAttributeForm">
+    @csrf
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Product Attribute</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Attribute Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Input Type</label>
+                    <select name="data_type" class="form-control" required >
+                        <option value="text">Text</option>
+                        <option value="number">Number</option>
+                        <option value="date">Date</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Required?</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_required" value="1" checked> Yes
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_required" value="0"> No
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save Attribute</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+
 <script>
+
+let lastOpenedSelect = null;
+
+window.openAttributeModal = function(button) {
+    lastOpenedSelect = $(button).closest('td').find('select');
+    $('#createAttributeModal').modal('show');
+};
+
+window.addSpecRow = function(productIndex) {
+    const tableBody = $(`#specificationTable${productIndex} tbody`);
+    const rowIndex = Date.now(); // safer than global counter
+
+    const row = `
+        <tr>
+            <td class="d-flex align-items-center gap-1" >
+                <select name="products[${productIndex}][specifications][${rowIndex}][attribute_id]" class="form-control form-control-sm select2 attribute-select" 
+                    data-product-index="${productIndex}" data-row-index="${rowIndex} required>
+                    <option value="">-- Select Attribute --</option>
+                    @foreach($attributes as $attr)
+                        <option value="{{ $attr->product_attribute_id }}" data-data-type="{{ $attr->data_type }}">{{ $attr->name }}</option>
+                    @endforeach
+                </select>
+                <button type="button" class="btn btn-sm btn-success" onclick="openAttributeModal(this)">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </td>
+            <td class="spec-value-td" data-product-index="${productIndex}" data-row-index="${rowIndex}">
+                <input type="text" name="products[${productIndex}][specifications][${rowIndex}][value]" class="form-control form-control-sm spec-value-input" required>
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-sm btn-danger" onclick="$(this).closest('tr').remove()">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `;
+    tableBody.append(row);
+    //$('.select2').select2({ theme: 'bootstrap4' });
+};
+
 $(document).ready(function(){
     let variantCount = 0;
 
@@ -722,7 +822,85 @@ $(document).ready(function(){
     $(document).on('click', '.edit-variant', function(){
         alert('Edit functionality can be implemented here.');
     });
+
+    let specRowCount = 0;
+    const attributeDataTypes = @json($attributes->pluck('data_type', 'product_attribute_id'));
+    
+    $(document).on('change', '.attribute-select', function () {
+        const $trObj = $(this).closest('tr');
+        const $select = $(this);
+        const productIndex = $select.data('product-index');
+        const rowIndex = $select.data('row-index');
+        const attributeId = $select.val();
+
+        if (!attributeId) return;
+
+        // Optional: use data-type from option directly
+        const dataType = $select.find('option:selected').data('data-type');
+
+        // Otherwise, use AJAX to fetch input HTML
+        $.ajax({
+            url: `/admin/master/inventory/product-attributes/${attributeId}/input-field`, // Create this route
+            type: 'GET',
+            data: {
+                product_index: productIndex,
+                row_index: rowIndex
+            },
+            success: function (res) {
+                $trObj.find('td.spec-value-td').html(res.input);
+                // const $td = $(`td.spec-value-td[data-product-index="${productIndex}"][data-row-index="${rowIndex}"]`);
+                // console.log(`td.spec-value-td[data-product-index="${productIndex}"][data-row-index="${rowIndex}"]`);
+                // $td.html(res.input); // Replace input dynamically
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', 'select[name^="specifications"]', function () {
+        let val = $(this).val();
+        let input = $(this).closest('.form-group').find('input[name^="new_specifications"]');
+        if (val === '_new') {
+            input.removeClass('d-none').attr('required', true);
+        } else {
+            input.addClass('d-none').val('').removeAttr('required');
+        }
+    });
+
+    $('#createAttributeForm').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const data = form.serialize();
+
+        $.ajax({
+            url: '{{ route("admin.master.inventory.product-attributes.store") }}', // Make sure this matches your route
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: data,
+            success: function(res) {
+                const newId = res.data.product_attribute_id;
+                const newName = res.data.name;
+
+                // Append new attribute to all select2 dropdowns
+                $('select[name$="[attribute_id]"]').each(function () {
+                    if ($(this).find(`option[value="${newId}"]`).length === 0) {
+                        $(this).append(`<option value="${newId}" selected>${newName}</option>`).trigger('change');
+                    }
+                });
+
+                $('#createAttributeModal').modal('hide');
+                $('#createAttributeForm')[0].reset();
+            },
+            error: function(xhr) {
+                alert('Failed to create attribute. Check inputs.');
+            }
+        });
+    });
 });
+
 </script>
 
 @endsection

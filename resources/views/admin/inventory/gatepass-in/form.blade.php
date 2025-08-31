@@ -79,6 +79,10 @@
                             <div class="col-md-4">
                                 <div class="pform-panel" style="min-height: 250px;">
                                     <div class="pform-row">
+                                        <div class="pform-label">Transport Mode</div>
+                                        <div class="pform-value"><input type="text" value="Road – Reefer"></div>
+                                    </div>
+                                    <div class="pform-row">
                                         <div class="pform-label">Transporter / STN No.</div>
                                         <div class="pform-value"><input type="text" value="STN‑BLUO‑250826"></div>
                                     </div>
@@ -107,10 +111,6 @@
                                         <div class="pform-value"><input type="text" value="9847012345"></div>
                                     </div>
                                     <div class="pform-row">
-                                        <div class="pform-label">Transport Mode</div>
-                                        <div class="pform-value"><input type="text" value="Road – Reefer"></div>
-                                    </div>
-                                    <div class="pform-row">
                                         <div class="pform-label">Vehicle Temperature (°C)</div>
                                         <div class="pform-value"><input type="number" step="0.1" name="vehicle_temperature" value="-18.5"></div>
                                     </div>
@@ -121,16 +121,16 @@
                             <div class="col-md-4">
                                 <div class="pform-panel" style="min-height: 250px;">
                                     <div class="pform-row">
-                                        <div class="pform-label">Dock In Time</div>
-                                        <div class="pform-value"><input type="time" value="09:55"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Dock In Name</div>
-                                        <div class="pform-value"><input type="text" value="Vijay K"></div>
+                                        <div class="pform-label">Product Type</div>
+                                        <div class="pform-value"><input type="text" placeholder="Frozen, Dry, etc." ></div>
                                     </div>
                                     <div class="pform-row">
                                         <div class="pform-label">Gross Weight (KG)</div>
                                         <div class="pform-value"><input type="number" step="0.01" value="1285.40"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Dock No.</div>
+                                        <div class="pform-value"><input type="text" value=""></div>
                                     </div>
                                     <div class="pform-row">
                                         <div class="pform-label">Security Name</div>
@@ -156,7 +156,7 @@
                                                 <th>Requested Qty</th>
                                                 <th>Received Qty</th>
                                                 <th>Batch No.</th>
-                                                <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success">+</button></th>
+                                                <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -166,23 +166,23 @@
                                                 <td><input type="number" class="form-control" value="500"></td>
                                                 <td><input type="number" class="form-control" value="500"></td>
                                                 <td><input class="form-control" value="BATCH‑PR‑045"></td>
-                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
+                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-control" value="Frozen Squid Rings"></td>
+                                                <td><input class="form-control" value="Frozen Prawns"></td>
                                                 <td><input class="form-control" value="KG"></td>
-                                                <td><input type="number" class="form-control" value="300"></td>
-                                                <td><input type="number" class="form-control" value="298"></td>
-                                                <td><input class="form-control" value="BATCH‑SQ‑112"></td>
-                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
+                                                <td><input type="number" class="form-control" value="500"></td>
+                                                <td><input type="number" class="form-control" value="500"></td>
+                                                <td><input class="form-control" value="BATCH‑PR‑045"></td>
+                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-control" value="Frozen Crab Meat"></td>
+                                                <td><input class="form-control" value="Frozen Prawns"></td>
                                                 <td><input class="form-control" value="KG"></td>
-                                                <td><input type="number" class="form-control" value="200"></td>
-                                                <td><input type="number" class="form-control" value="200"></td>
-                                                <td><input class="form-control" value="BATCH‑CR‑078"></td>
-                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
+                                                <td><input type="number" class="form-control" value="500"></td>
+                                                <td><input type="number" class="form-control" value="500"></td>
+                                                <td><input class="form-control" value="BATCH‑PR‑045"></td>
+                                                <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                         </tbody>
                                     </table>

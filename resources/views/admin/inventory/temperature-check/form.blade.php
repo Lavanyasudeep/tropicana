@@ -129,14 +129,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-list-panel">
-                        <table class="page-list-table" id="temperatureCheckTable">
+                        <table class="page-input-table" id="temperatureCheckTable">
                             <thead>
                                 <tr>
-                                    <th>Check #</th>
-                                    <th>Product #</th>
-                                    <th>Time</th>
-                                    <th>Product Temp (°C)</th>
-                                    <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success">+</button></th>
+                                    <th style="width:5%;" >#</th>
+                                    <th style="width:60%;" >Product</th>
+                                    <th style="width:15%;" >Time</th>
+                                    <th style="width:15%; text-align:right;" >Product Temp (°C)</th>
+                                    <th style="width:10%;" ><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>  
                                 </tr>
                             </thead>
                             <tbody>
@@ -152,7 +152,7 @@
                                     </td>
                                     <td><input name="checks[0][time]" type="time" class="form-control" value="{{ date('H:i') }}"></td>
                                     <td><input name="checks[0][product_temp]" type="number" step="0.1" class="form-control" value="-17.8"></td>
-                                    <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
+                                    <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                 </tr>
                             </tbody>
                         </table>

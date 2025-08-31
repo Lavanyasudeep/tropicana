@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\Inventory\GatePassInController;
 use App\Http\Controllers\Admin\Inventory\TemperatureCheckController;
 use App\Http\Controllers\Admin\Inventory\PalletizationController;
 use App\Http\Controllers\Admin\Inventory\PutAwayController;
+use App\Http\Controllers\Admin\Inventory\ReleasingOrderController;
+use App\Http\Controllers\Admin\Inventory\VehPreCoolingInspCheckController;
 
 // Purchase
 use App\Http\Controllers\Admin\Purchase\GRNController;
@@ -381,7 +383,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
     Route::group(['prefix' => 'purchase', 'as' => 'purchase.'], function() {
         Route::group(['prefix' => 'grn', 'as' => 'grn.'], function() {
             Route::get('/', [GRNController::class, 'index'])->name('index');
+            Route::get('/create', [GRNController::class, 'create'])->name('create');
+            Route::get('/edit/{id}', [GRNController::class, 'edit'])->name('edit');
             Route::get('/view/{id}', [GRNController::class, 'show'])->name('view');
+            Route::get('/print/{id}', [GRNController::class, 'print'])->name('print');
             Route::get('/{grn}/assign/{id}', [GRNController::class, 'assign'])->name('assign');
             Route::get('/get-storage-rooms', [GRNController::class, 'getStorageRooms'])->name('get-storage-rooms');
             Route::post('/get-racks', [GRNController::class, 'getRacks'])->name('get-racks');
@@ -467,6 +472,26 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
             Route::post('/reassign/back', [InwardController::class, 'saveReAssignedSlots'])->name('reassign.back');
             Route::get('/{id}/print', [InwardController::class, 'print'])->name('print');
             Route::post('/change-status', [InwardController::class, 'changeStatus'])->name('change-status');
+        });
+
+        //Releasing Order
+        Route::group(['prefix' => 'releasing-order', 'as' => 'releasing-order.'], function() {
+            Route::get('/', [ReleasingOrderController::class, 'index'])->name('index');
+            Route::get('/create', [ReleasingOrderController::class, 'create'])->name('create');
+            Route::get('/{id}/edit', [ReleasingOrderController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [ReleasingOrderController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [ReleasingOrderController::class, 'show'])->name('view');
+            Route::get('/{id}/print', [ReleasingOrderController::class, 'print'])->name('print');
+        });
+
+        //Pre-Cooling Inspection Check
+        Route::group(['prefix' => 'vpci-check', 'as' => 'vpci-check.'], function() {
+            Route::get('/', [VehPreCoolingInspCheckController::class, 'index'])->name('index');
+            Route::get('/create', [VehPreCoolingInspCheckController::class, 'create'])->name('create');
+            Route::get('/{id}/edit', [VehPreCoolingInspCheckController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [VehPreCoolingInspCheckController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [VehPreCoolingInspCheckController::class, 'show'])->name('view');
+            Route::get('/{id}/print', [VehPreCoolingInspCheckController::class, 'print'])->name('print');
         });
 
         //picklist

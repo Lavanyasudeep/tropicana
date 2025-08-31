@@ -1,18 +1,18 @@
 @extends('adminlte::page')
 
-@section('title', 'View Pre‑Alert')
+@section('title', 'View Releasing Order')
 
 @section('content_header')
-    <h1>Pre‑Alert Document</h1>
+    <h1>Releasing Order</h1>
 @endsection
 
 @section('content')
 <div class="page-sub-header">
     <h3>View Details</h3>
     <div class="action-btns">
-        <a href="{{ route('admin.inventory.pre-alert.edit', 1) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
-        <a href="{{ route('admin.inventory.pre-alert.print', 1) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i> Print</a>
-        <a href="{{ route('admin.inventory.pre-alert.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.inventory.releasing-order.edit', 1) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+        <a href="{{ route('admin.inventory.releasing-order.print', 1) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i> Print</a>
+        <a href="{{ route('admin.inventory.releasing-order.index') }}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Back</a>
     </div>
     <div class="action-status">
         <label>Change Status</label>
@@ -25,9 +25,9 @@
     </div>
 </div>
 
-<ul class="nav nav-tabs" role="tablist" id="preAlertTabs">
+<ul class="nav nav-tabs" role="tablist" id="releasingOrderTabs">
     <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#details">Pre‑Alert</a>
+        <a class="nav-link active" data-toggle="tab" href="#details">Releasing Order</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#attachment">Attachment</a>
@@ -46,10 +46,10 @@
                     <!-- Panel 1 -->
                     <div class="col-md-4">
                         <div class="pform-panel" style="min-height:135px;">
-                            <div class="pform-row"><div class="pform-label">Document #</div><div class="pform-value">PA‑25‑00001</div></div>
+                            <div class="pform-row"><div class="pform-label">Document #</div><div class="pform-value">RO‑25‑00001</div></div>
                             <div class="pform-row"><div class="pform-label">Document Date</div><div class="pform-value">25/08/2025</div></div>
-                            <div class="pform-row"><div class="pform-label">Arriving Date</div><div class="pform-value">25/10/2025</div></div>
-                            <div class="pform-row"><div class="pform-label">Ref No. #</div><div class="pform-value">SQ‑25‑00045</div></div>
+                            <div class="pform-row"><div class="pform-label">Date of Releasing</div><div class="pform-value">25/10/2025</div></div>
+                            <div class="pform-row"><div class="pform-label">Ref. No. #</div><div class="pform-value">PQ‑25‑00045</div></div>
                             <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">ABC Cold Storage Ltd.</div></div>
                         </div>
                     </div>
@@ -96,43 +96,43 @@
             <div class="card-header"><h5>Attachments</h5></div>
             <div class="card-body">
                @php
-                $prealetAttachments = [
-                    [
-                        'filename' => 'Prealet_Request_RO-25-00012.pdf',
-                        'type' => 'PDF',
-                        'size' => '284 KB',
-                        'uploaded_by' => 'Customer: Frozen Foods Inc.',
-                        'date' => '28 Aug 2025 16:45'
-                    ],
-                    [
-                        'filename' => 'Packing_List_Batch_2025A.xlsx',
-                        'type' => 'Excel',
-                        'size' => '92 KB',
-                        'uploaded_by' => 'Customer: Frozen Foods Inc.',
-                        'date' => '28 Aug 2025 16:47'
-                    ],
-                    [
-                        'filename' => 'Product_Label_Samples.jpg',
-                        'type' => 'Image',
-                        'size' => '1.4 MB',
-                        'uploaded_by' => 'Customer: Frozen Foods Inc.',
-                        'date' => '28 Aug 2025 16:50'
-                    ],
-                    [
-                        'filename' => 'Transport_Confirmation.pdf',
-                        'type' => 'PDF',
-                        'size' => '198 KB',
-                        'uploaded_by' => 'Customer: Frozen Foods Inc.',
-                        'date' => '28 Aug 2025 17:00'
-                    ],
-                    [
-                        'filename' => 'Temperature_Certificate_Batch_2025A.pdf',
-                        'type' => 'PDF',
-                        'size' => '312 KB',
-                        'uploaded_by' => 'Customer: Frozen Foods Inc.',
-                        'date' => '28 Aug 2025 17:05'
-                    ]
-                ];
+                    $attachments = [
+                        [
+                            'filename' => 'Delivery_Note_RO-25-00012.pdf',
+                            'type' => 'PDF',
+                            'size' => '312 KB',
+                            'uploaded_by' => 'Dispatch Coordinator',
+                            'date' => '29 Aug 2025 09:15'
+                        ],
+                        [
+                            'filename' => 'Driver_ID_Verification.jpg',
+                            'type' => 'Image',
+                            'size' => '1.1 MB',
+                            'uploaded_by' => 'Security Staff',
+                            'date' => '29 Aug 2025 09:18'
+                        ],
+                        [
+                            'filename' => 'Temperature_Log_ChamberC.xlsx',
+                            'type' => 'Excel',
+                            'size' => '78 KB',
+                            'uploaded_by' => 'Warehouse Supervisor',
+                            'date' => '29 Aug 2025 09:22'
+                        ],
+                        [
+                            'filename' => 'Vehicle_RC_Scan.pdf',
+                            'type' => 'PDF',
+                            'size' => '198 KB',
+                            'uploaded_by' => 'Security Staff',
+                            'date' => '29 Aug 2025 09:25'
+                        ],
+                        [
+                            'filename' => 'Pallet_Tag_Labels_RO-25-00012.png',
+                            'type' => 'Image',
+                            'size' => '640 KB',
+                            'uploaded_by' => 'Inventory Clerk',
+                            'date' => '29 Aug 2025 09:30'
+                        ]
+                    ];
                 @endphp
                 <table class="table table-bordered page-list-table">
                     <thead>
@@ -147,7 +147,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($prealetAttachments as $i => $file)
+                        @foreach($attachments as $i => $file)
                             <tr>
                                 <td>{{ $i + 1 }}</td>
                                 <td>{{ $file['filename'] }}</td>
@@ -168,57 +168,51 @@
 
     <!-- Status Tab -->
     <div class="tab-pane fade" id="status">
-        <div class="card">
-            @php
-                $prealetStatusLog = [
-                    [
-                        'timestamp' => '28 Aug 2025 16:45',
-                        'status' => 'Prealet Received',
-                        'updated_by' => 'System',
-                        'remarks' => 'Document received via customer email'
-                    ],
-                    [
-                        'timestamp' => '28 Aug 2025 17:10',
-                        'status' => 'Document Verified',
-                        'updated_by' => 'Inbound Officer',
-                        'remarks' => 'Packing list and temperature certificate verified'
-                    ],
-                    [
-                        'timestamp' => '28 Aug 2025 17:30',
-                        'status' => 'Storage Slot Assigned',
-                        'updated_by' => 'Warehouse Supervisor',
-                        'remarks' => 'Assigned to Chamber C2, Rack R5'
-                    ],
-                    [
-                        'timestamp' => '28 Aug 2025 18:00',
-                        'status' => 'Goods Inward Scheduled',
-                        'updated_by' => 'Operations Team',
-                        'remarks' => 'Expected arrival: 29 Aug 2025, 09:00'
-                    ],
-                    [
-                        'timestamp' => '29 Aug 2025 09:15',
-                        'status' => 'Goods Received',
-                        'updated_by' => 'Inbound Officer',
-                        'remarks' => 'Physical verification completed, GRN generated'
-                    ],
-                    [
-                        'timestamp' => '29 Aug 2025 09:30',
-                        'status' => 'Storage Confirmed',
-                        'updated_by' => 'System',
-                        'remarks' => 'Inventory updated, cold storage active'
-                    ]
-                ];
+        @php
+            $statusLogs = [
+                [
+                    'user' => 'Admin User',
+                    'status' => 'Created',
+                    'description' => 'Document initialized with customer and item details',
+                    'date' => '29 Aug 2025 09:05'
+                ],
+                [
+                    'user' => 'Inventory Clerk',
+                    'status' => 'Item Verified',
+                    'description' => 'Stock availability and batch numbers confirmed',
+                    'date' => '29 Aug 2025 09:20'
+                ],
+                [
+                    'user' => 'Warehouse Supervisor',
+                    'status' => 'Temperature Checked',
+                    'description' => 'Cold chamber temperature log verified',
+                    'date' => '29 Aug 2025 09:35'
+                ],
+                [
+                    'user' => 'Security Staff',
+                    'status' => 'Gatepass Issued',
+                    'description' => 'Vehicle and driver verified, gatepass printed',
+                    'date' => '29 Aug 2025 09:50'
+                ],
+                [
+                    'user' => 'Dispatch Coordinator',
+                    'status' => 'Released',
+                    'description' => 'Order dispatched and marked as released',
+                    'date' => '29 Aug 2025 10:00'
+                ]
+            ];
             @endphp
+        <div class="card">
             <div class="card-header"><h5>Status History</h5></div>
             <div class="card-body">
-                @foreach($prealetStatusLog as $log)
+                @foreach($statusLogs as $log)
                 <div class="status-log-entry">
                     <img src="{{ asset('images/default-avatar.jpg') }}" class="avatar">
                     <div class="status-details">
-                        <strong>{{ $log['updated_by'] }}</strong>
+                        <strong>{{ $log['user'] }}</strong>
                         <span class="status">{{ $log['status'] }}</span>
-                        <span class="description">{{ $log['remarks'] }}</span>
-                        <span class="date">{{ $log['timestamp'] }}</span>
+                        <span class="description">{{ $log['description'] }}</span>
+                        <span class="date">{{ $log['date'] }}</span>
                     </div>
                 </div>
                 @endforeach
@@ -230,9 +224,9 @@
 
 @section('css')
 <style>
-    #preAlertTabs { border-bottom: 1px solid #000; }
-    #preAlertTabs li.nav-item a { color:#000; }
-    #preAlertTabs li.nav-item a.active { color:#000; border-color:#000; border-bottom: 1px solid #FFF !important; }
+    #releasingOrderTabs { border-bottom: 1px solid #000; }
+    #releasingOrderTabs li.nav-item a { color:#000; }
+    #releasingOrderTabs li.nav-item a.active { color:#000; border-color:#000; border-bottom: 1px solid #FFF !important; }
     .status-log-entry { display: flex; align-items: center; margin-bottom: 15px; }
     .status-log-entry .avatar { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
     .status-details { font-size: 14px; }

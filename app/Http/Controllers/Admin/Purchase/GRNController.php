@@ -163,7 +163,7 @@ class GRNController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.purchase.grn.form');
     }
 
     /**
@@ -179,17 +179,17 @@ class GRNController extends Controller
      */
     public function show(string $id)
     {
-        $availablePallets = Pallet::with('stock') 
-                                ->get()
-                                ->map(function ($pallet) {
-                                    return [
-                                        'pallet_id' => $pallet->pallet_id,
-                                        'current' => $pallet->current_pallet_capacity ?? 0
-                                    ];
-                                });
+        // $availablePallets = Pallet::with('stock') 
+        //                         ->get()
+        //                         ->map(function ($pallet) {
+        //                             return [
+        //                                 'pallet_id' => $pallet->pallet_id,
+        //                                 'current' => $pallet->current_pallet_capacity ?? 0
+        //                             ];
+        //                         });
                                 
-        $grn = GRN::with('productmasters')->findOrFail($id);
-        return view('admin.purchase.grn.view', compact('grn', 'availablePallets'));
+        // $grn = GRN::with('productmasters')->findOrFail($id);
+        return view('admin.purchase.grn.view');
     }
 
     public function assign(string $grnBatchID, string $id)
@@ -229,7 +229,7 @@ class GRNController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.purchase.grn.form');
     }
 
     /**
@@ -488,5 +488,10 @@ class GRNController extends Controller
         //         'details' => $e->getMessage(),
         //     ], 500);
         // }
+    }
+
+    public function print(string $id)
+    {
+        return view('admin.purchase.grn.print');
     }
 }

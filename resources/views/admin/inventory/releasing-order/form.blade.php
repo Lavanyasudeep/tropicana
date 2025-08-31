@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Pre‑Alert')
+@section('title', 'Releasing Order')
 
 @section('content_header')
-    <h1>Pre‑Alert</h1>
+    <h1>Releasing Order</h1>
 @endsection
 
 @section('content')
 <div class="page-sub-header">
     <h3>Create Form</h3>
     <div class="action-btns">
-        <a href="{{ route('admin.inventory.pre-alert.index') }}" class="btn btn-success">
+        <a href="{{ route('admin.inventory.releasing-order.index') }}" class="btn btn-success">
             <i class="fas fa-arrow-left"></i> Back
         </a>
     </div>
@@ -19,15 +19,15 @@
 <div class="pageTabs">
     <ul class="nav nav-tabs" role="tablist" >
         <li class="nav-item">
-            <a class="nav-link active" id="pre-alert-tab" data-toggle="tab" href="#preAlert" role="tab">Basic Info</a>
+            <a class="nav-link active" id="releasing-order-tab" data-toggle="tab" href="#releasingOrder" role="tab">Basic Info</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="prealert-attachment-tab" data-toggle="tab" href="#preAlertAttachment" role="tab">Attachment</a>
+            <a class="nav-link" id="releasingorder-attachment-tab" data-toggle="tab" href="#releasingOrderAttachment" role="tab">Attachment</a>
         </li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane fade show active" id="preAlert" role="tabpanel">
+        <div class="tab-pane fade show active" id="releasingOrder" role="tabpanel">
 
             <div class="card page-form page-form-add">
                 <div class="card-body">
@@ -39,19 +39,19 @@
                             <div class="col-md-4">
                                 <div class="pform-panel" style="min-height: 150px;">
                                     <div class="pform-row">
-                                        <div class="pform-label">Document #</div>
+                                        <div class="pform-label">Doc. #</div>
                                         <div class="pform-value">
-                                            <input type="text" value="PA‑25‑00001" readonly>
+                                            <input type="text" value="RO‑25‑00001" readonly>
                                         </div>
                                     </div>
                                     <div class="pform-row">
-                                        <div class="pform-label">Document Date</div>
+                                        <div class="pform-label">Doc. Date</div>
                                         <div class="pform-value">
                                             <input type="date" value="@php echo date('Y-m-d') @endphp" readonly>
                                         </div>
                                     </div>
                                     <div class="pform-row">
-                                        <div class="pform-label">Date of Arriving</div>
+                                        <div class="pform-label">Date of Releasing</div>
                                         <div class="pform-value">
                                             <input type="date" value="" >
                                         </div>
@@ -118,11 +118,11 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="page-list-panel">
-                                    <table class="page-input-table" id="preAlertItemsTable">
+                                    <table class="page-input-table" id="releasingOrderItemsTable">
                                         <thead>
                                             <tr>
                                                 <th>Item Name</th>
-                                                <th>Quantity</th>
+                                                <th>Qty</th>
                                                 <th>UOM</th>
                                                 <th>Batch No.</th>
                                                 <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>
@@ -158,10 +158,10 @@
         </div>
 
         <!-- Attachment Tab -->
-        <div class="tab-pane fade" id="preAlertAttachment" role="tabpanel">
+        <div class="tab-pane fade" id="releasingOrderAttachment" role="tabpanel">
             <x-attachment-uploader 
-                :tableName="'pre-alert'" 
-                :rowId="'PA-25-00012'" 
+                :tableName="'releasing_order'" 
+                :rowId="'RO-25-00012'" 
             />
         </div>
     </div>
@@ -173,7 +173,7 @@
 let rowIdx = 2;
 
 function addRow() {
-    let table = document.querySelector("#preAlertItemsTable tbody");
+    let table = document.querySelector("#releasingOrderItemsTable tbody");
     let newRow = document.createElement("tr");
     newRow.innerHTML = `
         <td><input class="form-control" value="Sample Item ${rowIdx+1}"></td>

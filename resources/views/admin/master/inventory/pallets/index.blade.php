@@ -258,10 +258,52 @@
 <script>
 $(document).ready(function () {
     // Yajra DataTable
-    const table = $('#palletTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{{ route("admin.master.inventory.pallets.index") }}',
+   const table = $('#palletTable').DataTable({
+        processing: false,
+        serverSide: false,
+        data: [
+            {
+                pallet_id: 101,
+                pallet_no: 'PAL-001',
+                name: 'Frozen Shrimp',
+                storage_room_name: 'Chiller Room A',
+                block_name: 'Seafood Storage Block D2',
+                rack_name: 'Chiller Room A',
+                slot_name: 'Slot 5',
+                pallet_position: 'WU0001-R001-B1-R3-L2-D1',
+                pallet_type: 'Wooden',
+                active: '<span class="badge badge-success">Yes</span>',
+                actions: `
+                    <a href="/admin/master/inventory/pallets/edit/101" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/master/inventory/pallets/view/101" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+                pallet_id: 102,
+                pallet_no: 'PAL-002',
+                name: 'Lobster Tails',
+                storage_room_name: 'Chiller Room B',
+                block_name: 'Seafood Storage Block D2',
+                rack_name: 'Chiller Room B',
+                slot_name: 'Slot 2',
+                pallet_position: 'WU0001-R002-B2-R5-L1-D2',
+                pallet_type: 'Plastic',
+                active: '<span class="badge badge-danger">No</span>',
+                actions: `
+                    <a href="/admin/master/inventory/pallets/edit/102" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/master/inventory/pallets/view/102" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            }
+            // Add more dummy rows as needed
+        ],
         columns: [
             { data: 'pallet_id', name: 'pallet_id', defaultContent: '' },
             { data: 'pallet_no', name: 'pallet_no', defaultContent: '' },
@@ -276,10 +318,7 @@ $(document).ready(function () {
             { data: 'actions', name: 'action', orderable: false, searchable: false }
         ],
         columnDefs: [
-            {
-                targets: [6,7],
-                className: 'text-center'
-            }
+            { targets: [6, 7], className: 'text-center' }
         ],
         order: [[0, 'desc']]
     });
