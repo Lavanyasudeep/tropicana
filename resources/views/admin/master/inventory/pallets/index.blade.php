@@ -5,6 +5,26 @@
     <h1>Manage Pallets</h1>
 @stop
 
+@php
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
+
+function generateQR($payload) {
+    $builder = new Builder(
+        writer: new PngWriter(),
+        data: json_encode($payload),
+        size: 150,
+        margin: 5
+    );
+
+    $result = $builder->build();
+    return 'data:image/png;base64,' . base64_encode($result->getString());
+}
+
+$qr1 = generateQR(['pallet_no' => 'PAL-001']);
+$qr2 = generateQR(['pallet_no' => 'PAL-002']);
+@endphp
+
 @section('content')
 <div class="row" id="palletCreateForm" style="display: none;">
     <!-- Pallet Form -->
@@ -182,13 +202,15 @@
                     <th>#</th>
                     <th>Pallet No</th>
                     <th>Name</th>
-                    <th>Room Name</th>
-                    <th>Block Name</th>
-                    <th>Rack Name</th>
-                    <th>Slot Name</th>
-                    <th>Pallet Position</th>
-                    <th>Pallet Type</th>
-                    <th>Active</th>
+                    <th>Storage Room</th>
+                    <th>Block</th>
+                    <th>Rack</th>
+                    <th>Slot</th>
+                    <th>Position</th>
+                    <th>Type</th>
+                    <th>Volume (m³)</th>
+                    <th>QR Code</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -272,6 +294,8 @@ $(document).ready(function () {
                 slot_name: 'Slot 5',
                 pallet_position: 'WU0001-R001-B1-R3-L2-D1',
                 pallet_type: 'Wooden',
+                volume_m3: '1.800',
+                qr_code: '<img src="{{ $qr1 }}" alt="QR PAL-001" width="50">',
                 active: '<span class="badge badge-success">Yes</span>',
                 actions: `
                     <a href="/admin/master/inventory/pallets/edit/101" class="btn btn-warning btn-sm">
@@ -292,6 +316,8 @@ $(document).ready(function () {
                 slot_name: 'Slot 2',
                 pallet_position: 'WU0001-R002-B2-R5-L1-D2',
                 pallet_type: 'Plastic',
+                volume_m3: '1.694',
+                qr_code: '<img src="{{ $qr2 }}" alt="QR PAL-002" width="50">',
                 active: '<span class="badge badge-danger">No</span>',
                 actions: `
                     <a href="/admin/master/inventory/pallets/edit/102" class="btn btn-warning btn-sm">
@@ -302,18 +328,19 @@ $(document).ready(function () {
                     </a>
                 `
             }
-            // Add more dummy rows as needed
         ],
         columns: [
-            { data: 'pallet_id', name: 'pallet_id', defaultContent: '' },
-            { data: 'pallet_no', name: 'pallet_no', defaultContent: '' },
-            { data: 'name', name: 'name', defaultContent: '' },
-            { data: 'storage_room_name', name: 'storage_room_name', defaultContent: '' },
-            { data: 'block_name', name: 'block_name', defaultContent: '' },
-            { data: 'rack_name', name: 'rack_name', defaultContent: '' },
-            { data: 'slot_name', name: 'slot_name', defaultContent: '' },
-            { data: 'pallet_position', name: 'pallet_position', defaultContent: '' },
-            { data: 'pallet_type', name: 'pallet_type', defaultContent: '' },
+            { data: 'pallet_id', name: 'pallet_id' },
+            { data: 'pallet_no', name: 'pallet_no' },
+            { data: 'name', name: 'name' },
+            { data: 'storage_room_name', name: 'storage_room_name' },
+            { data: 'block_name', name: 'block_name' },
+            { data: 'rack_name', name: 'rack_name' },
+            { data: 'slot_name', name: 'slot_name' },
+            { data: 'pallet_position', name: 'pallet_position' },
+            { data: 'pallet_type', name: 'pallet_type' },
+            { data: 'volume_m3', name: 'volume_m3' },
+            { data: 'qr_code', name: 'qr_code', orderable: false, searchable: false },
             { data: 'active', name: 'Status', orderable: false, searchable: false },
             { data: 'actions', name: 'action', orderable: false, searchable: false }
         ],

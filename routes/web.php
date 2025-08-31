@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\Inventory\VehPreCoolingInspCheckController;
 use App\Http\Controllers\Admin\Purchase\GRNController;
 
 // Sales
+use App\Http\Controllers\Admin\Sales\CustomerContractController;
 use App\Http\Controllers\Admin\Sales\CustomerEnquiryController;
 use App\Http\Controllers\Admin\Sales\SalesQuotationController;
 
@@ -585,6 +586,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
     //*********** Sales Module ***********/
     Route::group(['prefix' => 'sales', 'as' => 'sales.'], function() {
+
+        //customer contract
+        Route::group(['prefix' => 'customer-contract', 'as' => 'customer-contract.'], function() {
+            Route::get('/', [CustomerContractController::class, 'index'])->name('index');
+            Route::get('/create', [CustomerContractController::class, 'create'])->name('create');
+            Route::post('/store', [CustomerContractController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [CustomerContractController::class, 'edit'])->name('edit');
+            Route::put('/{id}/update', [CustomerContractController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [CustomerContractController::class, 'show'])->name('view');
+            Route::post('/change-status', [CustomerContractController::class, 'changeStatus'])->name('change-status');
+            Route::get('/{id}/print', [CustomerContractController::class, 'print'])->name('print');
+        });
 
         //customer enquiry
         Route::group(['prefix' => 'customer-enquiry', 'as' => 'customer-enquiry.'], function() {
