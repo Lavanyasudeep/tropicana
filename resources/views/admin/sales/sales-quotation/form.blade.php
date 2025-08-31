@@ -21,7 +21,6 @@ if(isset($quotation)) {
     $customer_id = $quotation->customer_id;
     $service_type = $quotation->service_type;
     $remarks = $quotation->remarks;
-    $customer_id = $quotation->customer_id;
     $service_type = explode(',', $quotation->service_type);
     $remarks = $quotation->remarks;
     $total_amount = $quotation->total_amount;
@@ -40,7 +39,6 @@ if(isset($quotation)) {
     $customer_id = '';
     $service_type = '';
     $remarks = '';
-    $customer_id = '';
     $service_type = [];
     $remarks = '';
     $total_amount = '';
@@ -342,7 +340,7 @@ if(isset($quotation)) {
         });
 
         @if (!empty($customer_id))
-            $('#customer_id').trigger('change');
+           // $('#customer_id').trigger('change');
         @endif
     });
 

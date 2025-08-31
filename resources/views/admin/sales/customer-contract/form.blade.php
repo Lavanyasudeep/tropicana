@@ -59,6 +59,7 @@
                                         <div class="pform-label">Billing Cycle</div>
                                         <div class="pform-value">
                                             <select class="form-control">
+                                                <option value='' >- Select -</option>
                                                 <option>Monthly</option>
                                                 <option>Quarterly</option>
                                                 <option>Yearly</option>
@@ -68,7 +69,7 @@
                                     <div class="pform-row">
                                         <div class="pform-label">Billing Method</div>
                                         <div class="pform-value">
-                                            <input type="text" value="Manual">
+                                            <input type="text" value="" >
                                         </div>
                                     </div>
                                 </div>
@@ -80,25 +81,25 @@
                                     <div class="pform-row">
                                         <div class="pform-label">Customer Name</div>
                                         <div class="pform-value">
-                                            <input type="text" value="Acme Cold Storage">
+                                            <input type="text" value="">
                                         </div>
                                     </div>
                                     <div class="pform-row">
                                         <div class="pform-label">Contact Number</div>
                                         <div class="pform-value">
-                                            <input type="text" value="+91 9876543210">
+                                            <input type="text" value="">
                                         </div>
                                     </div>
                                     <div class="pform-row">
                                         <div class="pform-label">Contact Email</div>
                                         <div class="pform-value">
-                                            <input type="text" value="acme@example.com">
+                                            <input type="text" value="">
                                         </div>
                                     </div>
                                     <div class="pform-row">
                                         <div class="pform-label">Contract Type</div>
                                         <div class="pform-value">
-                                            <input type="text" value="Storage & Handling">
+                                            <input type="text" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -152,9 +153,9 @@
                                     <table class="page-input-table" id="contractItemsTable">
                                         <thead>
                                             <tr>
-                                                <th>Product</th>
-                                                <th>Min. Guarantee (pallets)</th>
-                                                <th>Temperature to maintain</th>
+                                                <th>Product Description</th>
+                                                <th>Min. Guarantee (Pallets)</th>
+                                                <th>Temperature to Maintain</th>
                                                 <th>Storage Charge</th>
                                                 <th>Handling Charge</th>
                                                 <th><button type="button" onclick="addContractRow()" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button></th>
@@ -162,11 +163,11 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input class="form-control" value="Fruits"></td>
-                                                <td><input type="number" class="form-control" value="1000"></td>
-                                                <td><input type="text" class="form-control" value="+2 to +4 deg. C"></td>
-                                                <td><input class="form-control" value="CR184"></td>
-                                                <td><input class="form-control" value="CR50"></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><input type="number" class="form-control" value=""></td>
+                                                <td><input type="text" class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
+                                                <td><input class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
                                             </tr>
                                         </tbody>
@@ -175,12 +176,12 @@
                                         <div class="col-md-6" ><br /><br />
                                             <div class="remarks-panel" >
                                                 <label>Remarks</label>
-                                                <textarea class="form-control" name="remarks">Includes power tariff escalation clause</textarea>
+                                                <textarea class="form-control" name="remarks"></textarea>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="submit" class="btn btn-save btn-sm float-right">Save</button>
+                                        <div class="col-md-6" ><br /><br /><br />
+                                            <button type="submit" class="btn btn-save btn-sm float-right">Save</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +210,11 @@ function addContractRow() {
     let table = document.querySelector("#contractItemsTable tbody");
     let newRow = document.createElement("tr");
     newRow.innerHTML = `
-        <td><input class="form-control" value="Sample Product ${rowIdx+1}"></td>
-        <td><input type="number" class="form-control" value="500"></td>
-        <td><input class="form-control" value="CR${180 + rowIdx}"></td>
-        <td><input class="form-control" value="CR${40 + rowIdx}"></td>
+        <td><input class="form-control" value=""></td>
+        <td><input type="number" class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
         <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
     `;
     table.appendChild(newRow);

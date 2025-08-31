@@ -96,61 +96,57 @@
         <table id="contractListTable" class="page-list-table">
             <thead>
                 <tr>
-                    <th>Contract No</th>
-                    <th>Period</th>
+                    <th>Doc. No</th>
+                    <th>Doc. Date</th>
                     <th>Client</th>
+                    <th>Period</th>
                     <th>Product</th>
                     <th>Billing Cycle</th>
-                    <th>Storage Charges</th>
                     <th>Status</th>
-                    <th>Clauses</th>
-                    <th>Action</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>CT-2025-001</td>
-                    <td>01/01/2025 - 31/12/2025</td>
+                    <td>01/01/2025</td>
                     <td>Acme Cold Storage</td>
+                    <td>01/01/2025 - 31/12/2025</td>
                     <td>Fruits</td>
                     <td>Monthly</td>
-                    <td>CR184</td>
                     <td class="text-center">Active</td>
-                    <td title="PRICE ESCALATION: REVISED POWER TARIFF; TEMPERATURE VARIANCE CHARGES">
-                        PRICE ESCALATION: REVISED POWER TARIFF...
-                    </td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-primary">View</a>
+                        <a href="#" class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-sm btn-view"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <tr>
                     <td>CT-2025-002</td>
-                    <td>01/03/2025 - 28/02/2026</td>
+                    <td>01/01/2025</td>
                     <td>Polar Freight</td>
+                    <td>01/01/2024 - 31/12/2024</td>
                     <td>Meat</td>
                     <td>Quarterly</td>
-                    <td>CR250</td>
                     <td class="text-center">Pending</td>
-                    <td title="CUT OFF TIME FOR VEHICLE REPORTING; WEEKEND ACCESS CHARGES">
-                        CUT OFF TIME FOR VEHICLE REPORTING...
-                    </td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-warning">Review</a>
+                        <a href="#" class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-sm btn-view"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <tr>
                     <td>CT-2024-003</td>
-                    <td>01/01/2024 - 31/12/2024</td>
+                    <td>01/01/2025</td>
                     <td>Frostline Storage</td>
+                    <td>01/01/2024 - 31/12/2024</td>
                     <td>Vegetables</td>
                     <td>Monthly</td>
-                    <td>CR150</td>
                     <td class="text-center">Expired</td>
-                    <td title="POWER TARIFF HIRE BASIS; TEMPERATURE VARIANCE CHARGES">
-                        POWER TARIFF HIRE BASIS...
-                    </td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-secondary">Archive</a>
+                        <a href="#" class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-sm btn-view"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
