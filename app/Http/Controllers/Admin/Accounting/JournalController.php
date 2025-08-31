@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Accounting;
 
 use App\Models\{ Branch, Department };
+use App\Models\Master\Sales\Customer;
 use App\Models\Master\Purchase\Supplier;
 use App\Models\Master\Accounting\BankMaster;
 use App\Models\Master\Accounting\TransactionType;
@@ -122,10 +123,18 @@ class JournalController extends Controller
     {
         $branches = Branch::select('branch_id', 'branch_name')->get();
         $departments = Department::select('department_id', 'department_name')->get();
-        $accounts = ChartOfAccount::selectRaw("account_code as value, CONCAT(account_name, ' - ', account_code) as label")
+        $accounts = ChartOfAccount::selectRaw("account_id as value, CONCAT(account_name, ' - ', account_code) as label")
                 ->where('company_id', auth()->user()->company_id)
                 ->where('active', 1)
                 ->orderBy('account_code')
+                ->get();
+            $customers = Customer::selectRaw("customer_id as value, customer_name as label")
+                ->where('company_id', auth()->user()->company_id)
+                ->where('active', 1)
+                ->get();
+            $suppliers = Supplier::selectRaw("supplier_id as value, supplier_name as label")
+                ->where('company_id', auth()->user()->company_id)
+                ->where('active', 1)
                 ->get();
 
         $analytical = Analytical::select('analytical_code')
@@ -133,7 +142,7 @@ class JournalController extends Controller
                             ->where('active', 1)
                             ->get();
 
-        return view('admin.accounting.journal.create', compact('branches', 'departments', 'accounts', 'analytical'));
+        return view('admin.accounting.journal.create', compact('branches', 'departments', 'accounts', 'analytical','customers','suppliers'));
     }
 
     /**
@@ -149,7 +158,7 @@ class JournalController extends Controller
                 'branch_id'     => 'required|integer',
                 'department_id' => 'required|integer',
                 'ledger'        => 'required|array',
-                'account_code'  => 'required|array',
+                'account_id'    => 'required|array',
                 'debit'         => 'required|array',
                 'credit'        => 'required|array',
             ]);
@@ -187,7 +196,7 @@ class JournalController extends Controller
                 DB::table('cs_journal_detail')->insert([
                     'journal_id'      => $journalId,
                     'account_type'    => $ledger,
-                    'account_code'    => $request->account_code[$index] ?? null,
+                    'account_id'      => $request->account_id[$index] ?? null,
                     'analytical_code' => $request->analytical_code[$index] ?? null,
                     'amount'          => $amount,
                     'tran_type'       => $tranType,

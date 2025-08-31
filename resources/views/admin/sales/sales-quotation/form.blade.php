@@ -150,7 +150,7 @@ if(isset($quotation)) {
              <div class="row" >
                 <div class="col-md-12" >
                     <div class="page-list-panel">
-                        <table class="page-list-table" id="quotationItemsTable">
+                        <table class="page-input-table" id="quotationItemsTable">
                             <thead>
                                 <tr>
                                     <th style="width:10%;" >Type of Item</th>

@@ -27,9 +27,11 @@ use App\Http\Controllers\Admin\Purchase\GRNController;
 // Sales
 use App\Http\Controllers\Admin\Sales\CustomerEnquiryController;
 use App\Http\Controllers\Admin\Sales\SalesQuotationController;
+use App\Http\Controllers\Admin\Sales\SalesInvoiceController;
 
 // Accounting
 use App\Http\Controllers\Admin\Accounting\PaymentController;
+use App\Http\Controllers\Admin\Accounting\ReceiptController;
 use App\Http\Controllers\Admin\Accounting\JournalController;
 
 // Masters
@@ -570,6 +572,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
             Route::post('/{id}/settle', [PaymentController::class, 'settle'])->name('settle');
             Route::get('/{id}/print', [PaymentController::class, 'print'])->name('print');
         });
+        
+        //receipt
+        Route::group(['prefix' => 'receipt', 'as' => 'receipt.'], function() {
+            Route::get('/', [ReceiptController::class, 'index'])->name('index');
+            Route::get('/create', [ReceiptController::class, 'create'])->name('create');
+            Route::post('/store', [ReceiptController::class, 'store'])->name('store');
+            Route::get('/view/{id}', [ReceiptController::class, 'show'])->name('view');
+            Route::post('/get-ledger-account-by-account-label', [ReceiptController::class, 'getLedgerAccount'])->name('get-ledger-account');
+            Route::post('/get-ledger-account-balance', [ReceiptController::class, 'getLedgerAccountBalance'])->name('get-ledger-account-balance');
+            Route::post('/get-payment-purpose', [ReceiptController::class, 'getPaymentPurpose'])->name('get-payment-purpose');
+            Route::post('/change-status', [ReceiptController::class, 'changeStatus'])->name('change-status');
+            Route::post('/{id}/settle', [ReceiptController::class, 'settle'])->name('settle');
+            Route::get('/{id}/print', [ReceiptController::class, 'print'])->name('print');
+        });
 
         //journal
         Route::group(['prefix' => 'journal', 'as' => 'journal.'], function() {
@@ -608,6 +624,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
             Route::get('/view/{id}', [SalesQuotationController::class, 'show'])->name('view');
             Route::post('/change-status', [SalesQuotationController::class, 'changeStatus'])->name('change-status');
             Route::get('/{id}/print', [SalesQuotationController::class, 'print'])->name('print');
+        });
+        
+        //sales invoice
+        Route::group(['prefix' => 'sales-invoice', 'as' => 'sales-invoice.'], function() {
+            Route::get('/', [SalesInvoiceController::class, 'index'])->name('index');
+            Route::get('/create', [SalesInvoiceController::class, 'create'])->name('create');
+            Route::post('/store', [SalesInvoiceController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [SalesInvoiceController::class, 'edit'])->name('edit');
+            Route::put('/{id}/update', [SalesInvoiceController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [SalesInvoiceController::class, 'show'])->name('view');
+            Route::post('/change-status', [SalesInvoiceController::class, 'changeStatus'])->name('change-status');
+            Route::get('/{id}/print', [SalesInvoiceController::class, 'print'])->name('print');
         });
        
     });

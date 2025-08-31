@@ -86,7 +86,28 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'branch_name' => 'required|string|max:255',
+
+            //'country_id' => 'required|exists:cs_country,country_id',
+            'state_id' => 'nullable|exists:cs_state,state_id',
+            'district_id' => 'required|exists:cs_district,district_id',
+            'pincode' => 'required',
+
+            'address' => 'nullable|string|max:500',
+            'phone_number' => 'nullable|string|max:15',
+
+            'email_id' => 'nullable|email|max:255',
+        ]);
+
+        $data = $request->only([
+            'branch_name', 'company_id', 'state_id', 'district_id', 'pincode',
+            'address', 'phone_number', 'email_id',
+        ]);
+
+        Branch::create($data);
+
+        return redirect()->route('admin.master.general.branch.index')->with('success', 'Branch created successfully.');
     }
 
     /**

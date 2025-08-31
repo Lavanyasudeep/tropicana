@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Payment Voucher')
+@section('title', 'Create Receipt Voucher')
 
 @section('content_header')
-    <h1>Payment Voucher</h1>
+    <h1>Receipt Voucher</h1>
 @endsection
 
 @section('content')
@@ -12,18 +12,18 @@
 <div class="page-sub-header">
     <h3>Create Form</h3>
     <div class="action-btns" >
-        <a href="{{ route('admin.accounting.payment.index') }}" class="btn btn-success" ><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.accounting.receipt.index') }}" class="btn btn-success" ><i class="fas fa-arrow-left"></i> Back</a>
     </div>
 </div>
 
 <div class="card page-form page-form-add" >
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.accounting.payment.store') }}" id="outwardForm">
+        <form method="POST" action="{{ route('admin.accounting.receipt.store') }}" id="outwardForm">
             @csrf
             <div class="row" >
                 <!-- Panel 1 -->
                 <div class="col-md-4" >
-                    <div class="pform-panel" style="min-height:165px;">
+                    <div class="pform-panel" style="min-height:185px;">
                         <div class="pform-row" >
                             <div class="pform-label" >Doc. #</div>
                             <div class="pform-value" >
@@ -56,19 +56,58 @@
                     </div>
                 </div>
 
+                <!-- Panel 2 -->
                 <div class="col-md-4" >
-                    <div class="pform-panel" style="min-height:165px;">
+                    <div class="pform-panel" style="min-height: 185px;" >
                         <div class="pform-row" >
-                            <div class="pform-label" >Voucher Type</div>
+                            <div class="pform-label" >Customer</div>
                             <div class="pform-value" >
-                                <select name="voucher_type" id="voucher_type">
+                                <select name="customer_id" id="customer_id" class="select2">
                                     <option value="">- Select -</option>
-                                    @foreach($voucherTypes as $type)
-                                        <option value="{{ $type->value }}"
-                                                @selected(old('voucher_type') == $type->value)>
-                                            {{ $type->label() }}
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->customer_id }}" 
+                                                @selected(old('customer_id') == $customer->customer_id) >
+                                            {{ $customer->customer_name }}
                                         </option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pform-row" >
+                            <div class="pform-label" >Contact No.</div>
+                            <div class="pform-value" >
+                                <span id="grn_no" ><input type="text" id="customer_contact_no" value="" readonly></span>
+                            </div>
+                        </div>
+                        <div class="pform-row" >
+                            <div class="pform-label" >Credit Limit</div>
+                            <div class="pform-value" >
+                                <span id="grn_no" ><input type="text" id="customer_contact_no" value="" readonly></span>
+                            </div>
+                        </div>
+                        <div class="pform-row" >
+                            <div class="pform-label" >Cur. Balance</div>
+                            <div class="pform-value" >
+                                <span id="grn_no" ><input type="text" id="customer_contact_no" value="" readonly></span>
+                            </div>
+                        </div>
+                        <div class="pform-row" >
+                            <div class="pform-label" >GSTIN</div>
+                            <div class="pform-value" >
+                                <span id="grn_no" ><input type="text" id="customer_contact_no" value="" readonly></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" >
+                    <div class="pform-panel" style="min-height:185px;">
+                        <div class="pform-row" >
+                            <div class="pform-label" >Advance</div>
+                            <div class="pform-value" >
+                                <select name="is_advance" id="is_advance">
+                                    <option value="0" @selected(old('is_advance', 'no') == 'no')>No</option>
+                                    <option value="1" @selected(old('is_advance') == 'yes')>Yes</option>
                                 </select>
                             </div>
                         </div>
@@ -101,59 +140,13 @@
                         <div class="pform-clear" ></div>
                     </div>
                 </div>
-
-                <!-- Panel 2 -->
-                <div class="col-md-4" >
-                    <div class="pform-panel" style="min-height: 165px;" >
-                        <div class="pform-row" >
-                            <div class="pform-label" >Payee</div>
-                            <div class="pform-value" >
-                                <select name="supplier_id" id="supplier_id" class="select2">
-                                    <option value="">- Select -</option>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->supplier_id }}" 
-                                                @selected(old('supplier_id') == $supplier->supplier_id) >
-                                            {{ $supplier->supplier_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Contact No.</div>
-                            <div class="pform-value" >
-                                <span id="grn_no" ><input type="text" id="supplier_contact_no" value="" readonly></span>
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Advance</div>
-                            <div class="pform-value" >
-                                <select name="is_advance" id="is_advance">
-                                    <option value="0" @selected(old('is_advance', 'no') == 'no')>No</option>
-                                    <option value="1" @selected(old('is_advance') == 'yes')>Yes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Purpose</div>
-                            <div class="pform-value" >
-                                <select name="purpose_id" id="purpose_id" class="select2" >
-                                    <option value="">- Select -</option>
-                                    @foreach($purposes as $purpose)
-                                        <option value="{{ $purpose->purpose_id }}">{{ $purpose->purpose_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="row" >
                 <div class="col-md-12" >
 
                     <div class="page-list-panel" >
-                        <table class="page-input-table" id="paymentCreateTable" >
+                        <table class="page-input-table" id="receiptCreateTable" >
                             <thead>
                                 <tr>
                                     <th style="width:10%;" >Label</th>
@@ -182,7 +175,7 @@
 
                                     <!-- Dr. Bank A/c -->
                                     <td class="bank-column">
-                                        <input type="text" name="supplier_bank[]" />
+                                        <input type="text" name="customer_bank[]" />
                                     </td>
 
                                     <!-- balance -->
@@ -312,50 +305,50 @@
 <script>
 
 $(document).ready(function () {
-    function getLedgerAccountByAccountLabel()
-    {
-        const advance = $('#is_advance').val();
-        const tranType = $('#transaction_type').val();
-        const purposeId = $('#purpose_id').val();
+    // function getLedgerAccountByAccountLabel()
+    // {
+    //     const advance = $('#is_advance').val();
+    //     const tranType = $('#transaction_type').val();
+    //     const purposeId = $('#purpose_id').val();
 
-        $.ajax({
-            url: "/admin/accounting/payment/get-ledger-account-by-account-label",
-            method: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                'advance': advance,
-                'tranType': tranType,
-                'purposeId': purposeId
-            },
-            success: function (response) {
-                let $from_account_html = `<option value="">- Select -</option>`;
-                response.fromAccount.forEach(account => {
-                    $from_account_html += `<option value="${ account.value }" selected>${ account.label }</option>`;
-                });
+    //     $.ajax({
+    //         url: "/admin/accounting/receipt/get-ledger-account-by-account-label",
+    //         method: "POST",
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         data: {
+    //             'advance': advance,
+    //             'tranType': tranType,
+    //             'purposeId': purposeId
+    //         },
+    //         success: function (response) {
+    //             let $from_account_html = `<option value="">- Select -</option>`;
+    //             response.fromAccount.forEach(account => {
+    //                 $from_account_html += `<option value="${ account.value }" selected>${ account.label }</option>`;
+    //             });
 
-                let $to_account_html = `<option value="">- Select -</option>`;
-                response.toAccount.forEach(account => {
-                    $to_account_html += `<option value="${ account.value }">${ account.label }</option>`;
-                });
+    //             let $to_account_html = `<option value="">- Select -</option>`;
+    //             response.toAccount.forEach(account => {
+    //                 $to_account_html += `<option value="${ account.value }">${ account.label }</option>`;
+    //             });
 
-                // Update ALL select boxes with name from_account_code[] and to_account_code[]
-                $('select[name="from_account_code[]"]').html($from_account_html);
-                $('select[name="to_account_code[]"]').html($to_account_html);
+    //             // Update ALL select boxes with name from_account_code[] and to_account_code[]
+    //             $('select[name="from_account_code[]"]').html($from_account_html);
+    //             $('select[name="to_account_code[]"]').html($to_account_html);
 
-                $('#from_account_code').trigger('change');
-            },
-            error: function (xhr) {
-                toastr.error(xhr.responseJSON?.message || "Error in getting ledger Account");
-            }
-        });
-    }
+    //             $('#from_account_code').trigger('change');
+    //         },
+    //         error: function (xhr) {
+    //             toastr.error(xhr.responseJSON?.message || "Error in getting ledger Account");
+    //         }
+    //     });
+    // }
 
     // Column toggle logic
     function toggleColumn() {
         const tranType = $('#transaction_type').val();
-        const supplierId = $('#supplier_id').val();
+        const customerId = $('#customer_id').val();
        
         if(tranType != 'cash' && tranType != '') {
             $('.bank-column').show();
@@ -365,7 +358,7 @@ $(document).ready(function () {
             $('#cr_account_label').text('Cash');
         }
 
-        if(supplierId == 1) {
+        if(customerId == 1) {
             $('.analytical-column').show();
         } else {
             $('.analytical-column').hide();
@@ -378,12 +371,12 @@ $(document).ready(function () {
         if(type === 'petty_cash') {
             $('#transaction_type').val('cash');
             $('#transaction_type').trigger('change');
-            $('#supplier_id').val(1);
-            $('#supplier_id').trigger('change');
+            $('#customer_id').val(1);
+            $('#customer_id').trigger('change');
             $('#ref_no').attr('readonly', true);
             $('#ref_date').attr('readonly', true);
         } else {
-            $('#supplier_id').val('').trigger('change');
+            $('#customer_id').val('').trigger('change');
         }
     });
 
@@ -393,50 +386,50 @@ $(document).ready(function () {
         if(isAdvance) {
             $('#dr_account_label').text('Advance');
         } else {
-            $('#dr_account_label').text('Expense');
+            $('#dr_account_label').text('Income');
         }
 
         //getLedgerAccountByAccountLabel();
         if(isAdvance) {
-            $.post("/admin/accounting/payment/get-payment-purpose", {
-                is_advance: isAdvance,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            }, function(response) {
-                let purposeData = response.purpose;
+            // $.post("/admin/accounting/receipt/get-receipt-purpose", {
+            //     is_advance: isAdvance,
+            //     _token: $('meta[name="csrf-token"]').attr('content')
+            // }, function(response) {
+            //     let purposeData = response.purpose;
 
-                let purposeHtml = `<option value="">- Select -</option>`;
-                $.each(purposeData, function (index, purpose) {
-                    purposeHtml += `<option value="${purpose.purpose_id}">
-                                        ${purpose.purpose_name}
-                                    </option>`;
-                });
+            //     let purposeHtml = `<option value="">- Select -</option>`;
+            //     $.each(purposeData, function (index, purpose) {
+            //         purposeHtml += `<option value="${purpose.purpose_id}">
+            //                             ${purpose.purpose_name}
+            //                         </option>`;
+            //     });
 
-                $('#purpose_id').html(purposeHtml);
-            }).fail(function(xhr) {
-                toastr.error(xhr.responseJSON?.message || "Failed to load payment purpose data.");
-            });
+            //     $('#purpose_id').html(purposeHtml);
+            // }).fail(function(xhr) {
+            //     toastr.error(xhr.responseJSON?.message || "Failed to load receipt purpose data.");
+            // });
         }
     });
 
-    $(document).on('change', '#supplier_id', function () {
-        supplierId = $(this).val();
+    $(document).on('change', '#customer_id', function () {
+        customerId = $(this).val();
 
-        if(supplierId != 1) {
+        if(customerId != 1) {
             $('#analytical_code').val('');
         }
 
         toggleColumn();
 
-        if(supplierId!='') {
-            $.post("/admin/master/purchase/supplier/get-supplier-details", {
-                supplier_id: supplierId,
+        if(customerId!='') {
+            $.post("/admin/master/purchase/customer/get-customer-details", {
+                customer_id: customerId,
                 _token: $('meta[name="csrf-token"]').attr('content')
             }, function(response) {
-                data = response.supplier;
+                data = response.customer;
 
-                $("#supplier_contact_no").val(data.mobile??'');
+                $("#customer_contact_no").val(data.mobile??'');
             }).fail(function(xhr) {
-                toastr.error(xhr.responseJSON?.message || "Failed to load supplier details.");
+                toastr.error(xhr.responseJSON?.message || "Failed to load customer details.");
             });
         }
         
@@ -464,7 +457,7 @@ $(document).ready(function () {
         $('#ref_date').text(selected.refDate);
 
         if(tranType === 'cash') {
-            $('supplier_bank').val('');
+            $('customer_bank').val('');
             $('#bank_master_id').val('');
         } 
 
@@ -476,7 +469,7 @@ $(document).ready(function () {
         const accountCode = $(this).val();
 
         $.ajax({
-            url: "/admin/accounting/payment/get-ledger-account-balance",
+            url: "/admin/accounting/receipt/get-ledger-account-balance",
             method: "POST",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
