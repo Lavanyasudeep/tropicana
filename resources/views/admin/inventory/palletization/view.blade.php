@@ -117,7 +117,7 @@ $pallet = [
                             <div class="pform-row"><div class="pform-label">Dock-In No.</div><div class="pform-value">D-07</div></div>
                             <div class="pform-row"><div class="pform-label">Room No.</div><div class="pform-value">R-102</div></div>
                             <div class="pform-row" style="color:red;" ><div class="pform-label">Pallet No.</div><div class="pform-value">PLT-00001</div></div>
-                            <div class="pform-row"><div class="pform-label">Qty Per Pallet</div><div class="pform-value">100</div></div>
+                            <div class="pform-row"><div class="pform-label">Pallet Volume (m3)</div><div class="pform-value">10 m3</div></div>
                             <div class="pform-row"><div class="pform-label">Total Weight (KG)</div><div class="pform-value">1250</div></div>
                             <div class="pform-row"><div class="pform-label">Status</div><div class="pform-value"><span class="badge badge-success">Completed</span></div></div>
                         </div>
@@ -145,6 +145,7 @@ $pallet = [
                             <th>Expiry Date</th>
                             <th>Quantity</th>
                             <th>UOM</th>
+                            <th>Volume (m3)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,6 +157,7 @@ $pallet = [
                             <td>15/02/2026</td>
                             <td class="text-right">60</td>
                             <td>Boxes</td>
+                            <td>8</td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -165,6 +167,7 @@ $pallet = [
                             <td>20/03/2026</td>
                             <td class="text-right">40</td>
                             <td>Boxes</td>
+                            <td>2</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -173,6 +176,7 @@ $pallet = [
                             <td colspan="4" class="text-right">Total</td>
                             <td class="text-right">100</td>
                             <td></td>
+                            <td class="text-right">10</td>
                         </tr>
                     </tfoot>
                 </table>
