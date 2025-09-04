@@ -32,16 +32,16 @@
 
 @php
 $products = [
-    ['product'=>'RED JOANPRINCE SMALL','lot'=>'LOT001','no_of_packages'=>100,'package_type'=>'Carton','total_gw'=>'525','total_nw'=>'500'],
-    ['product'=>'GREEN EMERALD LARGE','lot'=>'LOT010','no_of_packages'=>200,'package_type'=>'Crate','total_gw'=>'264','total_nw'=>'240'],
-    ['product'=>'BLUE OCEAN MEDIUM','lot'=>'LOT015','no_of_packages'=>150,'package_type'=>'Sack','total_gw'=>'180','total_nw'=>'150'],
-    ['product'=>'YELLOW SUNBURST XL','lot'=>'LOT020','no_of_packages'=>80,'package_type'=>'Carton','total_gw'=>'400','total_nw'=>'380'],
-    ['product'=>'ORANGE BLAZE SMALL','lot'=>'LOT025','no_of_packages'=>100,'package_type'=>'Crate','total_gw'=>'260','total_nw'=>'250'],
-    ['product'=>'PURPLE REGALIA','lot'=>'LOT030','no_of_packages'=>140,'package_type'=>'Carton','total_gw'=>'420','total_nw'=>'400'],
-    ['product'=>'WHITE CRYSTAL LARGE','lot'=>'LOT035','no_of_packages'=>60,'package_type'=>'Bag','total_gw'=>'120','total_nw'=>'115'],
-    ['product'=>'BLACK DIAMOND MEDIUM','lot'=>'LOT040','no_of_packages'=>90,'package_type'=>'Crate','total_gw'=>'220','total_nw'=>'210'],
-    ['product'=>'SILVER MIST SMALL','lot'=>'LOT045','no_of_packages'=>110,'package_type'=>'Carton','total_gw'=>'330','total_nw'=>'320'],
-    ['product'=>'GOLDEN PEARL XL','lot'=>'LOT050','no_of_packages'=>130,'package_type'=>'Crate','total_gw'=>'390','total_nw'=>'375'],
+    ['product'=>'RED JOANPRINCE SMALL','lot'=>'LOT001','no_of_packages'=>100,'package_type'=>'Carton','total_gw'=>'525','total_nw'=>'500','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'GREEN EMERALD LARGE','lot'=>'LOT010','no_of_packages'=>200,'package_type'=>'Crate','total_gw'=>'264','total_nw'=>'240','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'BLUE OCEAN MEDIUM','lot'=>'LOT015','no_of_packages'=>150,'package_type'=>'Sack','total_gw'=>'180','total_nw'=>'150','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'YELLOW SUNBURST XL','lot'=>'LOT020','no_of_packages'=>80,'package_type'=>'Carton','total_gw'=>'400','total_nw'=>'380','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'ORANGE BLAZE SMALL','lot'=>'LOT025','no_of_packages'=>100,'package_type'=>'Crate','total_gw'=>'260','total_nw'=>'250','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'PURPLE REGALIA','lot'=>'LOT030','no_of_packages'=>140,'package_type'=>'Carton','total_gw'=>'420','total_nw'=>'400','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'WHITE CRYSTAL LARGE','lot'=>'LOT035','no_of_packages'=>60,'package_type'=>'Bag','total_gw'=>'120','total_nw'=>'115','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'BLACK DIAMOND MEDIUM','lot'=>'LOT040','no_of_packages'=>90,'package_type'=>'Crate','total_gw'=>'220','total_nw'=>'210','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'SILVER MIST SMALL','lot'=>'LOT045','no_of_packages'=>110,'package_type'=>'Carton','total_gw'=>'330','total_nw'=>'320','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
+    ['product'=>'GOLDEN PEARL XL','lot'=>'LOT050','no_of_packages'=>130,'package_type'=>'Crate','total_gw'=>'390','total_nw'=>'375','man_date'=>'02/09/2025','exp_date'=>'02/09/2026'],
 ];
 @endphp
 
@@ -103,6 +103,8 @@ $products = [
             <th>UOM</th>
             <th class="txt-right">Total G.W.</th>
             <th class="txt-right">Total N.W.</th>
+            <th>Manufacturing Date</th>
+            <th>Expiry Date</th>
         </tr>
     </thead>
     <tbody>
@@ -115,6 +117,8 @@ $products = [
             <td>{{ $item['package_type'] }}</td>
             <td class="txt-right">{{ $item['total_gw'] }}</td>
             <td class="txt-right">{{ $item['total_nw'] }}</td>
+            <td>{{ $item['man_date'] }}</td>
+            <td>{{ $item['exp_date'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -125,6 +129,7 @@ $products = [
             <td>Units</td>
             <td class="txt-right">{{ collect($products)->sum('total_gw') }}</td>
             <td class="txt-right">{{ collect($products)->sum('total_nw') }}</td>
+            <td colspan="2"></td>
         </tr>
     </tfoot>
 </table>

@@ -79,11 +79,13 @@
                             <th>Batch No.</th>
                             <th>Qty</th>
                             <th>UOM</th>
+                            <th>Manufacturing Date</th>
+                            <th>Expriy Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Frozen Prawns</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td></tr>
-                        <tr><td>Frozen Green Peas</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td></tr>
+                        <tr><td>Frozen Prawns</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td><td>12/06/2020</td><td>12/06/2030</td></tr>
+                        <tr><td>Frozen Green Peas</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td><td>09/07/2020</td><td>02/04/2030</td></tr>
                     </tbody>
                 </table>
             </div>

@@ -36,10 +36,11 @@ class PutAwayController extends Controller
      */
     public function index(Request $request)
     {
+        $clients = Client::all();
         $rooms = StorageRoom::with(['racks.pallets', 'racks'])->get();
         $racks = Rack::with(['slots.pallet'])->get();
 
-        return view('admin.inventory.put-away.index', compact('rooms', 'racks')); 
+        return view('admin.inventory.put-away.index', compact('clients', 'rooms', 'racks')); 
     }
 
     /**

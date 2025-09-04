@@ -122,9 +122,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Item Name</th>
+                                                <th>Batch No.</th>
                                                 <th>Quantity</th>
                                                 <th>UOM</th>
-                                                <th>Batch No.</th>
+                                                <th>Manufacturing Date</th>
+                                                <th>Expiry Date</th>
                                                 <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>
                                             </tr>
                                         </thead>
@@ -134,6 +136,8 @@
                                                 <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
@@ -141,6 +145,8 @@
                                                 <td><input type="number" class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                         </tbody>
@@ -177,10 +183,11 @@ function addRow() {
     let newRow = document.createElement("tr");
     newRow.innerHTML = `
         <td><input class="form-control" value="Sample Item ${rowIdx+1}"></td>
-        <td><input class="form-control" value="KG"></td>
-        <td><input type="number" class="form-control" value="100"></td>
         <td><input class="form-control" value="BATCH‑XX‑00${rowIdx+1}"></td>
-        <td><input class="form-control" value="Cold Room C${rowIdx+1}"></td>
+        <td><input type="number" class="form-control" value="100"></td>
+        <td><input class="form-control" value="Box"></td>
+        <td><input type="date" class="form-control" value=""></td>
+        <td><input type="date" class="form-control" value=""></td>
         <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
     `;
     table.appendChild(newRow);

@@ -301,6 +301,7 @@ return [
 
     // config/adminlte.php
     // 'menu' => \App\Helper\MenuBuilder::getMenu(),
+    'menu_search' => true,
     'menu' => [],
 
     /*

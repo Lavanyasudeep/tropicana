@@ -36,9 +36,9 @@
 
     // Dummy items
     $items = [
-        ['name' => 'Frozen Prawns', 'uom' => 'KG', 'date' => '06/03', 'pre_alert_qty' => 73, 'received_qty' => 73, 'remarks' => 'OK'],
-        ['name' => 'Frozen Squid Rings', 'uom' => 'KG', 'date' => '23/06', 'pre_alert_qty' => 225, 'received_qty' => 225, 'remarks' => 'OK'],
-        ['name' => 'Frozen Crab Meat', 'uom' => 'KG', 'date' => '06/10', 'pre_alert_qty' => 267, 'received_qty' => 267, 'remarks' => 'OK'],
+        ['name' => 'Frozen Prawns', 'uom' => 'Box', 'date' => '06/03', 'pre_alert_qty' => 73, 'received_qty' => 73, 'remarks' => 'OK'],
+        ['name' => 'Frozen Squid Rings', 'uom' => 'Box', 'date' => '23/06', 'pre_alert_qty' => 225, 'received_qty' => 225, 'remarks' => 'OK'],
+        ['name' => 'Frozen Crab Meat', 'uom' => 'Box', 'date' => '06/10', 'pre_alert_qty' => 267, 'received_qty' => 267, 'remarks' => 'OK'],
     ];
 
     // Dummy status logs

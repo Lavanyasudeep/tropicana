@@ -3,6 +3,7 @@
 namespace App\Helper;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\Master\General\Menu;
 use App\Models\RoleMenuPermission;
@@ -13,27 +14,43 @@ class MenuBuilder
     {
         $user = Auth::user();
        
-        if (!$user) {
-            return [];
-        }
+        if (!$user) return [];
+
+        $cacheKey = 'menu_for_user_' . $user->id;
         
         // Get role(s) of the user
         $roles = $user->roles->pluck('role_id')->toArray();
-
-        // Get menus accessible by user’s roles
-        $menuItems = Menu::with(['children' => function($q) use ($roles) {
-                            $q->whereHas('roleMenuPermissions', function($qq) use ($roles) {
-                                $qq->whereIn('role_id', $roles);
-                            })->orderBy('sort_order');
-                        }])
-                        ->whereHas('roleMenuPermissions', function($q) use ($roles) {
-                            $q->whereIn('role_id', $roles);
-                        })
-                        ->whereNull('parent_id')
-                        ->orderBy('sort_order')
-                        ->get();
         
-        return self::formatMenu($menuItems);
+        // Get menus accessible by user’s roles
+        // $menuItems = Menu::with(['children' => function($q) use ($roles) {
+        //                     $q->whereHas('roleMenuPermissions', function($qq) use ($roles) {
+        //                         $qq->whereIn('role_id', $roles);
+        //                     })->orderBy('sort_order');
+        //                 }])
+        //                 ->whereHas('roleMenuPermissions', function($q) use ($roles) {
+        //                     $q->whereIn('role_id', $roles);
+        //                 })
+        //                 ->whereNull('parent_id')
+        //                 ->orderBy('sort_order')
+        //                 ->get();
+        
+        return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($user) {
+                $roles = $user->roles->pluck('role_id')->toArray();
+
+                $menuItems = Menu::with([
+                                    'roleMenuPermissions',
+                                    'children.roleMenuPermissions'
+                                ])
+                                ->whereHas('roleMenuPermissions', function($q) use ($roles) {
+                                    $q->whereIn('role_id', $roles);
+                                })
+                                ->whereNull('parent_id')
+                                ->orderBy('sort_order')
+                                ->get();
+
+                return self::formatMenu($menuItems);
+            });
+        // return self::formatMenu($menuItems);
     }
 
     private static function formatMenu($menus)

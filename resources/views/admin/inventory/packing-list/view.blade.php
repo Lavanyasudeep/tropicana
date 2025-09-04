@@ -102,27 +102,33 @@
                 <tr>
                     <th>Item Name</th>
                     <th>UOM</th>
-                    <th>Quantity</th>
-                    <th>Net Weight (KG)</th>
-                    <th>Gross Weight (KG)</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Net Weight (KG)</th>
+                    <th class="text-right">Gross Weight (KG)</th>
+                    <th>Manufacturing Date</th>
+                    <th>Expiry Date</th>
                     <th>Remarks</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Frozen Prawns</td>
-                    <td>KG</td>
+                    <td>Box</td>
                     <td class="text-right">500</td>
                     <td class="text-right">500.00</td>
                     <td class="text-right">520.00</td>
+                    <td>10/12/2010</td>
+                    <td>01/04/2030</td>
                     <td>Packed in 20kg cartons</td>
                 </tr>
                 <tr>
                     <td>Frozen Squid Rings</td>
-                    <td>KG</td>
+                    <td>Box</td>
                     <td class="text-right">300</td>
                     <td class="text-right">300.00</td>
                     <td class="text-right">315.00</td>
+                    <td>12/08/2015</td>
+                    <td>10/12/2030</td>
                     <td>Packed in 15kg cartons</td>
                 </tr>
                 <tr>
@@ -131,6 +137,8 @@
                     <td class="text-right">200</td>
                     <td class="text-right">200.00</td>
                     <td class="text-right">210.00</td>
+                    <td>05/01/2010</td>
+                    <td>01/11/2015</td>
                     <td>Packed in 10kg cartons</td>
                 </tr>
             </tbody>

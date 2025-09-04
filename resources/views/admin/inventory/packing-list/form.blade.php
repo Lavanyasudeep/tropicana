@@ -130,6 +130,8 @@
                                                 <th>Quantity</th>
                                                 <th>UOM</th>
                                                 <th>Net Weight</th>
+                                                <th>Manufacturing Date</th>
+                                                <th>Expiry Date</th>
                                                 <th><button type="button" onclick="addRow()" class="btn btn-sm btn-success"><i class="fa fa-plus" ></i></button></th>   
                                             </tr>
                                         </thead>
@@ -141,6 +143,8 @@
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
@@ -150,6 +154,8 @@
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                             <tr>
@@ -159,6 +165,8 @@
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
                                                 <td><input class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
+                                                <td><input type="date" class="form-control" value=""></td>
                                                 <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></button></td>
                                             </tr>
                                         </tbody>
@@ -184,3 +192,29 @@
     </div>
 </div>
 @endsection
+@section('js')
+<script>
+let rowIdx = 3;
+
+function addRow() {
+    let table = document.querySelector("#packingListItemsTable tbody");
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `
+        <td>${rowIdx}</td>
+        <td><input class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
+        <td><input type="number" class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
+        <td><input class="form-control" value=""></td>
+        <td><input type="date" class="form-control" value=""></td>
+        <td><input type="date" class="form-control" value=""></td>
+        <td><button type="button" onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button></td>
+    `;
+    table.appendChild(newRow);
+    rowIdx++;
+}
+
+function removeRow(btn) {
+    btn.closest('tr').remove();
+}
+</script>

@@ -166,9 +166,9 @@ class SalesInvoiceController extends Controller
      */
     public function show(string $id)
     {
-        $invoice = SalesInvoice::with(['statusUpdates.creator', 'invoiceDetails'])->findOrFail($id);
+        // $invoice = SalesInvoice::with(['statusUpdates.creator', 'invoiceDetails'])->findOrFail($id);
 
-        return view('admin.sales.sales-invoice.view', compact('invoice'));
+        return view('admin.sales.sales-invoice.view');
     }
 
     /**

@@ -138,8 +138,8 @@
 
                 </script>
 
-                <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+                <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+                <!-- <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script> -->
 
                 <!-- JS -->
                 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>

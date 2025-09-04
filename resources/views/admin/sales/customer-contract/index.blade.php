@@ -116,6 +116,7 @@
                     <td>Monthly</td>
                     <td class="text-center">Active</td>
                     <td class="text-center">
+                        <a href="{{ route('admin.sales.customer-contract.print',1) }}" target="_blank" class="btn btn-sm btn-print"><i class="fas fa-print"></i></a>
                         <a href="#" class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></a>
                         <a href="#" class="btn btn-sm btn-view"><i class="fas fa-eye"></i></a>
                         <a href="#" class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></a>

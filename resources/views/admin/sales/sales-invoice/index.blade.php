@@ -94,7 +94,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Invoice No.</th>
+                    <th>Doc. No.</th>
                     <th>Date</th>
                     <th>Customer</th>
                     <th>Amount</th>
@@ -167,29 +167,105 @@ $(function () {
     /***** End : Advance Filter *****/
 
     let table = $('#invoiceTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: '{{ route("admin.sales.sales-invoice.index") }}',
-            data: function (d) {
-                let range = $('#fltrDateRangePicker').val();
-                if (range) {
-                    let dates = range.split(' - ');
-
-                    // Function to convert dd/mm/yyyy to yyyy-mm-dd
-                    function formatDate(dateStr) {
-                        let parts = dateStr.split('/');
-                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // yyyy-mm-dd
-                    }
-
-                    d.from_date = formatDate(dates[0]);
-                    d.to_date = formatDate(dates[1]);
-                }
-                d.customer_flt = $('#customerFlt').val();
-                d.quick_search = $('#fltrSearchBox').val();
-                d.status = $('#fltrStatus').val();
+        processing: false,
+        serverSide: false,
+        data: [
+            {
+            "DT_RowIndex": 1,
+            "doc_no": "INV-2025-001",
+            "doc_date": "02/08/2025",
+            "customer": { "customer_name": "Frozen Foods Ltd." },
+            "amount": "₹12,450.00",
+            "status": "Approved",
+            "action": `
+                    <a href="/admin/sales/sales-invoice/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/1/print" target="_blank" class="btn btn-sm btn-print" title="Print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/view/1" class="btn btn-primary btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+            "DT_RowIndex": 2,
+            "doc_no": "INV-2025-002",
+            "doc_date": "03/08/2025",
+            "customer": { "customer_name": "Arctic Warehousing Co." },
+            "amount": "₹8,720.00",
+            "status": "Pending",
+            "action": `
+                    <a href="/admin/sales/sales-invoice/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/1/print" target="_blank" class="btn btn-sm btn-print" title="Print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/view/1" class="btn btn-primary btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+            "DT_RowIndex": 3,
+            "doc_no": "INV-2025-003",
+            "doc_date": "04/08/2025",
+            "customer": { "customer_name": "ChillZone Logistics" },
+            "amount": "₹15,300.00",
+            "status": "Rejected",
+            "action": `
+                    <a href="/admin/sales/sales-invoice/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/1/print" target="_blank" class="btn btn-sm btn-print" title="Print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/view/1" class="btn btn-primary btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+            "DT_RowIndex": 4,
+            "doc_no": "INV-2025-004",
+            "doc_date": "05/08/2025",
+            "customer": { "customer_name": "Polar Ice Pvt. Ltd." },
+            "amount": "₹9,980.00",
+            "status": "Approved",
+            "action":  `
+                    <a href="/admin/inventory/sales-invoice/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/inventory/sales-invoice/1/print" target="_blank" class="btn btn-sm btn-print" title="Print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="/admin/inventory/sales-invoice/1/view" class="btn btn-primary btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
+            },
+            {
+            "DT_RowIndex": 5,
+            "doc_no": "INV-2025-005",
+            "doc_date": "06/08/2025",
+            "customer": { "customer_name": "Glacier Goods Inc." },
+            "amount": "₹11,200.00",
+            "status": "Pending",
+            "action": `
+                    <a href="/admin/sales/sales-invoice/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/1/print" target="_blank" class="btn btn-sm btn-print" title="Print">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a href="/admin/sales/sales-invoice/view/1" class="btn btn-primary btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                `
             }
-        },
+        ],
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex' },
             { data: 'doc_no', name: 'doc_no' },

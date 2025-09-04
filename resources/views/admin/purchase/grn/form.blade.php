@@ -156,6 +156,8 @@
                                     <th>Lot</th>
                                     <th>UOM</th>
                                     <th>Qty</th>
+                                    <th>Manufacturing Date</th>
+                                    <th>Expiry Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,8 +193,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dock_in_time: "10:15",
             remarks: "All products delivered frozen and sealed",
             items: [
-                { product: "Frozen Prawns 500g", lot: "BCH-25-001", uom: "Boxes", qty: 60 },
-                { product: "Frozen Squid Rings 1kg", lot: "BCH-25-002", uom: "Boxes", qty: 40 }
+                { product: "Frozen Prawns 500g", lot: "BCH-25-001", uom: "Boxes", qty: 60, man_date: "10/12/2025", exp_date: "11/01/2026" },
+                { product: "Frozen Squid Rings 1kg", lot: "BCH-25-002", uom: "Boxes", qty: 40, man_date: "05/01/2025", exp_date: "04/12/2025" }
             ]
         },
         "SUP002": {
@@ -209,8 +211,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dock_in_time: "11:20",
             remarks: "Requires QC check before storage",
             items: [
-                { product: "Frozen Tuna Steaks 2kg", lot: "BCH-25-010", uom: "Boxes", qty: 50 },
-                { product: "Frozen Lobster Tails 1kg", lot: "BCH-25-011", uom: "Boxes", qty: 50 }
+                { product: "Frozen Tuna Steaks 2kg", lot: "BCH-25-010", uom: "Boxes", qty: 50, man_date: "23/06/2025", exp_date: "30/05/2026" },
+                { product: "Frozen Lobster Tails 1kg", lot: "BCH-25-011", uom: "Boxes", qty: 50, man_date: "10/07/2025", exp_date: "04/12/2025" }
             ]
         }
     };
@@ -265,6 +267,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${item.lot}</td>
                     <td>${item.uom}</td>
                     <td class="text-right">${item.qty}</td>
+                    <td>${item.man_date}</td>
+                    <td>${item.exp_date}</td>
                 </tr>
             `;
         });

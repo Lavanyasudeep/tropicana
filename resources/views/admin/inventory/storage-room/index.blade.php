@@ -37,7 +37,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <label>Rooms :</label>
+                        <label>Chamber :</label>
                         <ul class="nav nav-tabs d-inline-flex" role="tablist" id="chamberTabs">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#ca" role="tab">CR-101</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cb" role="tab">CR-102</a></li>
@@ -223,7 +223,7 @@ function renderRacks() {
   racks.forEach(rackId => {
     const rackEl = document.createElement('div');
     rackEl.className = 'rack';
-    rackEl.innerHTML = `<div class="rack-header">Chamber: ${rackId}</div>`;
+    rackEl.innerHTML = `<div class="rack-header">Rack: ${rackId}</div>`;
     const body = document.createElement('div');
     body.className = 'rack-body';
 

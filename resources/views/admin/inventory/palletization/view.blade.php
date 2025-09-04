@@ -15,8 +15,8 @@ $pallet = [
         'room_no'           => 'R-102',
         'dock_no'           => 'D-07',
         'product_code'      => 'FRZ-001',
-        'product'           => 'Frozen Prawns 500g',
-        'lot'               => 'BCH-25-001',
+        'product'           => 'Ice Cream Tubs - 35cmx35cmx20cm',
+        'lot'               => 'LOT-PR-001',
         'size'              => '500g',
         'package_type'      => 'Carton',
         'no_of_packages'    => 60,
@@ -35,8 +35,8 @@ $pallet = [
         'room_no'           => 'R-102',
         'dock_no'           => 'D-07',
         'product_code'      => 'FRZ-002',
-        'product'           => 'Frozen Squid Rings 1kg',
-        'lot'               => 'BCH-25-002',
+        'product'           => 'Paneer Blocks 5kg - 40cmx30cmx25cm',
+        'lot'               => 'LOT-SQ-002',
         'size'              => '1kg',
         'package_type'      => 'Carton',
         'no_of_packages'    => 40,
@@ -151,9 +151,9 @@ $pallet = [
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>FRZ-001</td>
-                            <td>Frozen Prawns 500g</td>
-                            <td>BCH-25-001</td>
+                            <td class="text-left">FRZ-001</td>
+                            <td class="text-left">Ice Cream Tubs - 35cmx35cmx20cm</td>
+                            <td>LOT-PR-001</td>
                             <td>15/02/2026</td>
                             <td class="text-right">60</td>
                             <td>Boxes</td>
@@ -161,9 +161,9 @@ $pallet = [
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>FRZ-002</td>
-                            <td>Frozen Squid Rings 1kg</td>
-                            <td>BCH-25-002</td>
+                            <td class="text-left">FRZ-002</td>
+                            <td class="text-left">Paneer Blocks 5kg - 40cmx30cmx25cm</td>
+                            <td>LOT-SQ-002</td>
                             <td>20/03/2026</td>
                             <td class="text-right">40</td>
                             <td>Boxes</td>
@@ -261,8 +261,8 @@ $pallet = [
                         @foreach($pallet as $i => $item)
                             <tr>
                                 <td>{{ $i + 1 }}</td>
-                                <td>{{ $item['product_code'] }}</td>
-                                <td>{{ $item['product'] }}</td>
+                                <td class="text-left">{{ $item['product_code'] }}</td>
+                                <td class="text-left">{{ $item['product'] }}</td>
                                 <td>{{ $item['lot'] }}</td>
                                 <td>{{ $item['expiry_date'] }}</td>
                                 <td class="text-right">{{ $item['no_of_packages'] }}</td>

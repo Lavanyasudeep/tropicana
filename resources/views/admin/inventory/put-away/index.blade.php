@@ -12,6 +12,49 @@
     <h3>Put Away</h3>
 </div>
 
+<!-- Advance Filter -->
+<div class="page-advance-filter" id="putAwayAdvFilterPanel" >
+    <form id="putAwayAdvFilterForm" >
+        <div class="row">
+            <div class="col-md-3" >
+
+            </div>
+            <div class="col-md-3 btn-group" role="group" >
+                <button type="submit" class="btn btn-success" id="applyAdvFilter" >Filter</button>
+                <button type="button" class="btn btn-secondary" id="cancelFltrBtn" >Cancel</button>
+                <button type="button" class="btn btn-light" id="closeFltrBtn" >Close</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Quick Filter -->
+<div class="page-quick-filter">
+    <div class="row">
+        <div class="col-md-1 fltr-title">
+            <span>FILTER BY</span>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text pq-fltr-icon" ><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <select id="clientFlt" class="form-control pq-fltr-select">
+                    <option value="">- All Customer -</option>
+                    @foreach($clients as $client)
+                        <option value="{{ $client->client_id }}">{{ $client->client_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <input type="button" id="fltrSearchBtn" value="Search" class="btn btn-quick-filter-search" />
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     <div>
@@ -36,7 +79,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Pallets In Ante Room</strong>
+                        <strong>Pallets</strong>
                         <input id="palletSearch" class="form-control form-control-sm mt-2" placeholder="Search pallet...">
                     </div>
                     <div class="card-body pallet-list" id="palletList"></div>
@@ -47,7 +90,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <label>Rooms :</label>
+                        <label>Chamber :</label>
                         <ul class="nav nav-tabs d-inline-flex" role="tablist" id="chamberTabs">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#ca" role="tab">CR-101</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cb" role="tab">CR-102</a></li>
@@ -245,7 +288,7 @@ function renderRacks() {
     racks.forEach(rackId => {
         const rackEl = document.createElement('div');
         rackEl.className = 'rack';
-        rackEl.innerHTML = `<div class="rack-header">Chamber: ${rackId}</div>`;
+        rackEl.innerHTML = `<div class="rack-header">Rack: ${rackId}</div>`;
         const body = document.createElement('div');
         body.className = 'rack-body';
 
