@@ -14,10 +14,7 @@
                 <img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Company Logo">
             </td>
             <td style="text-align:left;">
-                <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                <p>Website: www.johnsonchill.com</p>
+                @include('common.print-company-address')
             </td>
         </tr>
         <tr>
@@ -33,7 +30,7 @@
             <strong>Doc No. #:</strong> GPI‑25‑00001<br><br>
             <strong>Date:</strong> 25/08/2025<br><br>
             <strong>Time In:</strong> 14:30<br><br>
-            <strong>Customer:</strong> Blue Ocean Seafood Traders<br>
+            <strong>Customer:</strong> Australian Foods India Pvt. Ltd.<br>
             <strong>Pre‑Alert #:</strong> PA‑25‑00001<br>
             <strong>Invoice No #:</strong> INV‑25‑0010<br>
         </td>
@@ -72,9 +69,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr><td>1</td><td class="txt-left">Frozen Prawns</td><td class="txt-left">KG</td><td class="txt-left">06/03</td><td class="txt-center">73</td><td class="txt-center">73</td><td class="txt-left">OK</td></tr>
-        <tr><td>2</td><td class="txt-left">Frozen Squid Rings</td><td class="txt-left">KG</td><td class="txt-left">23/06</td><td class="txt-center">225</td><td class="txt-center">225</td><td class="txt-left">OK</td></tr>
-        <tr><td>3</td><td class="txt-left">Frozen Crab Meat</td><td class="txt-left">KG</td><td class="txt-left">06/10</td><td class="txt-center">267</td><td class="txt-center">267</td><td class="txt-left">OK</td></tr>
+        <tr><td>1</td><td class="txt-left">Frozen Peas 5kg</td><td class="txt-left">Box</td><td class="txt-left">06/03</td><td class="txt-center">73</td><td class="txt-center">73</td><td class="txt-left">OK</td></tr>
+        <tr><td>2</td><td class="txt-left">Chicken Nuggets 10kg</td><td class="txt-left">Bag</td><td class="txt-left">23/06</td><td class="txt-center">225</td><td class="txt-center">225</td><td class="txt-left">OK</td></tr>
+        <tr><td>3</td><td class="txt-left">Fish Fillet 2kg</td><td class="txt-left">Box</td><td class="txt-left">06/10</td><td class="txt-center">267</td><td class="txt-center">267</td><td class="txt-left">OK</td></tr>
         <tr style="font-weight:bold;">
             <td colspan="3"></td>
             <td class="txt-left">Total</td>

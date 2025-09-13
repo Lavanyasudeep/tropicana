@@ -11,10 +11,7 @@
             <tr>
                 <td style="text-align: left;"><img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Kern Logo"></td>
                 <td style="text-align: left;">
-                    <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                    <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                    <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                    <p>Website: www.johnsonchill.com</p>
+                    @include('common.print-company-address')
                 </td>
             </tr>
             <tr></tr>
@@ -52,11 +49,9 @@
                 <th class="txt-left" >Product</th>
                 <th class="txt-left" >Lot No.</th>
                 <th class="txt-center" >Pkg Type</th>
-                <th class="txt-center" >Size</th>
-                <th class="txt-center" >Slot</th>
+                <th class="txt-center" >Location</th>
                 <th class="txt-center" >Pallet</th>
-                <th class="txt-center" >G.W/Pkg</th>
-                <th class="txt-center" >N.W/Pkg</th>
+                <th class="txt-center" >Item Numbers per Package</th>
                 <th class="txt-center" >G.W. Total</th>
                 <th class="txt-center" >N.W. Total</th>
                 <th class="txt-center" >Qty</th>
@@ -64,27 +59,23 @@
         </thead>
         <tbody>
             @php
-                $tot_qty = $tot_gw_per_package = $tot_nw_per_package = $tot_gw_with_pallet = $tot_nw_kg = $tot_pallet_qty = 0;
+                $tot_qty = $tot_gw_with_pallet = $tot_nw_kg = $tot_pallet_qty = 0;
             @endphp
             @foreach($outwardDetails as $k => $v)
                 <tr>
                     <td>{{ $k + 1 }}</td>
                     <td class="txt-left">{{ $v->pickListDetail->packingListDetail->cargo_description }}</td>
                     <td class="txt-left">{{ $v->pickListDetail->packingListDetail->lot_no }}</td>
-                    <td class="txt-center">{{ $v->pickListDetail->packingListDetail->packageType?->description }}</td>
+                    <td class="txt-center">{{ $v->pickListDetail->packingListDetail->packageType? $v->pickListDetail->packingListDetail->packageType->description : 'Box' }}</td>
+                    <td class="txt-center">{{ $v->pickListDetail->pallet->pallet_position }}</td>
+                    <td class="txt-center">{{ $v->pickListDetail->pallet->pallet_no }}</td>
                     <td class="txt-center">{{ $v->pickListDetail->packingListDetail->item_size_per_package }}</td>
-                    <td class="txt-center">{{ $v->pickListDetail->room->name }}-{{ $v->pickListDetail->rack->name }}-{{ $v->pickListDetail->slot->level_no }}-{{ $v->pickListDetail->slot->depth_no }}</td>
-                    <td class="txt-center">{{ $v->pickListDetail->pallet->name }}</td>
-                    <td class="txt-center">{{ $v->pickListDetail->packingListDetail->gw_per_package }}</td>
-                    <td class="txt-center">{{ $v->pickListDetail->packingListDetail->nw_per_package }}</td>
                     <td class="txt-center">{{ $v->pickListDetail->packingListDetail->gw_with_pallet }}</td>
                     <td class="txt-center">{{ $v->pickListDetail->packingListDetail->nw_kg }}</td>
                     <td class="txt-center">{{ $v->quantity }}</td>
                 </tr>
                 @php
                     $tot_qty += $v->quantity;
-                    $tot_gw_per_package += $v->pickListDetail->packingListDetail->gw_per_package;
-                    $tot_nw_per_package += $v->pickListDetail->packingListDetail->nw_per_package;
                     $tot_gw_with_pallet += $v->pickListDetail->packingListDetail->gw_with_pallet;
                     $tot_nw_kg += $v->pickListDetail->packingListDetail->nw_kg;
                     $tot_pallet_qty += $outward->pallet_qty ?? 0;
@@ -92,8 +83,6 @@
             @endforeach
             <tr style="font-weight: bold;" >
                 <td class="txt-right" colspan="7" >Total</td>
-                <td class="txt-center">{{ $tot_gw_per_package }}</td>
-                <td class="txt-center">{{ $tot_nw_per_package }}</td>
                 <td class="txt-center">{{ $tot_gw_with_pallet }}</td>
                 <td class="txt-center">{{ $tot_nw_kg }}</td>
                 <td class="txt-center">{{ $tot_qty }}</td>

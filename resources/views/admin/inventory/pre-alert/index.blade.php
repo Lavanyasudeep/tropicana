@@ -80,7 +80,7 @@
                 <tr>
                     <td>PA‑25‑00001</td>
                     <td>25/08/2025</td>
-                    <td>ABC Cold Storage Ltd.</td>
+                    <td>Australian Foods India Pvt. Ltd.</td>
                     <td>KL‑07‑AB‑1234</td>
                     <td>Created</td>
                     <td>
@@ -92,7 +92,7 @@
                 <tr>
                     <td>PA‑25‑00002</td>
                     <td>26/08/2025</td>
-                    <td>XYZ Foods Pvt. Ltd.</td>
+                    <td>AAA International</td>
                     <td>KL‑08‑CD‑5678</td>
                     <td>Approved</td>
                     <td>

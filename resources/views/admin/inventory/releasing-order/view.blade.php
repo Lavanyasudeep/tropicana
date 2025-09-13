@@ -50,7 +50,7 @@
                             <div class="pform-row"><div class="pform-label">Document Date</div><div class="pform-value">25/08/2025</div></div>
                             <div class="pform-row"><div class="pform-label">Date of Releasing</div><div class="pform-value">25/10/2025</div></div>
                             <div class="pform-row"><div class="pform-label">Ref. No. #</div><div class="pform-value">PQ‑25‑00045</div></div>
-                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">ABC Cold Storage Ltd.</div></div>
+                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">Australian Foods India Pvt. Ltd.</div></div>
                         </div>
                     </div>
                     <!-- Panel 2 -->
@@ -82,8 +82,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Frozen Prawns</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td></tr>
-                        <tr><td>Frozen Green Peas</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td></tr>
+                        <tr><td>Frozen Peas 5kg</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td></tr>
+                        <tr><td>Mixed Veg 1kg</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td></tr>
                     </tbody>
                 </table>
             </div>

@@ -11,10 +11,7 @@
             <tr>
                 <td style="text-align: left;"><img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Kern Logo"></td>
                 <td style="text-align: left;">
-                    <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                    <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                    <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                    <p>Website: www.johnsonchill.com</p>
+                    @include('common.print-company-address')
                 </td>
             </tr>
             <tr></tr>

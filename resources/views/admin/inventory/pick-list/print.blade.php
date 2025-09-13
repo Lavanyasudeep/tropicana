@@ -11,10 +11,7 @@
             <tr>
                 <td style="text-align: left;"><img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Kern Logo"></td>
                 <td style="text-align: left;">
-                    <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                    <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                    <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                    <p>Website: www.johnsonchill.com</p>
+                    @include('common.print-company-address')
                 </td>
             </tr>
             <tr></tr>
@@ -52,13 +49,13 @@
                 <th class="txt-left" >Product</th>
                 <th class="txt-left" >Lot No.</th>
                 <th>Pkg Type</th>
+                <th>Pallet Location</th>
+                <th>Pallet</th>
                 <th>Size</th>
                 <th>G.W/Pkg</th>
                 <th>N.W/Pkg</th>
                 <th>G.W. Total</th>
                 <th>N.W. Total</th>
-                <th class="txt-left">Slot</th>
-                <!-- <th>Pallet</th> -->
                 <th>Qty</th>
             </tr>
         </thead>
@@ -72,13 +69,13 @@
                     <td class="txt-left">{{ $v->packingListDetail->cargo_description }}</td>
                     <td class="txt-left">{{ $v->packingListDetail->lot_no }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->packageType?->description }}</td>
+                    <td class="txt-left">{{ $v->pallet->pallet_position }}</td>
+                    <td>{{ $v->pallet->pallet_no }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->item_size_per_package }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->gw_per_package }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->nw_per_package }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->gw_with_pallet }}</td>
                     <td class="txt-center">{{ $v->packingListDetail->nw_kg }}</td>
-                    <td class="txt-left">{{ $v->room->name }}-{{ $v->rack->name }}-{{ $v->slot->level_no ?? '' }}-{{ $v->slot->depth_no ?? '' }}</td>
-                    <!-- <td>{{ $v->pallet->name }}</td> -->
                     <td class="txt-center">{{ $v->quantity }}</td>
                 </tr>
                 @php
@@ -90,12 +87,11 @@
                 @endphp
             @endforeach
             <tr style="font-weight: bold;">
-                <td class="txt-right" colspan="5">Total</td>
+                <td class="txt-right" colspan="7">Total</td>
                 <td class="txt-center">{{ $tot_gw_per_package }}</td>
                 <td class="txt-center">{{ $tot_nw_per_package }}</td>
                 <td class="txt-center">{{ $tot_gw_with_pallet }}</td>
                 <td class="txt-center">{{ $tot_nw_kg }}</td>
-                <td></td>
                 <td class="txt-center">{{ $tot_qty }}</td>
             </tr>
         </tbody>

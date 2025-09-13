@@ -260,7 +260,7 @@
                 {
                     doc_no: "GRN-25-00001",
                     doc_date: "2025-08-26",
-                    customer: "Ocean Fresh Exports Pvt Ltd",
+                    customer: "Australian Foods India Pvt. Ltd.",
                     invoice_no: "INV-2501",
                     vehicle_no: "KL-07-AB-1234",
                     gatepass_no: "GP-1001",
@@ -282,7 +282,7 @@
                 {
                     doc_no: "GRN-25-00002",
                     doc_date: "2025-08-25",
-                    customer: "Fresh Harvest Distributors",
+                    customer: "AAA International",
                     invoice_no: "INV-2502",
                     vehicle_no: "KL-07-CD-4521",
                     gatepass_no: "GP-1002",
@@ -304,7 +304,7 @@
                 {
                     doc_no: "GRN-25-00003",
                     doc_date: "2025-08-24",
-                    customer: "Bluewave Seafood Traders",
+                    customer: "Chelur Foods",
                     invoice_no: "INV-2503",
                     vehicle_no: "KL-55-EF-9988",
                     gatepass_no: "GP-1003",

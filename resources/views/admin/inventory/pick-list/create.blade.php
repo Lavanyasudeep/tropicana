@@ -18,7 +18,7 @@
 
 <div class="card page-form page-form-add" >
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.inventory.pick-list.store') }}">
+        <form method="POST" action="#">
          @csrf
             <div class="row" >
                 <!-- Panel 1 -->
@@ -34,6 +34,17 @@
                             <div class="pform-label" >Doc. Date</div>
                             <div class="pform-value" >
                                 <input type="date" id="doc_date" name="doc_date" value="@php echo date('Y-m-d') @endphp" >
+                            </div>
+                        </div>
+                        <div class="pform-row">
+                            <div class="pform-label">Releasing Order #</div>
+                            <div class="pform-value">
+                                <select name="pre_alert_id" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option value="101" >RO‑25‑0001</option>
+                                    <option value="102">RO‑25‑0002</option>
+                                    <option value="103">RO‑25‑0003</option>
+                                </select>
                             </div>
                         </div>
                         <div class="pform-row" >
@@ -56,13 +67,14 @@
                 <div class="col-md-6" >
                     <div class="pform-panel" style="min-height:195px;" >
                         <div class="pform-row" >
-                            <div class="pform-label" >Client</div>
+                            <div class="pform-label" >Customer</div>
                             <div class="pform-value" >
-                                <select name="client_id" id="client_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($clients as $client)
-                                        <option value="{{ $client->client_id }}" selected >{{ $client->client_name }}</option>
-                                    @endforeach
+                                <select name="customer_id" id="customer_id" class="form-control">
+                                    <option value="">-- None (Create New) --</option>
+                                    <option value="4">Australian Foods India Pvt. Ltd.</option>
+                                    <option value="5">AAA International</option>
+                                    <option value="6">Chelur Foods</option>
+                                    <option value="7">PJJ Fruits</option>
                                 </select>
                             </div>
                         </div>
@@ -139,40 +151,28 @@
                         <table class="page-list-table" id="pickListCreateTable" >
                             <thead>
                                 <tr>
-                                    <th>Pick</th>
-                                    <!-- <th>Room</th>
-                                    <th>Rack</th> -->
-                                    <th>Slot</th>
-                                    <th>Pallet</th>
                                     <th>Product</th>
                                     <th>Lot No.</th>
-                                    <!-- <th>Client Name</th> -->
-                                    <th>No. of Packages</th>
-                                    <th>Selected Qty</th>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <!-- <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th> -->
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <!-- <th><input type="text" class="form-control column-search" placeholder="Search Client"></th> -->
-                                    <th></th>
-                                    <th></th>
+                                    <th>Expiry Date</th>
+                                    <th>Pallet</th>
+                                    <th>Location</th>
+                                    <th>Pallet-in Date</th>
+                                    <th>UOM</th>
+                                    <th>Total Qty</th>
+                                    <th>Requested Qty</th>
+                                    <th>Picked Qty</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                             <tfoot>
                                 <tr class="total-row">
-                                    <th colspan="6" class="text-right" >Total Selected :</th>
+                                    <th colspan="9" class="text-right" >Total Picked :</th>
                                     <th id="total_picked_qty" class="text-center"></th>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class="mt-3">
-                            <button type="submit" class="btn btn-save btn-sm float-right" id="submitPickList" disabled >Save</button>
+                            <button type="submit" class="btn btn-save btn-sm float-right">Save</button>
                         </div>
                     </div>
                 </div>
@@ -189,180 +189,101 @@
 
 @section('js')
 <script>
-    $(document).ready(function () {
-        let pickedTotal = 0;
-        let totalAllowed = 0;
+const releasingOrders = {
+    "101": {
+        customer_id: "6", // Chelur Foods
+        contact_name: "Mr. Rajan Nair",
+        contact_address: "Chelur Industrial Estate, Kochi, Kerala",
+        total_qty: 250,
+        items: [
+            { product: "Frozen Peas 5kg", lot: "LOT001", expiry: "2026-02-01", pallet: "PAL-101", location: "WU0001-R002-B2-R5-L1-D2", pallet_in: "2025-08-01", uom: "Bag", total_qty: 100, requested_qty: 80, picked_qty: 80 },
+            { product: "Chicken Nuggets 10kg", lot: "LOT002", expiry: "2026-01-15", pallet: "PAL-102", location: "WU0001-R001-B1-R3-L2-D1", pallet_in: "2025-07-15", uom: "Box", total_qty: 150, requested_qty: 120, picked_qty: 120 }
+        ]
+    },
+    "102": {
+        customer_id: "4", // Australian Foods India Pvt. Ltd.
+        contact_name: "Ms. Anita Sharma",
+        contact_address: "Export Zone, Mumbai, Maharashtra",
+        total_qty: 180,
+        items: [
+            { product: "Fish Fillet 2kg", lot: "LOT010", expiry: "2026-01-20", pallet: "PAL-201", location: "WU0001-R003-B1-R1-L3-D4", pallet_in: "2025-06-20", uom: "Pack", total_qty: 80, requested_qty: 60, picked_qty: 60 },
+            { product: "Frozen Momos 2kg", lot: "LOT015", expiry: "2026-01-22", pallet: "PAL-202", location: "WU0001-R004-B2-R1-L4-D1", pallet_in: "2025-07-22", uom: "Box", total_qty: 100, requested_qty: 90, picked_qty: 90 }
+        ]
+    },
+    "103": {
+        customer_id: "5", // AAA International
+        contact_name: "Mr. Faizal Khan",
+        contact_address: "Sector 12, Bengaluru, Karnataka",
+        total_qty: 200,
+        items: [
+            { product: "Frozen French Fries 5kg", lot: "LOT013", expiry: "2026-02-03", pallet: "PAL-301", location: "WU0001-R001-B1-R8-L2-D3", pallet_in: "2025-08-03", uom: "Bag", total_qty: 120, requested_qty: 100, picked_qty: 100 },
+            { product: "Frozen Biryani Packs 1kg", lot: "LOT014", expiry: "2026-01-28", pallet: "PAL-302", location: "WU0001-R002-B1-R6-L1-D4", pallet_in: "2025-07-28", uom: "Pack", total_qty: 80, requested_qty: 70, picked_qty: 70 }
+        ]
+    }
+};
 
-        let table = $('#pickListCreateTable').DataTable({
-            processing: true,
-            serverSide: true,
-            searching: true,
-            lengthMenu: [10, 20, 50, 100],
-            pageLength: 20,
-            ajax: {
-                url: '{{ route("admin.inventory.pick-list.create") }}',
-                data: function (d) {
-                    d.client_id = $('#client_id').val(); // pass client_id to server
-                }
-            },
-            language: {
-                emptyTable: "Please select a client to display data."
-            },
-            columns: [
-                { data: 'pick', name: 'pick', width: '5%', orderable: false, searchable: false },
-                // { data: 'room.name', name: 'room.name', width: '10%' },
-                // { data: 'rack.name', name: 'rack.name', width: '10%' },
-                // { data: 'slot.name', name: 'slot.name', width: '10%' },
-                { data: 'slot_position', name: 'slot_position', width: '10%' },
-                { data: 'pallet.pallet_no', name: 'pallet.pallet_no', width: '10%' },
-                { data: 'product_name', name: 'product_name', width: '25%' },
-                { data: 'batch_no', name: 'batch_no', width: '30%' },
-                { data: 'available_qty', name: 'available_qty', width: '10%' },
-                {
-                    data: null,
-                    orderable: false,
-                    searchable: false,
-                    defaultContent: '',
-                    className: 'pick-qty',
-                    render: function () {
-                        return '<input type="text" class="form-control text-center selected-qty" min="0" value="0" data-prev="0" readonly >';
-                    }
-                }
-            ],
-            columnDefs: [
-                {
-                    targets: [0, 1, 2, 4, 5],
-                    className: 'text-center'
-                }
-            ],
-            order: [[0, 'desc']],
-            initComplete: function () {
-                // optional: only clear on initial load
-                // table.clear().draw();
-            }
-        });
+let pickListTable;
 
-        $('#pickListCreateTable thead').on('keyup change', '.column-search', function () {
-            let colIndex = $(this).parent().index();
-            table.column(colIndex).search(this.value).draw();
-        });
-
-        $(document).on('input', '#total_qty', function () {
-            totalAllowed = parseInt($(this).val()) || 0;
-            pickedTotal = 0;
-            $('.pick-check').prop('checked', false).prop('disabled', false);
-            $('.selected-qty').val(0).prop('disabled', true);
-            $('#submitPickList').prop('disabled', true);
-        });
-
-        $(document).on('change', '.pick-check', function () {
-            const row = $(this).closest('tr');
-            const packageQty = parseInt($(this).data('package-qty')) || 0;
-
-            // if ($(this).is(':checked')) {
-            //     const remaining = totalAllowed - pickedTotal;
-            //     const assignQty = Math.min(remaining, packageQty);
-            //     row.find('.selected-qty').val(assignQty).prop('disabled', false).data('prev', assignQty);
-            //     pickedTotal += assignQty;
-            // } else {
-            //     const prevQty = parseInt(row.find('.selected-qty').val()) || 0;
-            //     pickedTotal -= prevQty;
-            //     row.find('.selected-qty').val(0).prop('disabled', true).data('prev', 0);
-            // }
-            if($(this).is(':checked'))
-                row.find('.selected-qty').val(packageQty);
-            else
-                row.find('.selected-qty').val('0');
-
-            //updateCheckboxStates();
-            checkSubmitEnabled();
-        });
-
-        // $(document).on('input', '.selected-qty', function () {
-        //     const input = $(this);
-        //     const newVal = parseInt(input.val()) || 0;
-        //     const prevVal = parseInt(input.data('prev')) || 0;
-        //     const row = input.closest('tr');
-        //     const maxVal = parseInt(row.find('.pick-check').data('package-qty')) || 0;
-
-        //     // Limit to max available per pallet
-        //     if (newVal > maxVal) {
-        //         input.val(maxVal);
-        //         pickedTotal += (maxVal - prevVal);
-        //     } else {
-        //         pickedTotal += (newVal - prevVal);
-        //     }
-
-        //     input.data('prev', newVal);
-        //     //updateCheckboxStates();
-        //     checkSubmitEnabled();
-        // });
-
-        $('#submitPickList').on('click', function (e) {
-            // Remove previous hidden fields
-            $('form').find('.dynamic-hidden').remove();
-
-            let index = 0;
-
-            $('#pickListCreateTable tbody tr').each(function () {
-                const checkbox = $(this).find('.pick-check');
-                const qtyInput = $(this).find('.selected-qty');
-
-                if (checkbox.is(':checked')) {
-                    const packingListDtlId = checkbox.data('packing-list-detail-id');
-                    const palletId = checkbox.data('pallet-id');
-                    const qty = qtyInput.val();
-
-                    $('form').append(`<input type="hidden" name="selected_items[${index}][pallet_id]" value="${palletId}" class="dynamic-hidden">`);
-                    $('form').append(`<input type="hidden" name="selected_items[${index}][packing_list_detail_id]" value="${packingListDtlId}" class="dynamic-hidden">`);
-                    $('form').append(`<input type="hidden" name="selected_items[${index}][pick_qty]" value="${qty}" class="dynamic-hidden">`);
-                    index++;
-                }
-            });
-        });
-
-        function updateCheckboxStates() {
-            $('.pick-check').each(function () {
-                const row = $(this).closest('tr');
-                const packageQty = parseInt($(this).data('package-qty')) || 0;
-                const input = row.find('.selected-qty');
-                const remaining = totalAllowed - pickedTotal;
-
-                if (!$(this).is(':checked')) {
-                    if (remaining <= 0) {
-                        $(this).prop('disabled', true);
-                    } else {
-                        $(this).prop('disabled', false);
-                    }
-                } else {
-                    input.prop('disabled', false);
-                }
-            });
-        }
-
-        function checkSubmitEnabled() {
-            var totQty = 0;
-            $('.pick-check').each(function () {
-                if ($(this).is(':checked')) {
-                    totQty += parseFloat($(this).data('package-qty'));
-                }
-            });
-            $('#total_qty').val(totQty);
-            $('#total_picked_qty').text(totQty);
-
-            if(totQty>0)
-                $('#submitPickList').prop('disabled', false);
-            else
-                $('#submitPickList').prop('disabled', true);
-            //$('#submitPickList').prop('disabled', pickedTotal <= 0 || pickedTotal > totalAllowed || pickedTotal < totalAllowed);
-            //$('#submitPickList').prop('disabled', pickedTotal <= 0);
-        }
-
-        // On client change, reload table
-        $('#client_id').on('change', function () {
-            table.ajax.reload();
-        });
-
+$(document).ready(function () {
+    pickListTable = $('#pickListCreateTable').DataTable({
+        paging: false,
+        searching: false,
+        ordering: true,
+        info: false
     });
+
+    $('#pickListCreateTable').on('input', '.picked-qty-input', function () {
+        let total = 0;
+        $('.picked-qty-input').each(function () {
+            total += parseInt($(this).val()) || 0;
+        });
+        $('#total_picked_qty').text(total);
+    });
+
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const roSelect = document.querySelector('select[name="pre_alert_id"]');
+
+    roSelect.addEventListener('change', function () {
+        const selectedId = this.value;
+        const data = releasingOrders[selectedId];
+
+        if (!data) return;
+
+        // Set customer info
+        document.getElementById('customer_id').value = data.customer_id;
+        document.getElementById('contact_name').value = data.contact_name;
+        document.querySelector('textarea[name="contact_address"]').value = data.contact_address;
+        document.getElementById('total_qty').value = data.total_qty;
+
+        // Clear and repopulate DataTable
+        pickListTable.clear();
+
+        let totalPicked = 0;
+
+        data.items.forEach((item, index) => {
+            totalPicked += item.picked_qty;
+
+            pickListTable.row.add([
+                item.product,
+                item.lot,
+                item.expiry,
+                item.pallet,
+                item.location,
+                item.pallet_in,
+                item.uom,
+                item.total_qty,
+                item.requested_qty,
+                `<input type="number" class="form-control picked-qty-input" value="${item.picked_qty}" min="0" data-index="${index}">`
+            ]);
+        });
+
+        pickListTable.draw();
+
+        document.getElementById('total_picked_qty').textContent = totalPicked;
+    });
+});
+
 </script>
 @stop

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Inventory\GatePassController;
 use App\Http\Controllers\Admin\Inventory\GatePassInController;
 use App\Http\Controllers\Admin\Inventory\TemperatureCheckController;
 use App\Http\Controllers\Admin\Inventory\PalletizationController;
+use App\Http\Controllers\Admin\Inventory\SlottingController;
 use App\Http\Controllers\Admin\Inventory\PutAwayController;
 use App\Http\Controllers\Admin\Inventory\ReleasingOrderController;
 use App\Http\Controllers\Admin\Inventory\VehPreCoolingInspCheckController;
@@ -57,6 +58,7 @@ use App\Http\Controllers\Admin\Master\General\CompanyController;
 use App\Http\Controllers\Admin\Master\General\BranchController;
 use App\Http\Controllers\Admin\Master\General\MenuController;
 use App\Http\Controllers\Admin\Master\General\RoleController;
+use App\Http\Controllers\Admin\Master\General\LocationController;
 
 use App\Http\Controllers\Admin\Master\Purchase\SupplierController;
 
@@ -298,6 +300,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
                 Route::post('/toggle-status', [TaxController::class, 'toggleStatus'])->name('toggle-status');
             });
 
+            Route::group(['prefix' => 'location', 'as' => 'location.'], function() {
+                Route::get('/', [LocationController::class, 'index'])->name('index');
+                Route::post('/store', [LocationController::class, 'store'])->name('store');
+                Route::post('/update/{id}', [LocationController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [LocationController::class, 'destroy'])->name('destroy');
+                Route::post('/toggle-status', [LocationController::class, 'toggleStatus'])->name('toggle-status');
+            });
+
             Route::group(['prefix' => 'unit', 'as' => 'unit.'], function() {
                 Route::get('/', [UnitController::class, 'index'])->name('index');
                 Route::post('/store', [UnitController::class, 'store'])->name('store');
@@ -459,9 +469,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
             Route::get('/{id}/print', [PalletizationController::class, 'print'])->name('print');
         });
 
-         //put away
+         //slotting
+        Route::group(['prefix' => 'slotting', 'as' => 'slotting.'], function() {
+            Route::get('/', [SlottingController::class, 'index'])->name('index');
+        });
+
+         //put-away
         Route::group(['prefix' => 'put-away', 'as' => 'put-away.'], function() {
             Route::get('/', [PutAwayController::class, 'index'])->name('index');
+            Route::get('/create', [PutAwayController::class, 'create'])->name('create');
+            Route::get('/store', [PutAwayController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [PutAwayController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [PutAwayController::class, 'update'])->name('update');
+            Route::get('/view/{id}', [PutAwayController::class, 'show'])->name('view');
+            Route::get('/{id}/print', [PutAwayController::class, 'print'])->name('print');
         });
 
         //Inward

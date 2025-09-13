@@ -12,10 +12,7 @@
             <tr>
                 <td style="text-align: left;"><img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Kern Logo"></td>
                 <td style="text-align: left;">
-                    <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                    <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                    <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                    <p>Website: www.johnsonchill.com</p>
+                    @include('common.print-company-address')
                 </td>
             </tr>
             <tr></tr>
@@ -32,12 +29,12 @@
                 <strong>Doc No:</strong> TC-25-0001<br><br>
                 <strong>Doc Date:</strong> 16/10/2023<br><br>
                 <strong>Doc Time:</strong> 20:00<br><br>
-                <strong>Gate Pass No.:</strong> 7508<br><br>
-                <strong>Customer:</strong> TRDP<br><br>
+                <strong>Gate Pass No.:</strong> GP-25-0045<br><br>
+                <strong>Customer:</strong> Chelur Foods<br><br>
             </td>
             <td>
                 <strong>Vehicle No.:</strong> HR 55 R 0057<br><br>
-                <strong>Product:</strong> Frozen Prawns<br><br>
+                <strong>Product:</strong> Frozen Peas 5kg<br><br>
                 <strong>SKU:</strong> 150<br><br>
                 <strong>Vehicle Set Temp (°C):</strong> 2<br><br>
             </td>
@@ -63,19 +60,19 @@
         <tbody>
             <tr>
                 <td>1</td>
-                <td class="txt-left">Frozen Prawns</td>
+                <td class="txt-left">Frozen Peas 5kg</td>
                 <td class="txt-center">20:00</td>
                 <td class="txt-center">-1.6</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td class="txt-left">Frozen Squid Rings</td>
+                <td class="txt-left">Mixed Veg 1kg</td>
                 <td class="txt-center">20:05</td>
                 <td class="txt-center">-1.6</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td class="txt-left">Frozen Crab Meat</td>
+                <td class="txt-left">Paneer Blocks 5kg</td>
                 <td class="txt-center">20:10</td>
                 <td class="txt-center">-1.5</td>
             </tr>

@@ -112,13 +112,13 @@
                             <th style="width:15%;" >Product</th>
                             <th style="width:10%;" >Lot No.</th>
                             <th style="width:5%;" >Package Type</th>
+                            <th style="width:10%;" >Pallet Location</th>
+                            <th style="width:5%;" >Pallet</th>
                             <th style="width:5%;" class="text-center" >Size</th>
                             <th style="width:5%;" class="text-center" >G.W. per Package</th>
                             <th style="width:5%;" class="text-center" >N.W. per Package</th>
                             <th style="width:5%;" class="text-center" >G.W. KG with pit weight</th>
                             <th style="width:5%;" class="text-center" >N.W. KG</th>
-                            <th style="width:10%;" >Slot</th>
-                            <!-- <th style="width:5%;" >Pallet</th> -->
                             <th style="width:5%;" >Quantity</th>
                         </tr>
                     </thead>
@@ -135,14 +135,14 @@
                             <td>{{ $k + 1 }}</td>
                             <td>{{ $v->packingListDetail->cargo_description }}</td>
                             <td>{{ $v->packingListDetail->lot_no }}</td>
-                            <td>{{ $v->packingListDetail->packageType?->description }}</td>
+                            <td>{{ $v->packingListDetail->packageType? $v->packingListDetail->packageType->description : 'Box' }}</td>
+                            <td>{{ $v->pallet->pallet_position }}</td>
+                            <td>{{ $v->pallet->pallet_no }}</td>
                             <td class="text-center" >{{ $v->packingListDetail->item_size_per_package }}</td>
                             <td class="text-center" >{{ $v->packingListDetail->gw_per_package }}</td>
                             <td class="text-center" >{{ $v->packingListDetail->nw_per_package }}</td>
                             <td class="text-center" >{{ $v->packingListDetail->gw_with_pallet }}</td>
                             <td class="text-center" >{{ $v->packingListDetail->nw_kg }}</td>
-                            <td>{{ $v->room->name }}-{{ $v->rack->name }}-{{ $v->slot->level_no??'' }}-{{ $v->slot->depth_no??'' }}</td>
-                            <!-- <td>{{ $v->pallet->name }}</td> -->
                             <td class="text-center">{{ $v->quantity??'' }}</td>
                         </tr>
                         @php 
@@ -158,12 +158,13 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="text-left" >Total</td>
                             <td class="text-center" >{{ $tot_gw_per_package }}</td>
                             <td class="text-center" >{{ $tot_nw_per_package }}</td>
                             <td class="text-center" >{{ $tot_gw_with_pallet }}</td>
                             <td class="text-center" >{{ $tot_nw_kg }}</td>
-                            <td></td>
                             <td class="text-center" >{{ $tot_qty }}</td>
                         </tr>
                     </tbody>

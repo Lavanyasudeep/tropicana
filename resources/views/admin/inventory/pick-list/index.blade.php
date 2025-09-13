@@ -52,7 +52,7 @@
                     <span class="input-group-text pq-fltr-icon" ><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <select id="clientFlt" class="form-control pq-fltr-select">
-                    <option value="">- All Client -</option>
+                    <option value="">- All Customer -</option>
                     @foreach($clients as $client)
                         <option value="{{ $client->client_id }}">{{ $client->client_name }}</option>
                     @endforeach

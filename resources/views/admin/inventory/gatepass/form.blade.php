@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="pform-row" >
-                            <div class="pform-label" >Client</div>
+                            <div class="pform-label" >Customer</div>
                             <div class="pform-value" >
                                 <select name="client_id" id="client_id">
                                     <option value="">- Select -</option>

@@ -60,7 +60,7 @@
                 <div class="pform-panel" style="min-height:150px;">
                     <div class="pform-row">
                         <div class="pform-label">Customer Name</div>
-                        <div class="pform-value">Ocean Fresh Exports Pvt Ltd</div>
+                        <div class="pform-value">Chelur Foods</div>
                     </div>
                     <div class="pform-row">
                         <div class="pform-label">Contact Number</div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="pform-row">
                         <div class="pform-label">Address</div>
-                        <div class="pform-value">Plot No. 45, Seafood Industrial Estate, Aroor, Kerala, India</div>
+                        <div class="pform-value">Plot No. 45, Food Industrial Estate, Aroor, Kerala, India</div>
                     </div>
                     <div class="pform-clear"></div>
                 </div>
@@ -112,34 +112,34 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Frozen Prawns</td>
+                    <td>Frozen Peas 5kg</td>
                     <td>Box</td>
                     <td class="text-right">500</td>
                     <td class="text-right">500.00</td>
                     <td class="text-right">520.00</td>
                     <td>10/12/2010</td>
                     <td>01/04/2030</td>
-                    <td>Packed in 20kg cartons</td>
+                    <td>Packed in 20kg Boxes</td>
                 </tr>
                 <tr>
-                    <td>Frozen Squid Rings</td>
+                    <td>Mixed Veg 1kg</td>
                     <td>Box</td>
                     <td class="text-right">300</td>
                     <td class="text-right">300.00</td>
                     <td class="text-right">315.00</td>
                     <td>12/08/2015</td>
                     <td>10/12/2030</td>
-                    <td>Packed in 15kg cartons</td>
+                    <td>Packed in 15kg Boxes</td>
                 </tr>
                 <tr>
-                    <td>Frozen Crab Meat</td>
-                    <td>KG</td>
+                    <td>Paneer Blocks 5kg</td>
+                    <td>Box</td>
                     <td class="text-right">200</td>
                     <td class="text-right">200.00</td>
                     <td class="text-right">210.00</td>
                     <td>05/01/2010</td>
                     <td>01/11/2015</td>
-                    <td>Packed in 10kg cartons</td>
+                    <td>Packed in 10kg Boxes</td>
                 </tr>
             </tbody>
             <tfoot>

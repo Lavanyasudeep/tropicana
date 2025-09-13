@@ -107,7 +107,7 @@ $pallet = [
                             <div class="pform-row"><div class="pform-label">Gatepass No.</div><div class="pform-value">GP-1001</div></div>
                             <div class="pform-row"><div class="pform-label">Packing List No.</div><div class="pform-value">PL-25-00001</div></div>
                             <div class="pform-row"><div class="pform-label">Vehicle No.</div><div class="pform-value">KL-07-CD-4521</div></div>
-                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">Ocean Fresh Exports Pvt Ltd</div></div>
+                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">Chelur Foods</div></div>
                         </div>
                     </div>
                     <!-- Panel 2 -->

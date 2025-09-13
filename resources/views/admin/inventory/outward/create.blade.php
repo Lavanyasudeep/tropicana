@@ -27,13 +27,13 @@
 <div class="page-sub-header">
     <h3>Create</h3>
     <div class="action-btns" >
-        <a href="{{ route('admin.inventory.pick-list.index') }}" class="btn btn-success" ><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.inventory.outward.index') }}" class="btn btn-success" ><i class="fas fa-arrow-left"></i> Back</a>
     </div>
 </div>
 
 <div class="card page-form page-form-add" >
     <div class="card-body">
-        <form method="POST" action="{{ $formAction }}" id="outwardForm">
+        <form method="POST" action="#" id="outwardForm">
             @csrf
             @if ($formMethod === 'PUT')
                 @method('PUT')
@@ -45,7 +45,7 @@
                         <div class="pform-row" >
                             <div class="pform-label" >Doc. #</div>
                             <div class="pform-value" >
-                                <input type="text" id="doc_no" value="" readonly>
+                                <input type="text" id="doc_no" value="OUT-25-0001" readonly>
                             </div>
                         </div>
                         <div class="pform-row" >
@@ -67,17 +67,24 @@
                             </div>
                         </div>
                          <div class="pform-row" >
-                            <div class="pform-label" >Client</div>
+                            <div class="pform-label" >Customer</div>
                             <div class="pform-value" >
-                                <select name="client_id" id="client_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($clients as $client)
-                                        <option value="{{ $client->client_id }}"
-                                            @selected($pickList ? $pickList->client_id == $client->client_id : old('client_id') == $client->client_id)
-                                        >
-                                            {{ $client->client_name }}
-                                        </option>
-                                    @endforeach
+                                <select name="customer_id" id="customer_id" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option value="4">Australian Foods India Pvt. Ltd.</option>
+                                    <option value="5">AAA International</option>
+                                    <option value="6">Chelur Foods</option>
+                                    <option value="7">PJJ Fruits</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pform-row" >
+                            <div class="pform-label" >Pick List No</div>
+                            <div class="pform-value" >
+                                <select name="pick_list_id" id="pick_list_id" class="form-control">
+                                    <option value="">--Select --</option>
+                                    <option value="1">PL-25-0001</option>
+                                    <option value="2">PL-25-0002</option>
                                 </select>
                             </div>
                         </div>
@@ -88,17 +95,6 @@
                 <!-- Panel 2 -->
                 <div class="col-md-4" >
                     <div class="pform-panel" >
-                        <div class="pform-row d-none" >
-                            <div class="pform-label" >Customer</div>
-                            <div class="pform-value" >
-                                <select name="supplier_id" id="supplier_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                         <div class="pform-row" >
                             <div class="pform-label" >Contact Name</div>
                             <div class="pform-value" >
@@ -122,87 +118,6 @@
                 </div>
 
                 <!-- Panel 3 -->
-                <div class="col-md-3 d-none" >
-                    <div class="pform-panel" style="min-height:220px;" >
-                        <div class="pform-row" >
-                            <div class="pform-label" >Package Type</div>
-                            <div class="pform-value" >
-                                <select name="package_type_id" id="package_type_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($packageTypes as $packageType)
-                                        <option value="{{ $packageType->unit_id }}">{{ $packageType?->description }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Date of Loading</div>
-                            <div class="pform-value" >
-                                <input type="date" id="loading_date" name="loading_date" value="@php echo date('Y-m-d') @endphp" >
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Port of Loading</div>
-                            <div class="pform-value" >
-                                <select name="loading_port_id" id="loading_port_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($ports as $port)
-                                        <option value="{{ $port->port_id }}">{{ $port->Name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pform-row" >
-                            <div class="pform-label" >Port of Discharge</div>
-                            <div class="pform-value" >
-                                <select name="discharge_port_id" id="discharge_port_id">
-                                    <option value="">- Select -</option>
-                                    @foreach($ports as $port)
-                                        <option value="{{ $port->port_id }}">{{ $port->Name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pform-clear" ></div>
-                    </div>
-                </div>
-             
-                <!-- Panel 4 -->
-                <div class="col-md-3 d-none">
-                    <div class="pform-panel" style="min-height:220px;">
-                        <div class="pform-row">
-                            <div class="pform-label">GOODS</div>
-                            <div class="pform-value">
-                                {{ optional(optional($pickList?->pickListDetails)->first()?->packingList)->goods ?? '' }}
-                            </div>
-                        </div>
-                        <div class="pform-row">
-                            <div class="pform-label">Size</div>
-                            <div class="pform-value">
-                                {{ optional(optional($pickList?->pickListDetails)->first()?->packingList)->size ?? '' }}
-                            </div>
-                        </div>
-                        <div class="pform-row">
-                            <div class="pform-label">BL. No.</div>
-                            <div class="pform-value"></div>
-                        </div>
-                        <div class="pform-row">
-                            <div class="pform-label">Name of Vessel</div>
-                            <div class="pform-value">
-                                <input type="text" id="vessel_name" name="vessel_name" value="{{ old('vessel_name') }}">
-                            </div>
-                        </div>
-                        <div class="pform-row">
-                            <div class="pform-label">Voyage No.</div>
-                            <div class="pform-value">
-                                <input type="text" id="voyage_no" name="voyage_no" value="{{ old('voyage_no') }}">
-                            </div>
-                        </div>
-                        <div class="pform-clear"></div>
-                    </div>
-                </div>
-
-                <!-- Panel 5 -->
                 <div class="col-md-4" >
                     <div class="pform-panel" style="min-height:125px;">
                         <div class="pform-row" >
@@ -231,53 +146,31 @@
                                     <th class="text-center" >#</th>
                                     <th>Product</th>
                                     <th>Lot</th>
-                                    <th>Size</th>
-                                    <th>Package Type</th>
-                                    <th>Slot</th>
+                                    <th>Expiry Date</th>
+                                    <th>UOM</th>
+                                    <th>Total Qty</th>
                                     <th>Pallet</th>
-                                    <th>G.W. per Package</th>
-                                    <th>N.W. per Package</th>
+                                    <th>Location</th>
                                     <th>G.W. KG with pit weight</th>
                                     <th>N.W. KG</th>
-                                    <th>Total Packages</th>
-                                    <th>No. of Packages Picked</th>
-                                    <!-- <th></th> -->
-                                </tr>
-                                 <tr>
-                                    <th></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th><input type="text" class="form-control column-search" placeholder="Search"></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <!-- <th></th> -->
+                                    <th>Picked Qty</th>
+                                    <th>Out Qty</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         
                             <tfoot>
                                 <tr class="total-row">
-                                    <th colspan="7" class="text-right" >Total Selected :</th>
-                                    <th id="total_gw_per_package" class="text-center"></th>
-                                    <th id="total_nw_per_package" class="text-center"></th>
+                                    <th colspan="5" class="text-right" >Total :</th>
+                                    <th id="total_package_qty" class="text-center"></th>
+                                    <th colspan="2"></th>
                                     <th id="total_gw_with_pallet" class="text-center"></th>
                                     <th id="total_nw_kg" class="text-center"></th>
-                                    <th id="total_package_qty" class="text-center"></th>
                                     <th id="total_picked_qty" class="text-center"></th>
-                                    <!-- <th></th> -->
+                                    <th id="total_out_qty" class="text-right"></th>
                                 </tr>
                             </tfoot>
                         </table>
-                        @if($pickList)
-                            <a id="btn-add-selected-products" class="btn btn-sm btn-create mt-2">Add Products</a>
-                        @endif
 
                         <div class="row" >
                             <div class="col-md-6" ></div>
@@ -286,11 +179,11 @@
                                 <table class="table table-striped page-list-table" border="0">    
                                     <tbody>
                                         <tr>
-                                            <td><span>Weight of 1 empty pallet</span></td>
+                                            <td><span>Weight of 1 empty pallet (kg)</span></td>
                                             <td class="text-right">
                                                 <input 
                                                     type="text" 
-                                                    value="{{ optional($pickList?->pickListDetails->first()->packingListDetail?->packingList)->weight_per_pallet ?? '' }}" 
+                                                    value="15" 
                                                     id="weight_per_pallet" 
                                                     class="text-right" 
                                                     readonly 
@@ -305,7 +198,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><span>Total No of Packages Picked</span></td>
+                                            <td><span>Total No of Packages</span></td>
                                             <td class="text-right">
                                                 <input type="text" name="tot_package_qty" id="summary_total_picked_qty" value="" class="text-right" readonly autocomplete="off">
                                             </td>
@@ -346,219 +239,140 @@
 
 @section('js')
 <script>
-$(document).ready(function () {
-    let client_id = "{{ $pickList?->client_id ?? '' }}";
-    let picklistExists = {{ $pickList ? 'true' : 'false' }};
-    let onlyPicked = picklistExists? 1: 0;
-    let selected= [];
-
-    let table = $('#outwardCreateTable').DataTable({
-        processing: true,
-        serverSide: true,
-        searching: true,
-        lengthMenu: [10, 20, 50, 100],
-        pageLength: 20,
-        ajax: {
-            url: '{{ $formListAction }}',
-            data: function (d) {
-                d.client_id = (client_id == '') ? $('#client_id').val() : client_id;
-                d.only_picked = onlyPicked;
-            }
-        },
-        language: {
-            emptyTable: "Please select a client to display data."
-        },
-        columns: [
-            { data: 'pick', name: 'pick', width: '5%', orderable: false, searchable: false },
-            { data: 'product_name', name: 'product_name'},
-            { data: 'batch_no', name: 'batch_no' },
-            { data: 'size', name: 'size' },
-            { data: 'package_type', name: 'package_type' },
-            // { data: 'room.name', name: 'room.name' },
-            // { data: 'rack.name', name: 'rack.name' },
-            // { data: 'slot.name', name: 'slot.name' },
-            { data: 'slot_position', name: 'slot_position' },
-            { data: 'pallet.name', name: 'pallet.name' },
-            { data: 'gw_per_package', name: 'gw_per_package', className: 'gw_per_package'},
-            { data: 'nw_per_package', name: 'nw_per_package', className: 'nw_per_package'},
-            { data: 'gw_with_pallet', name: 'gw_with_pallet', className: 'gw_with_pallet'},
-            { data: 'nw_kg', name: 'nw_kg', className: 'nw_kg'},
-            { data: 'available_qty', name: 'available_qty', className: 'available_qty' },
+const pickListData = {
+    "1": {
+        customer_id: "6", // Chelur Foods
+        contact_name: "Mr. Rajan Nair",
+        contact_number: "9876543210",
+        contact_address: "Chelur Industrial Estate, Kochi, Kerala",
+        items: [
             {
-                data: null,
-                orderable: false,
-                searchable: false,
-                className: 'pick-qty',
-                render: function (data, type, row) {
-                    const value = row.pick_qty??0;
-                    return `<input type="text" class="form-control text-center selected-qty" 
-                        min="0" value="${value}" data-prev="${value}" readonly>`;
-                }
+                product: "Frozen Peas 5kg",
+                lot: "LOT001",
+                expiry: "2026-02-01",
+                uom: "Bag",
+                total_qty: 100,
+                pallet: "PAL-101",
+                location: "WU0001-R002-B2-R5-L1-D2",
+                gw: 520,
+                nw: 500,
+                picked_qty: 80
             },
-            // {
-            //     data: null,
-            //     orderable: false,
-            //     searchable: false,
-            //     render: function (data, type, row) {
-            //         const value = row.pick_qty??0;
-            //         return `<button type="button" class="btn btn-sm btn-danger remove-row">&times;</button>`;
-            //     }
-            // }
-        ],
-        columnDefs: [
             {
-                targets: [0, 6, 7, 8, 9, 10, 11],
-                className: 'text-center'
+                product: "Chicken Nuggets 10kg",
+                lot: "LOT002",
+                expiry: "2026-01-15",
+                uom: "Box",
+                total_qty: 150,
+                pallet: "PAL-102",
+                location: "WU0001-R001-B1-R3-L2-D1",
+                gw: 1020,
+                nw: 1000,
+                picked_qty: 120
             }
-        ],
-        order: [[0, 'desc']],
-        initComplete: function () {
-            // optional: only clear on initial load
-            // table.clear().draw();
-            if (picklistExists) {
-                updateSelectedItems();
+        ]
+    },
+    "2": {
+        customer_id: "4", // Australian Foods India Pvt. Ltd.
+        contact_name: "Ms. Anita Sharma",
+        contact_number: "9123456789",
+        contact_address: "Export Zone, Mumbai, Maharashtra",
+        items: [
+            {
+                product: "Fish Fillet 2kg",
+                lot: "LOT010",
+                expiry: "2026-01-20",
+                uom: "Pack",
+                total_qty: 80,
+                pallet: "PAL-201",
+                location: "WU0001-R003-B1-R1-L3-D4",
+                gw: 220,
+                nw: 200,
+                picked_qty: 60
+            },
+            {
+                product: "Frozen Momos 2kg",
+                lot: "LOT015",
+                expiry: "2026-01-22",
+                uom: "Box",
+                total_qty: 100,
+                pallet: "PAL-202",
+                location: "WU0001-R004-B2-R1-L4-D1",
+                gw: 220,
+                nw: 200,
+                picked_qty: 90
             }
-        },
-        drawCallback: function () {
-            if (picklistExists) {
-                updateSelectedItems();
-            }
-        },
-    });
+        ]
+    }
+};
 
-    $('#outwardCreateTable thead').on('keyup change', '.column-search', function () {
-        let colIndex = $(this).parent().index();
-        table.column(colIndex).search(this.value).draw();
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    const pickListSelect = document.getElementById('pick_list_id');
 
-    $(document).on('change', '#client_id', function () {
-        onlyPicked = 0; 
-        table.ajax.reload();
-    });
+    pickListSelect.addEventListener('change', function () {
+        const selectedId = this.value;
+        const data = pickListData[selectedId];
+        if (!data) return;
 
-    $(document).on('click', '#btn-add-selected-products', function () {
-        onlyPicked = 0; 
-        table.ajax.reload(); 
-        $(this).hide(); 
-    });
+        // Set customer info
+        document.getElementById('customer_id').value = data.customer_id;
+        document.getElementById('contact_name').value = data.contact_name;
+        document.getElementById('contact_address').value = data.contact_address;
 
-    $(document).on('change', '.pick-check', function (e) {
-        e.preventDefault();
-        const row = $(this).closest('tr');
-        const packageQty = parseInt($(this).data('package-qty')) || 0;
-        const weightPerPallet = parseInt($(this).data('package-qty')) || 0;
-        if($(this).is(':checked'))
-                row.find('.selected-qty').val(packageQty);
-        else
-            row.find('.selected-qty').val('0');
+        // Populate table
+        const tbody = document.querySelector('#outwardCreateTable tbody');
+        tbody.innerHTML = '';
 
-        if(!picklistExists) 
-            $('#weight_per_pallet').val(weightPerPallet);
+        let totalPicked = 0, totalOut = 0, totalGW = 0, totalNW = 0, totalQty = 0;
 
-        updateSelectedItems();
-    });
+        data.items.forEach((item, index) => {
+            totalQty += item.total_qty;
+            totalPicked += item.picked_qty;
+            totalOut += item.picked_qty;
+            totalGW += item.gw;
+            totalNW += item.nw;
 
-    $(document).on('submit', '#outwardForm', function() {
-        updateSelectedItems();  
-    });
-
-    // Remove row on button click
-    $(document).on('click', '.remove-row', function () {
-        $(this).closest('tr').remove();
-        updateTotals();
-    });
-
-    // Optionally also update totals when picked_qty is edited
-    $(document).on('input', 'input[name="picked_qty[]"]', function () {
-        updateTotals();
-    });
-
-    function updateSelectedItems() {
-        selected = [];
-
-        $('#outwardCreateTable tbody tr').each(function() {
-            const $row = $(this);
-            const checkbox = $row.find('.pick-check');
-
-            if (checkbox.is(':checked')) {
-                selected.push({
-                    packing_list_detail_id: checkbox.data('packing-list-detail-id'),
-                    pallet_id: checkbox.data('pallet-id'),
-                    package_qty: checkbox.data('package-qty'),
-                    pick_qty: parseFloat($row.find('.selected-qty').val()) || 0
-                });
-            }
-        });
-
-        if(selected.length === 0){
-            alert('Please select at least one product.');
-            return;
-        }
-
-        // Now update hidden inputs
-        let hiddenInputsHtml = '';
-
-        selected.forEach(function(item, index) {
-            hiddenInputsHtml += `
-                <input type="hidden" name="selected_items[${index}][pallet_id]" value="${item.pallet_id}">
-                <input type="hidden" name="selected_items[${index}][packing_list_detail_id]" value="${item.packing_list_detail_id}">
-                <input type="hidden" name="selected_items[${index}][package_qty]" value="${item.package_qty}">
-                <input type="hidden" name="selected_items[${index}][pick_qty]" value="${item.pick_qty}">
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="text-center">${index + 1}</td>
+                <td>${item.product}</td>
+                <td>${item.lot}</td>
+                <td>${item.expiry}</td>
+                <td>${item.uom}</td>
+                <td class="text-center" >${item.total_qty}</td>
+                <td>${item.pallet}</td>
+                <td>${item.location}</td>
+                <td class="text-center">${item.gw}</td>
+                <td class="text-center">${item.nw}</td>
+                <td class="text-center">${item.picked_qty}</td>
+                <td><input type="number" class="form-control out-qty-input text-center" value="${item.picked_qty}" min="0"></td>
             `;
+            tbody.appendChild(row);
         });
 
-        $('#selected-products-inputs').html(hiddenInputsHtml);
+        // Set summary totals
+        document.getElementById('total_package_qty').textContent = totalQty;
+        document.getElementById('total_gw_with_pallet').textContent = totalGW;
+        document.getElementById('total_nw_kg').textContent = totalNW;
+        document.getElementById('total_picked_qty').textContent = totalPicked;
+        document.getElementById('total_out_qty').textContent = totalOut;
 
-        updateTotals();
-    }
+        document.getElementById('summary_total_pallets').value = data.items.length;
+        document.getElementById('summary_total_picked_qty').value = totalPicked;
+        document.getElementById('summary_gw_with_pallet').value = totalGW;
+        document.getElementById('summary_nw_kg').value = totalNW;
 
-    function updateTotals() {
-        let totalGW = 0, totalNW = 0, totalGWWithPallet = 0, totalNWKg = 0, totalQty = 0, totalPicked = 0, totalPalletQty = 0;
-        let palletNames = {}; // for unique pallet counting
-
-        table.rows().every(function () {
-            const row = this.data();
-            const $rowNode = $(this.node());
-            const checkbox = $rowNode.find('.pick-check');
-
-            if (checkbox.is(':checked')) {
-                const gwPerPackage = parseFloat(row.gw_per_package) || 0;
-                const nwPerPackage = parseFloat(row.nw_per_package) || 0;
-                const gwWithPallet = parseFloat(row.gw_with_pallet) || 0;
-                const nwKg = parseFloat(row.nw_kg) || 0;
-                const quantity = parseFloat(row.available_qty) || 0;
-
-                const pickedQty = parseFloat($rowNode.find('.selected-qty').val()) || 0;
-
-                totalGW += gwPerPackage;
-                totalNW += nwPerPackage;
-                totalGWWithPallet += gwWithPallet;
-                totalNWKg += nwKg;
-                totalQty += quantity;
-                totalPicked += pickedQty;
-
-                if (row.pallet && row.pallet.name) {
-                    palletNames[row.pallet.name] = true;
-                }
-            }
+        // Bind input listeners
+        document.querySelectorAll('.out-qty-input').forEach(input => {
+            input.addEventListener('input', () => {
+                let totalOutQty = 0;
+                document.querySelectorAll('.out-qty-input').forEach(i => {
+                    totalOutQty += parseInt(i.value) || 0;
+                });
+                document.getElementById('total_out_qty').textContent = totalOutQty;
+            });
         });
-
-        totalPalletQty = Object.keys(palletNames).length;
-
-        // Update table footer
-        $('#total_gw_per_package').text(totalGW.toFixed(2));
-        $('#total_nw_per_package').text(totalNW.toFixed(2));
-        $('#total_gw_with_pallet').text(totalGWWithPallet.toFixed(2));
-        $('#total_nw_kg').text(totalNWKg.toFixed(2));
-        $('#total_package_qty').text(totalQty);
-        $('#total_picked_qty').text(totalPicked);
-
-        // Update summary section inputs
-        $('#summary_total_pallets').val(totalPalletQty);
-        $('#summary_total_picked_qty').val(totalPicked);
-        $('#summary_gw_with_pallet').val(totalGWWithPallet.toFixed(2));
-        $('#summary_nw_kg').val(totalNWKg.toFixed(2));
-    }
+    });
 });
 </script>
 @stop

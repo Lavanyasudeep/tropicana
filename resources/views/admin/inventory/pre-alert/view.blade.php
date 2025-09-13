@@ -50,7 +50,7 @@
                             <div class="pform-row"><div class="pform-label">Document Date</div><div class="pform-value">25/08/2025</div></div>
                             <div class="pform-row"><div class="pform-label">Arriving Date</div><div class="pform-value">25/10/2025</div></div>
                             <div class="pform-row"><div class="pform-label">Ref No. #</div><div class="pform-value">SQ‑25‑00045</div></div>
-                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">ABC Cold Storage Ltd.</div></div>
+                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">Australian Foods India Pvt. Ltd.</div></div>
                         </div>
                     </div>
                     <!-- Panel 2 -->
@@ -84,8 +84,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Frozen Prawns</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td><td>12/06/2020</td><td>12/06/2030</td></tr>
-                        <tr><td>Frozen Green Peas</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td><td>09/07/2020</td><td>02/04/2030</td></tr>
+                        <tr><td>Frozen Peas 5kg</td><td>BATCH‑PR‑001</td><td>500</td><td>Boxes</td><td>12/06/2020</td><td>12/06/2030</td></tr>
+                        <tr><td>Mixed Veg 1kg</td><td>BATCH‑GP‑002</td><td>300</td><td>Crates</td><td>09/07/2020</td><td>02/04/2030</td></tr>
                     </tbody>
                 </table>
             </div>

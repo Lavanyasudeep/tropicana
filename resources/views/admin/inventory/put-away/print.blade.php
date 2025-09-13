@@ -1,60 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pallet - Print</title>
+    <title>Putaway - Print</title>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body onload="printAndClose()">
 @php
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
-$pallet = [
+
+$putaway = [
     [
-        'pallet_no'         => 'PLT-00001',
-        'warehouse_unit_no' => 'WU-0005',
-        'room_no'           => 'R-102',
-        'dock_no'           => 'D-07',
         'product_code'      => 'FRZ-001',
-        'product'           => 'Frozen Prawns 500g',
+        'product'           => 'Ice Cream Tubs - 35cmx35cmx20cm',
         'lot'               => 'BCH-25-001',
-        'size'              => '500g',
-        'package_type'      => 'Carton',
-        'no_of_packages'    => 60,
-        'total_gw'          => 750,
-        'total_nw'          => 720,
         'expiry_date'       => '2026-02-15',
         'uom'               => 'Boxes',
-        'palletized_by'     => 'Ramesh Kumar',
-        'palletized_time'   => '09:15 – 09:42 (00:27)',
-        'supervisor'        => 'Vijay Nair',
-        'remarks'           => 'No damage, all boxes sealed',
+        'qty'               => 60,
+        'volume'            => 8
     ],
     [
-        'pallet_no'         => 'PLT-00001',
-        'warehouse_unit_no' => 'WU-0005',
-        'room_no'           => 'R-102',
-        'dock_no'           => 'D-07',
         'product_code'      => 'FRZ-002',
-        'product'           => 'Frozen Squid Rings 1kg',
+        'product'           => 'Paneer Blocks 5kg - 40cmx30cmx25cm',
         'lot'               => 'BCH-25-002',
-        'size'              => '1kg',
-        'package_type'      => 'Carton',
-        'no_of_packages'    => 40,
-        'total_gw'          => 500,
-        'total_nw'          => 480,
         'expiry_date'       => '2026-03-20',
         'uom'               => 'Boxes',
-        'palletized_by'     => 'Ramesh Kumar',
-        'palletized_time'   => '09:15 – 09:42 (00:27)',
-        'supervisor'        => 'Vijay Nair',
-        'remarks'           => 'No damage, all boxes sealed',
+        'qty'               => 40,
+        'volume'            => 2
     ]
 ];
 
-// Build QR payload with all items for this pallet
 $qrPayload = [
-    'pallet_no' => $pallet[0]['pallet_no'],
-    'items'     => $pallet
+    'doc_no' => 'PUT-25-00004',
+    'items'  => $putaway
 ];
 
 $builder = new Builder(
@@ -66,8 +44,6 @@ $builder = new Builder(
 
 $result = $builder->build();
 $qrCodeBase64 = 'data:image/png;base64,' . base64_encode($result->getString());
-
-$first = $pallet[0] ?? [];
 @endphp
 
 <!-- Header -->
@@ -81,7 +57,7 @@ $first = $pallet[0] ?? [];
         </td>
     </tr>
     <tr>
-        <td colspan="2" class="print-page-title"><strong>PALLETIZATION</strong></td>
+        <td colspan="2" class="print-page-title"><strong>PUTAWAY</strong></td>
     </tr>
 </table>
 
@@ -89,7 +65,7 @@ $first = $pallet[0] ?? [];
 <table class="print-detail-table">
     <tr>
         <td>
-            <strong>Doc No:</strong> PAL-25-00001<br>
+            <strong>Doc No:</strong> PUT-25-00004<br>
             <strong>Doc Date:</strong> 26/08/2025<br>
             <strong>Doc Time:</strong> 09:42<br>
             <strong>Gatepass No.:</strong> GP-1001<br>
@@ -98,18 +74,19 @@ $first = $pallet[0] ?? [];
             <strong>Customer:</strong> Chelur Foods
         </td>
         <td>
-            <strong>Warehouse Unit:</strong> {{ $first['warehouse_unit_no'] ?? '' }}<br>
-            <strong>Dock No:</strong> {{ $first['dock_no'] ?? '' }}<br>
-            <strong>Room No:</strong> {{ $first['room_no'] ?? '' }}<br>
-            <strong>Pallet No:</strong> {{ $first['pallet_no'] ?? '' }}<br>
-            <strong>Qty Per Pallet:</strong> {{ collect($pallet)->sum('no_of_packages') }}<br>
-            <strong>Total Weight (KG):</strong> {{ $first['total_gw'] ?? '' }}
+            <strong>Warehouse Unit:</strong> WU-0001<br>
+            <strong>Dock No:</strong> D-07<br>
+            <strong>Chamber No:</strong> CR-102<br>
+            <strong>Pallet No:</strong> PLT-00001<br>
+            <strong>Pallet Location:</strong>  WU0001-CR002-B2-R5-L1-D2<br>
+            <strong>Total Volume (m³):</strong> {{ collect($putaway)->sum('volume') }}
         </td>
         <td>
-            <strong>Palletized By:</strong> {{ $first['palletized_by'] ?? '' }}<br>
-            <strong>Palletized Time:</strong> {{ $first['palletized_time'] ?? '' }}<br>
-            <strong>Supervisor:</strong> {{ $first['supervisor'] ?? '' }}<br>
-            <strong>Remarks:</strong> {{ $first['remarks'] ?? '' }}
+            <strong>Putaway By:</strong> Ramesh Kumar<br>
+            <strong>Start Time:</strong> 09:15<br>
+            <strong>End Time:</strong> 09:42<br>
+            <strong>Team:</strong> Cold Ops Team A<br>
+            <strong>Remarks:</strong> All items placed correctly, no discrepancies
         </td>
         <td>
             <strong>Status:</strong> Completed<br>
@@ -126,41 +103,45 @@ $first = $pallet[0] ?? [];
             <th>S/N</th>
             <th>Product Code</th>
             <th>Product Name</th>
-            <th>Batch No</th>
+            <th>Lot No</th>
             <th>Expiry Date</th>
-            <th class="txt-right">Quantity</th>
+            <th class="txt-right">Putaway Qty</th>
             <th>UOM</th>
+            <th class="txt-right">Volume (m³)</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($pallet as $i => $item)
+        @foreach($putaway as $i => $item)
         <tr>
             <td>{{ $i + 1 }}</td>
-            <td>{{ $item['product_code'] ?? '' }}</td>
-            <td>{{ $item['product'] ?? '' }}</td>
-            <td>{{ $item['lot'] ?? '' }}</td>
-            <td>{{ $item['expiry_date'] ?? '' }}</td>
-            <td class="txt-right">{{ $item['no_of_packages'] ?? '' }}</td>
-            <td>{{ $item['uom'] ?? '' }}</td>
+            <td>{{ $item['product_code'] }}</td>
+            <td>{{ $item['product'] }}</td>
+            <td>{{ $item['lot'] }}</td>
+            <td>{{ $item['expiry_date'] }}</td>
+            <td class="txt-right">{{ $item['qty'] }}</td>
+            <td>{{ $item['uom'] }}</td>
+            <td class="txt-right">{{ $item['volume'] }}</td>
         </tr>
         @endforeach
     </tbody>
     <tfoot>
         <tr style="font-weight:bold;">
             <td colspan="5" class="txt-right">Total</td>
-            <td class="txt-right">{{ collect($pallet)->sum('no_of_packages') }}</td>
-            <td>Boxes</td>
+            <td class="txt-right">{{ collect($putaway)->sum('qty') }}</td>
+            <td></td>
+            <td class="txt-right">{{ collect($putaway)->sum('volume') }}</td>
         </tr>
     </tfoot>
 </table>
 
+<!-- Signature Table -->
 <table class="print-sign-table">
     <tr>
         <td style="height: 60px; vertical-align: bottom;">
             <strong>Assigned By:</strong> ___________________________
         </td>
         <td style="height: 60px; vertical-align: bottom;">
-            <strong>Palletized By:</strong> ___________________________
+            <strong>Putaway By:</strong> ___________________________
         </td>
         <td style="height: 60px; vertical-align: bottom;">
             <strong>Verified By:</strong> ___________________________

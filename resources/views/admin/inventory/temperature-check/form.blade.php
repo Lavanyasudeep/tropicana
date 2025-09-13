@@ -64,13 +64,13 @@
                         <div class="pform-row">
                             <div class="pform-label">Customer</div>
                             <div class="pform-value">
-                                <input type="text" id="customer" name="customer" value="">
+                                <input type="text" id="customer" name="customer" value="" readonly>
                             </div>
                         </div>
                         <div class="pform-row">
                             <div class="pform-label">Vehicle No.</div>
                             <div class="pform-value">
-                                <input type="text" id="vehicle_no" name="vehicle_no" value="">
+                                <input type="text" id="vehicle_no" name="vehicle_no" value="" readonly>
                             </div>
                         </div>
                         <div class="pform-row">
@@ -151,9 +151,21 @@
                                     <td>
                                         <select name="checks[0][product_name]" class="form-control">
                                             <option value="">-- Select Product --</option>
-                                            <option value="Frozen Prawns" >Frozen Prawns</option>
-                                            <option value="Frozen Squid Rings">Frozen Squid Rings</option>
-                                            <option value="Frozen Crab Meat">Frozen Crab Meat</option>
+                                            <option value="Frozen Peas 5kg">Frozen Peas 5kg</option>
+                                            <option value="Chicken Nuggets 10kg">Chicken Nuggets 10kg</option>
+                                            <option value="Fish Fillet 2kg">Fish Fillet 2kg</option>
+                                            <option value="Mixed Veg 1kg">Mixed Veg 1kg</option>
+                                            <option value="Ice Cream Tubs">Ice Cream Tubs</option>
+                                            <option value="Paneer Blocks 5kg">Paneer Blocks 5kg</option>
+                                            <option value="Frozen Corn 2kg">Frozen Corn 2kg</option>
+                                            <option value="Veg Spring Rolls 1kg">Veg Spring Rolls 1kg</option>
+                                            <option value="Chicken Seekh Kebab 5kg">Chicken Seekh Kebab 5kg</option>
+                                            <option value="Fish Fingers 3kg">Fish Fingers 3kg</option>
+                                            <option value="Frozen Paratha 1kg">Frozen Paratha 1kg</option>
+                                            <option value="Frozen Momos 2kg">Frozen Momos 2kg</option>
+                                            <option value="Frozen French Fries 5kg">Frozen French Fries 5kg</option>
+                                            <option value="Frozen Biryani Packs 1kg">Frozen Biryani Packs 1kg</option>
+                                            <option value="Frozen Pizza Base 2kg">Frozen Pizza Base 2kg</option>
                                         </select>
                                     </td>
                                     <td><input name="checks[0][time]" type="time" class="form-control" value=""></td>
@@ -176,6 +188,21 @@
 
 @section('js')
 <script>
+const gatePassInfo = {
+    "GP-25-0045": {
+        customer: "Chelur Foods",
+        vehicle: "KL-07-CD-4521"
+    },
+    "GP-25-0046": {
+        customer: "AAA International",
+        vehicle: "MH-12-XY-9988"
+    },
+    "GP-25-0047": {
+        customer: "Australian Foods India Pvt. Ltd.",
+        vehicle: "TN-22-ZZ-1122"
+    }
+};
+
 let rowIdx = 1;
 
 function addRow() {
@@ -187,9 +214,21 @@ function addRow() {
         <td>
             <select name="checks[${rowIdx}][product_name]" class="form-control">
                 <option value="">-- Select Product --</option>
-                <option value="Frozen Prawns">Frozen Prawns</option>
-                <option value="Frozen Squid Rings">Frozen Squid Rings</option>
-                <option value="Frozen Crab Meat">Frozen Crab Meat</option>
+                <option value="Frozen Peas 5kg">Frozen Peas 5kg</option>
+                <option value="Chicken Nuggets 10kg">Chicken Nuggets 10kg</option>
+                <option value="Fish Fillet 2kg">Fish Fillet 2kg</option>
+                <option value="Mixed Veg 1kg">Mixed Veg 1kg</option>
+                <option value="Ice Cream Tubs">Ice Cream Tubs</option>
+                <option value="Paneer Blocks 5kg">Paneer Blocks 5kg</option>
+                <option value="Frozen Corn 2kg">Frozen Corn 2kg</option>
+                <option value="Veg Spring Rolls 1kg">Veg Spring Rolls 1kg</option>
+                <option value="Chicken Seekh Kebab 5kg">Chicken Seekh Kebab 5kg</option>
+                <option value="Fish Fingers 3kg">Fish Fingers 3kg</option>
+                <option value="Frozen Paratha 1kg">Frozen Paratha 1kg</option>
+                <option value="Frozen Momos 2kg">Frozen Momos 2kg</option>
+                <option value="Frozen French Fries 5kg">Frozen French Fries 5kg</option>
+                <option value="Frozen Biryani Packs 1kg">Frozen Biryani Packs 1kg</option>
+                <option value="Frozen Pizza Base 2kg">Frozen Pizza Base 2kg</option>
             </select>
         </td>
         <td><input name="checks[${rowIdx}][time]" type="time" class="form-control" value="{{ date('H:i') }}"></td>
@@ -204,5 +243,15 @@ function addRow() {
 function removeRow(btn) {
     btn.closest('tr').remove();
 }
+
+$(document).ready(function () {
+    $('#gate_pass_no').on('change', function () {
+        const selectedId = $(this).val();
+        const data = gatePassInfo[selectedId];
+
+        $('input[name="customer"]').val(data?.customer || '');
+        $('input[name="vehicle_no"]').val(data?.vehicle || '');
+    });
+});
 </script>
 @endsection

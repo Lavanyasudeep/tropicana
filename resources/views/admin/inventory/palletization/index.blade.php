@@ -118,7 +118,7 @@
                     <td>26/08/2025</td>
                     <td>GP-1001</td>
                     <td>PL-25-00001</td>
-                    <td>Ocean Fresh Exports Pvt Ltd</td>
+                    <td>Chelur Foods</td>
                     <td>KL-07-CD-4521</td>
                     <td class="text-center">100</td>
                     <td>Ramesh Kumar</td>
@@ -138,7 +138,7 @@
                     <td>21/08/2025</td>
                     <td>GP-1002</td>
                     <td>PL-25-00002</td>
-                    <td>Fresh Harvest</td>
+                    <td>AAA International</td>
                     <td>KL-07-AB-7890</td>
                     <td class="text-center">80</td>
                     <td>Meena S</td>
@@ -158,7 +158,7 @@
                     <td>22/08/2025</td>
                     <td>GP-1003</td>
                     <td>PL-25-00003</td>
-                    <td>Cold Chain Logistics</td>
+                    <td>Australian Foods India Pvt. Ltd.</td>
                     <td>KL-07-EF-9012</td>
                     <td class="text-center">120</td>
                     <td>Abdul Rahman</td>

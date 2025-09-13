@@ -11,10 +11,7 @@
         <tr>
             <td style="text-align: left;"><img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Kern Logo"></td>
             <td style="text-align: left;">
-                <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                <p>Website: www.johnsonchill.com</p>
+                @include('common.print-company-address')
             </td>
         </tr>
         <tr></tr>
@@ -36,9 +33,9 @@
         <!-- Column 2 -->
         <td>
             <strong>Status:</strong> Created<br><br>
-            <strong>Customer Name:</strong> Ocean Fresh Exports Pvt Ltd<br><br>
+            <strong>Customer Name:</strong> Chelur Foods<br><br>
             <strong>Contact Number:</strong> +91 98470 12345<br><br>
-            <strong>Address:</strong> Plot No. 45, Seafood Industrial Estate, Aroor, Kerala, India<br>
+            <strong>Address:</strong> Plot No. 45, Food Industrial Estate, Aroor, Kerala, India<br>
         </td>
 
         <!-- Column 3 -->
@@ -64,28 +61,28 @@
     </thead>
     <tbody>
         <tr>
-            <td>Frozen Prawns</td>
-            <td>KG</td>
+            <td>Frozen Peas 5kg</td>
+            <td>Box</td>
             <td class="text-right">500</td>
             <td class="text-right">500.00</td>
             <td class="text-right">520.00</td>
-            <td>Packed in 20kg cartons</td>
+            <td>Packed in 20kg Boxes</td>
         </tr>
         <tr>
-            <td>Frozen Squid Rings</td>
-            <td>KG</td>
+            <td>Mixed Veg 1kg</td>
+            <td>Box</td>
             <td class="text-right">300</td>
             <td class="text-right">300.00</td>
             <td class="text-right">315.00</td>
-            <td>Packed in 15kg cartons</td>
+            <td>Packed in 15kg Boxes</td>
         </tr>
         <tr>
-            <td>Frozen Crab Meat</td>
-            <td>KG</td>
+            <td>Paneer Blocks 5kg</td>
+            <td>Box</td>
             <td class="text-right">200</td>
             <td class="text-right">200.00</td>
             <td class="text-right">210.00</td>
-            <td>Packed in 10kg cartons</td>
+            <td>Packed in 10kg Boxes</td>
         </tr>
         <tr style="font-weight: bold;">
             <td colspan="2" class="text-right">Total</td>

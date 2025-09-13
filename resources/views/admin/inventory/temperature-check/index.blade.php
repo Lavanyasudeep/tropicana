@@ -98,7 +98,7 @@
                     <td>09:15 AM</td>
                     <td>38.2</td>
                     <td>High</td>
-                    <td>Referred to nurse</td>
+                    <td>Referred</td>
                     <td>
                         <a href="{{ route('admin.inventory.temperature-check.edit', 2) }}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
                         <a href="{{ route('admin.inventory.temperature-check.print', 2) }}" target="_blank" class="btn btn-sm btn-print" title="Print"><i class="fas fa-print"></i></a>

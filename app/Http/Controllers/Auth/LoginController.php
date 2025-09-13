@@ -28,6 +28,11 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin/dashboard';
 
+    protected function authenticated($request, $user)
+    {
+        Cache::forget('menu_for_user_' . $user->id);
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -35,8 +40,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        Cache::forget('menu_for_user_' . auth()->id());
-
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }

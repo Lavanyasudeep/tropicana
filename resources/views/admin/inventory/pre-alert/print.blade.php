@@ -14,10 +14,7 @@
                 <img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Company Logo">
             </td>
             <td style="text-align: left;">
-                <h3>JOHNSON CHILL PRIVATE LIMITED</h3>
-                <p>No.314/1A2, Pala, Kottayam District, Kerala - 602105.</p>
-                <p>Contact : 9994218509 | Email: coldstore@johnsonchill.com / johnsonchillstore@gmail.com</p>
-                <p>Website: www.johnsonchill.com</p>
+                @include('common.print-company-address')
             </td>
         </tr>
         <tr>
@@ -34,7 +31,7 @@
             <strong>Doc. Date:</strong> 25/08/2025<br><br>
             <strong>Arriving. Date:</strong> 25/10/2025<br><br>
             <strong>Ref No. #:</strong> SQ‑25‑00045<br><br>
-            <strong>Customer:</strong> ABC Cold Storage Ltd.<br>
+            <strong>Customer:</strong> Australian Foods India Pvt. Ltd.<br>
         </td>
         <td>
             <strong>Status:</strong> Created<br><br>
@@ -64,7 +61,7 @@
     <tbody>
         <tr>
             <td>1</td>
-            <td>Frozen Prawns</td>
+            <td>Frozen Peas 5kg</td>
             <td>BATCH‑PR‑001</td>
             <td>500</td>
             <td>Boxes</td>
@@ -72,7 +69,7 @@
         </tr>
         <tr>
             <td>2</td>
-            <td>Frozen Green Peas</td>
+            <td>Mixed Veg 1kg</td>
             <td>BATCH‑GP‑002</td>
             <td>300</td>
             <td>Crates</td>

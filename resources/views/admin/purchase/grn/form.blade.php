@@ -26,7 +26,7 @@
             <div class="row">
                 <!-- Column 1 -->
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:250px;">
+                    <div class="pform-panel" style="min-height:230px;">
                         <div class="pform-row">
                             <div class="pform-label">Doc No</div>
                             <div class="pform-value">
@@ -44,8 +44,9 @@
                             <div class="pform-value">
                                 <select name="customer_id" id="customer_id" class="form-control">
                                     <option value="">-- Select Supplier --</option>
-                                    <option value="SUP001">Ocean Fresh Exports Pvt Ltd</option>
-                                    <option value="SUP002">Fresh Harvest Distributors</option>
+                                    <option value="SUP001">Australian Foods India Pvt. Ltd.</option>
+                                    <option value="SUP002">AAA International</option>
+                                    <option value="SUP003">Chelur Foods</option>
                                 </select>
                             </div>
                         </div>
@@ -66,14 +67,14 @@
 
                 <!-- Column 2 -->
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:250px;">
+                    <div class="pform-panel" style="min-height:230px;">
                         <div class="pform-row">
                             <div class="pform-label">Gatepass No</div>
                             <div class="pform-value">
                                 <select name="gatepass_no" id="gatepass_no" class="form-control">
                                     <option value="">-- Select --</option>
-                                    <option value="GP001">GP001</option>
-                                    <option value="GP002">GP002</option>
+                                    <option value="GP001">GPI‑25‑00001</option>
+                                    <option value="GP002">GPI‑25‑00002</option>
                                 </select>
                             </div>
                         </div>
@@ -116,7 +117,7 @@
 
                 <!-- Column 3 -->
                 <div class="col-md-4">
-                    <div class="pform-panel" style="min-height:250px;">
+                    <div class="pform-panel" style="min-height:230px;">
                         <div class="pform-row">
                             <div class="pform-label">Warehouse Unit</div>
                             <div class="pform-value">
@@ -193,8 +194,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dock_in_time: "10:15",
             remarks: "All products delivered frozen and sealed",
             items: [
-                { product: "Frozen Prawns 500g", lot: "BCH-25-001", uom: "Boxes", qty: 60, man_date: "10/12/2025", exp_date: "11/01/2026" },
-                { product: "Frozen Squid Rings 1kg", lot: "BCH-25-002", uom: "Boxes", qty: 40, man_date: "05/01/2025", exp_date: "04/12/2025" }
+                { product: "Frozen Peas 5kg", lot: "BCH-25-001", uom: "Boxes", qty: 60, man_date: "10/12/2025", exp_date: "11/01/2026" },
+                { product: "Paneer Blocks 5kg", lot: "BCH-25-002", uom: "Boxes", qty: 40, man_date: "05/01/2025", exp_date: "04/12/2025" }
             ]
         },
         "SUP002": {
@@ -211,8 +212,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dock_in_time: "11:20",
             remarks: "Requires QC check before storage",
             items: [
-                { product: "Frozen Tuna Steaks 2kg", lot: "BCH-25-010", uom: "Boxes", qty: 50, man_date: "23/06/2025", exp_date: "30/05/2026" },
-                { product: "Frozen Lobster Tails 1kg", lot: "BCH-25-011", uom: "Boxes", qty: 50, man_date: "10/07/2025", exp_date: "04/12/2025" }
+                { product: "Chicken Nuggets 10kg", lot: "BCH-25-010", uom: "Boxes", qty: 50, man_date: "23/06/2025", exp_date: "30/05/2026" },
+                { product: "Fish Fillet 2kg", lot: "BCH-25-011", uom: "Boxes", qty: 50, man_date: "10/07/2025", exp_date: "04/12/2025" }
             ]
         }
     };

@@ -49,15 +49,15 @@
                             <div class="pform-row"><div class="pform-label">Doc No</div><div class="pform-value">TC-25-0001</div></div>
                             <div class="pform-row"><div class="pform-label">Doc Date</div><div class="pform-value">16/10/2023</div></div>
                             <div class="pform-row"><div class="pform-label">Doc Time</div><div class="pform-value">20:00</div></div>
-                            <div class="pform-row"><div class="pform-label">Gate Pass No.</div><div class="pform-value">7508</div></div>
-                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">TRDP</div></div>
+                            <div class="pform-row"><div class="pform-label">Gate Pass No.</div><div class="pform-value">GP-25-0045</div></div>
+                            <div class="pform-row"><div class="pform-label">Customer</div><div class="pform-value">Chelur Foods</div></div>
                         </div>
                     </div>
                     <!-- Panel 2 -->
                     <div class="col-md-4">
                         <div class="pform-panel" style="min-height:135px;" >
                             <div class="pform-row"><div class="pform-label">Vehicle No.</div><div class="pform-value">HR 55 R 0057</div></div>
-                            <div class="pform-row"><div class="pform-label">Product</div><div class="pform-value">Frozen Prawns</div></div>
+                            <div class="pform-row"><div class="pform-label">Product</div><div class="pform-value">Frozen Peas 5kg</div></div>
                             <div class="pform-row"><div class="pform-label">Total Qty</div><div class="pform-value">150</div></div>
                             <div class="pform-row"><div class="pform-label">Vehicle Set Temp (°C)</div><div class="pform-value">2</div></div>
                         </div>
@@ -86,21 +86,21 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Frozen Prawns</td>
+                            <td>Frozen Peas 5kg</td>
                             <td>20:00</td>
                             <td>-1.6</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Frozen Squid Rings</td>
+                            <td>Mixed Veg 1kg</td>
                             <td>20:05</td>
                             <td>-1.6</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>Frozen Crab Meat</td>
+                            <td>Paneer Blocks 5kg</td>
                             <td>20:10</td>
-                            <td>Frozen Crab Meat</td>
+                            <td>Paneer Blocks 5kg</td>
                         </tr>
                     </tbody>
                 </table>

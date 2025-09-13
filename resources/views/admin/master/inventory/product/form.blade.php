@@ -99,7 +99,7 @@
                                             <select name="product_category_id">
                                                 <option value="">-- Select Category --</option>
                                                 @foreach($categories as $cat)
-                                                    <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                                                    <option value="{{ $cat->product_category_id  }}">{{ $cat->product_category_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -110,7 +110,7 @@
                                             <select name="brand_id">
                                                 <option value="">-- Select Brand --</option>
                                                 @foreach($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                    <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -120,9 +120,9 @@
                                         <div class="pform-value">
                                             <select name="product_type">
                                                 <option value="">-- Select Type --</option>
-                                                <option value="Finished Goods">Finished Goods</option>
-                                                <option value="Raw Material">Raw Material</option>
-                                                <option value="Semi-Finished">Semi-Finished</option>
+                                                <option value="Dry">Dry</option>
+                                                <option value="Frozen">Frozen</option>
+                                                <option value="Chilled">Chilled</option>
                                             </select>
                                         </div>
                                     </div>
@@ -189,65 +189,47 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="pform-panel" style="min-height:158px;">
+
+                                        <!-- Procurement -->
+                                        <div class="pform-section-title">Procurement</div>
+                                        <div class="pform-row d-none">
+                                            <div class="pform-label">Arrival Date</div>
+                                            <div class="pform-value">
+                                                <input type="date" name="arrival_date">
+                                            </div>
+                                        </div>
+                                        <div class="pform-row">
+                                            <div class="pform-label">Supplier</div>
+                                            <div class="pform-value">
+                                                <select name="supplier_id">
+                                                    <option value="">-- Select Supplier --</option>
+                                                    @foreach($suppliers as $sup)
+                                                        <option value="{{ $sup->supplier_id }}">{{ $sup->supplier_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="pform-row">
+                                            <div class="pform-label">Customer</div>
+                                            <div class="pform-value">
+                                                <select name="customer_id">
+                                                    <option value="">-- Select Customer --</option>
+                                                    @foreach($customers as $customer)
+                                                        <option value="{{ $customer->customer_id }}">{{ $customer->customer_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                     <!-- SPECIFICATIONS -->
                     <div class="tab-pane fade" id="specs" role="tabpanel">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:260px;">
-                                    
-                                    <!-- Weight & Capacity -->
-                                    <div class="pform-section-title">Weight & Capacity</div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Net Weight (kg)</div>
-                                        <div class="pform-value"><input type="number" step="0.01" name="product_weight" placeholder="e.g. 1.25"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Gross Weight (kg)</div>
-                                        <div class="pform-value"><input type="number" step="0.01" name="gross_weight" placeholder="e.g. 1.35"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Weight Per Box (kg)</div>
-                                        <div class="pform-value"><input type="number" step="0.01" name="weight_per_box" placeholder="e.g. 10.00"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Box Capacity (Full Pallet)</div>
-                                        <div class="pform-value"><input type="number" name="box_capacity_per_full_pallet" placeholder="e.g. 50"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Box Capacity (Half Pallet)</div>
-                                        <div class="pform-value"><input type="number" name="box_capacity_per_half_pallet" placeholder="e.g. 25"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Items per Box</div>
-                                        <div class="pform-value"><input type="number" name="no_of_items_in_box" placeholder="e.g. 12"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="pform-panel" style="min-height:158px;">
-                                    <!-- Material & Packaging -->
-                                    <div class="pform-section-title">Material & Packaging</div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Material / Composition</div>
-                                        <div class="pform-value"><input type="text" name="material" placeholder="e.g. Polypropylene"></div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Packaging Type</div>
-                                        <div class="pform-value">
-                                            <select name="packaging_type">
-                                                <option value="">-- Select --</option>
-                                                <option value="Box">Box</option>
-                                                <option value="Carton">Carton</option>
-                                                <option value="Bag">Bag</option>
-                                                <option value="Drum">Drum</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-md-6">
                                 <div class="pform-panel" style="min-height:150px;">
                                     <!-- Dimensions -->
@@ -306,6 +288,58 @@
                                         <i class="fas fa-plus"></i> Add More
                                     </button>
                                     <br /><br />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="pform-panel" style="min-height:260px;">
+                                    
+                                    <!-- Weight & Capacity -->
+                                    <div class="pform-section-title">Weight & Capacity</div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Net Weight (kg)</div>
+                                        <div class="pform-value"><input type="number" step="0.01" name="product_weight" placeholder="e.g. 1.25"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Gross Weight (kg)</div>
+                                        <div class="pform-value"><input type="number" step="0.01" name="gross_weight" placeholder="e.g. 1.35"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Weight Per Box (kg)</div>
+                                        <div class="pform-value"><input type="number" step="0.01" name="weight_per_box" placeholder="e.g. 10.00"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Box Capacity (Full Pallet)</div>
+                                        <div class="pform-value"><input type="number" name="box_capacity_per_full_pallet" placeholder="e.g. 50"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Box Capacity (Half Pallet)</div>
+                                        <div class="pform-value"><input type="number" name="box_capacity_per_half_pallet" placeholder="e.g. 25"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Items per Box</div>
+                                        <div class="pform-value"><input type="number" name="no_of_items_in_box" placeholder="e.g. 12"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pform-panel" style="min-height:158px;">
+                                    <!-- Material & Packaging -->
+                                    <div class="pform-section-title">Material & Packaging</div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Material / Composition</div>
+                                        <div class="pform-value"><input type="text" name="material" placeholder="e.g. Polypropylene"></div>
+                                    </div>
+                                    <div class="pform-row">
+                                        <div class="pform-label">Packaging Type</div>
+                                        <div class="pform-value">
+                                            <select name="packaging_type">
+                                                <option value="">-- Select --</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Carton">Carton</option>
+                                                <option value="Bag">Bag</option>
+                                                <option value="Drum">Drum</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -596,41 +630,7 @@
                     <!-- OTHERS -->
                     <div class="tab-pane fade" id="others" role="tabpanel">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="pform-panel" style="min-height:158px;">
-
-                                    <!-- Procurement -->
-                                    <div class="pform-section-title">Procurement</div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Arrival Date</div>
-                                        <div class="pform-value">
-                                            <input type="date" name="arrival_date">
-                                        </div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Supplier</div>
-                                        <div class="pform-value">
-                                            <select name="supplier_id">
-                                                <option value="">-- Select Supplier --</option>
-                                                @foreach($suppliers as $sup)
-                                                    <option value="{{ $sup->supplier_id }}">{{ $sup->supplier_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="pform-row">
-                                        <div class="pform-label">Customer</div>
-                                        <div class="pform-value">
-                                            <select name="customer_id">
-                                                <option value="">-- Select Customer --</option>
-                                                @foreach($customers as $customer)
-                                                    <option value="{{ $customer->customer_id }}">{{ $customer->customer_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6">
                                 <div class="pform-panel" style="min-height:158px;">
                                     <!-- Product Settings -->

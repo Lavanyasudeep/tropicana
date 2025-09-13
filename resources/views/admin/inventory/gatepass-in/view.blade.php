@@ -15,7 +15,7 @@
         'doc_no' => 'GPI‑25‑00001',
         'date' => '25/08/2025',
         'time_in' => '14:30',
-        'customer' => 'Blue Ocean Seafood Traders',
+        'customer' => 'Australian Foods India Pvt. Ltd.',
         'pre_alert_no' => 'PA‑25‑00001',
         'invoice_no' => 'INV‑25‑0010',
         'transporter_no' => 'STN‑BLUO‑250826',
@@ -35,10 +35,10 @@
     ];
 
     // Dummy items
-    $items = [
-        ['name' => 'Frozen Prawns', 'uom' => 'Box', 'date' => '06/03', 'pre_alert_qty' => 73, 'received_qty' => 73, 'remarks' => 'OK'],
-        ['name' => 'Frozen Squid Rings', 'uom' => 'Box', 'date' => '23/06', 'pre_alert_qty' => 225, 'received_qty' => 225, 'remarks' => 'OK'],
-        ['name' => 'Frozen Crab Meat', 'uom' => 'Box', 'date' => '06/10', 'pre_alert_qty' => 267, 'received_qty' => 267, 'remarks' => 'OK'],
+   $items = [
+        ['name' => 'Frozen Peas 5kg', 'uom' => 'Box', 'date' => '06/03', 'pre_alert_qty' => 73, 'received_qty' => 73, 'remarks' => 'OK'],
+        ['name' => 'Chicken Nuggets 10kg', 'uom' => 'Box', 'date' => '23/06', 'pre_alert_qty' => 225, 'received_qty' => 225, 'remarks' => 'OK'],
+        ['name' => 'Fish Fillet 2kg', 'uom' => 'Pack', 'date' => '06/10', 'pre_alert_qty' => 267, 'received_qty' => 267, 'remarks' => 'OK'],
     ];
 
     // Dummy status logs
@@ -67,6 +67,10 @@
             <option value="created" selected>Created</option>
             <option value="approved">Approved</option>
             <option value="rejected">Rejected</option>
+            <option value="arrived">Arrived</option>
+            <option value="inward_processing">Inward Processing</option>
+            <option value="waiting">Waiting</option>
+            <option value="truck_out">Truck Out</option>
             <option value="cancelled">Cancelled</option>
         </select>
     </div>
@@ -75,6 +79,9 @@
 <ul class="nav nav-tabs" role="tablist" id="gatepassInTabs">
     <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#gpDetails">Gatepass‑In</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#truck_out">Truck-out</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#gpAttachment">Attachments</a>
@@ -165,6 +172,31 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Truck out Tab -->
+    <div class="tab-pane fade" id="truck_out">
+        <div class="card page-form">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Panel 1 -->
+                    <div class="col-md-4">
+                        <div class="pform-panel" style="min-height: 100px;">
+                            <div class="pform-row"><div class="pform-label">Seal No #</div><div class="pform-value">SEAL-0001</div></div>
+                            <div class="pform-row"><div class="pform-label">Dispatch Time</div><div class="pform-value">{{ date('H:i') }}</div></div>
+                            <div class="pform-row"><div class="pform-label">Dispatch Date</div><div class="pform-value">{{ date('Y-m-d') }}</div></div>
+                        </div>
+                    </div>
+                    <!-- Panel 2 -->
+                    <div class="col-md-4">
+                        <div class="pform-panel" style="min-height: 100px;">
+                            <div class="pform-row"><div class="pform-label">Remarks</div><div class="pform-value">Any special instructions or notes...</div></div>
+                            <div class="pform-row"><div class="pform-label">Status</div><div class="pform-value">Truck Out</div></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

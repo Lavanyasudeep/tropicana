@@ -64,7 +64,7 @@
                         <span class="input-group-text pq-fltr-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <select id="clientFlt" class="form-control pq-fltr-select">
-                        <option value="">- Select Client-</option>
+                        <option value="">- Select Customer-</option>
                         @foreach($clients as $client)
                             <option value="{{ $client->client_id }}">{{ $client->client_name }}</option>
                         @endforeach
@@ -96,7 +96,7 @@
                         <th>Doc. Date</th>
                         <th>Inv. #</th>
                         <th>Inv. Date</th>
-                        <th>Client</th>
+                        <th>Customer</th>
                         <th>Palletization Status</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -164,7 +164,7 @@ $(document).ready(function() {
                 doc_date: '26/08/2025',
                 invoice_no: 'INV‑25‑0010',
                 invoice_date: '25/08/2025',
-                client: { client_name: 'Ocean Fresh Exports Pvt Ltd' },
+                client: { client_name: 'Australian Foods India Pvt. Ltd.' },
                 palletization: 33,
                 status: 'Assigned',
                 actions: `
@@ -184,7 +184,7 @@ $(document).ready(function() {
                 doc_date: '20/08/2025',
                 invoice_no: 'INV‑25‑0009',
                 invoice_date: '19/08/2025',
-                client: { client_name: 'Blue Ocean Seafood Traders' },
+                client: { client_name: 'AAA International' },
                 palletization: 0,
                 status: 'Not Assigned',
                 actions: `
@@ -204,7 +204,7 @@ $(document).ready(function() {
                 doc_date: '18/08/2025',
                 invoice_no: 'INV‑25‑0008',
                 invoice_date: '17/08/2025',
-                client: { client_name: 'Southern Catch Logistics' },
+                client: { client_name: 'Chelur Foods' },
                 palletization: 100,
                 status: 'Completed',
                 actions: `

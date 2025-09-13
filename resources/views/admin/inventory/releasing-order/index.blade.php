@@ -10,8 +10,8 @@
 @php 
 $orders =[
     [
-        'document_no' => 'PA‑25‑00003',
-        'customer_name' => 'Frozen Foods Inc.',
+        'document_no' => 'RO‑25‑00003',
+        'customer_name' => 'Chelur Foods',
         'created_at' => '2025-08-25',
         'releasing_date' => '2025-08-27',
         'vehicle_no' => 'KL‑09‑EF‑9012',
@@ -19,8 +19,8 @@ $orders =[
         'items_count' => 5
     ],
     [
-        'document_no' => 'PA‑25‑00004',
-        'customer_name' => 'Oceanic Ice Ltd.',
+        'document_no' => 'RO‑25‑00004',
+        'customer_name' => 'AAA International',
         'created_at' => '2025-08-26',
         'releasing_date' => '2025-08-28',
         'vehicle_no' => '',

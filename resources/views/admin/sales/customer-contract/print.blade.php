@@ -14,10 +14,7 @@
                     <img src="{{ asset('images/logo.jpeg') }}" style="width:150px;" alt="Johnson Chill Logo">
                 </td>
                 <td style="text-align: left;">
-                    <h3>STORAGE ENTITY LEASING WAREHOUSE SPACE</h3>
-                    <p>Plot No. 42, Industrial Zone, Sector 7, Navi Mumbai, Maharashtra - 400705</p>
-                    <p>Contact: +91 9988776655 | Email: storageentity@warehousemail.com</p>
-                    <p>Website: www.storageentity.in</p>
+                    @include('common.print-company-address')
                 </td>
             </tr>
             <tr>
